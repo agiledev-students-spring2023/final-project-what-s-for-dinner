@@ -2,7 +2,7 @@
 
 # Prototype
 
-https://www.figma.com/file/BbUOPStZKVZfCxUn3nl3fY/What's-for-Dinner?node-id=0%3A1&t=e40MGwhChooZ595g-1
+https://www.figma.com/proto/BbUOPStZKVZfCxUn3nl3fY/What-s-for-Dinner?node-id=0%3A1&scaling=scale-down&starting-point-node-id=4%3A24&show-proto-sidebar=1
 
 # App Map Diagram
 
