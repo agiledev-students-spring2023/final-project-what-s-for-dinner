@@ -6,3 +6,6 @@ Replace the contents of this file with the completed assignments, as described i
 
 - [app map & wireframe instructions](instructions-0a-app-map-wireframes.md).
 - [prototype instructions](instructions-0b-prototyping.md)
+
+
+![alt text](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/App%20Map.png)
