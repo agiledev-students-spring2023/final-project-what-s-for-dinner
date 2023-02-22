@@ -7,7 +7,9 @@ Replace the contents of this file with the completed assignments, as described i
 - [app map & wireframe instructions](instructions-0a-app-map-wireframes.md).
 - [prototype instructions](instructions-0b-prototyping.md)
 
+# Prototype
 
+https://www.figma.com/file/BbUOPStZKVZfCxUn3nl3fY/What's-for-Dinner?node-id=0%3A1&t=e40MGwhChooZ595g-1
 
 # App Map Diagram
 
