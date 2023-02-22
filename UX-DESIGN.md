@@ -8,4 +8,12 @@ Replace the contents of this file with the completed assignments, as described i
 - [prototype instructions](instructions-0b-prototyping.md)
 
 
-![alt text](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/App%20Map.png)
+
+# App Map Diagram
+![App Map](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/App%20Map.png)
+
+# Wireframes
+
+# Ingredients
+![Ingredients](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/wireframes/Ingredients.png)
+
