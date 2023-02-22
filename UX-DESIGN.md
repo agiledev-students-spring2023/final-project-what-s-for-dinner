@@ -55,4 +55,4 @@ and all of the steps required to make this dish.
 
 ![Recipe Details](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/ux-design/wireframes/recipe%20details.png)
 
-<img src="https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/ux-design/wireframes/recipe%20details.png"  width="60%" height="50%">
+<img src="https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/ux-design/wireframes/recipe%20details.png"  width="100" height="50">
