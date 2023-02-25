@@ -6,7 +6,7 @@ https://www.figma.com/proto/BbUOPStZKVZfCxUn3nl3fY/What-s-for-Dinner?node-id=0%3
 
 # App Map Diagram
 
-![App Map](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/App%20Map.png)
+![App Map](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/App%20Map2.png)
 
 # Wireframes
 
