@@ -1,10 +1,10 @@
 ## Project Description
 
-What's for Dinner is a project to help people make tasty meals from selected recipes that are available based on the user's current cooking ingredients and utensils. The input would be the current ingredients a user has at home along with utensils adn the output would should the recipes that a user can make based on their preference, like cuisine, and cooking level, from a beginner to a pro. Favorite recipes could then be saved to be used in the future.
+"What's for Dinner" is an open-source web application that suggests recipes based on the ingredients and cooking utensils you have on hand. With our platform, you can search for recipes using specific ingredients, add or remove ingredients to see different recipe suggestions, and save your favorite recipes for future use. Our app also includes advanced search filters such as dietary restrictions, meal type, and cooking time to help you find the perfect recipe for users at all levels.
 
 ### Product Vision Statement
 
-"What's for Dinner" is an open-source web application aimed at simplifying meal planning and inspiring creativity in the kitchen. The application utilizes machine learning algorithms to provide personalized recipe recommendations based on user's dietary preferences and ingredients they have on hand. It also features a grocery list generator and pantry inventory tracker to reduce food waste. Our vision is to create a platform that not only simplifies meal planning but also encourages users to experiment with new recipes and ingredients, ultimately leading to a more sustainable and enjoyable cooking experience.
+"What's for Dinner" is an app that helps users save time, reduce food waste, and enjoy the cooking process by providing optimal recipe suggestions based on the ingredients available.
 
 ## Meet Our Team
 
