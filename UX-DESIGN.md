@@ -57,14 +57,14 @@ This page allows user to share their own recipe by filling out all the required 
 If a user would like to know more about a specefic ingredient, they can head to the Ingredient Details page. 
 Here, one will find an image of the ingredient along with the quantity/weight of it.
 
-![Ingredient Details](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/wireframes/overlays/Ingredient%20Details.png
+![Ingredient Details](https://raw.githubusercontent.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/master/ux-design/wireframes/overlays/Ingredient%20Details.png)
 
 ## Overlay2: Recipe Details
 In the Recipe Details page, the user can look at a specefic recipe and learn all about it. 
 It contains the ingredients needed, a difficulty rating, the time expected, 
 and all of the steps required to make this dish.
 
-![Recipe Details](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/ux-design/wireframes/overlays/Recipe%20Details.png
+![Recipe Details](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/ux-design/wireframes/overlays/Recipe%20Details.png)
 
 ## Menu Overlay
 You've probably noticed the Hamburger Icon in the top-left corner of the screen. 
