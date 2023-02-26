@@ -9,15 +9,19 @@ A web application to be used on an iPhone. The application will be used to help 
 ## Meet Our Team
 
 Abhi - [link to github](https://github.com/abhi-vachani)
+
 Nancy - [link to github](https://github.com/nancysun0415)
+
 Alex - [link to github](https://github.com/ak8000)
+
 Chenyi - [link to github](https://github.com/Ginette9)
+
 Hillary - [link to github](https://github.com/hillarydavis1)
 
-### History of the Project
+## History of the Project
 
 We are a team of college students, and often after grocery shopping we have a few leftover ingredients that we don't know how to use or use effectively. Therefore, having an application that can help with giving us an optimal recipe based on the available ingredients can be very helpful in saving time, producing less waste when cooking, and enjopying the process. [Click here to see our Contributions](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/CONTRIBUTING.md)
 
-### Instructions to Building and Testing the Project
+## Instructions to Building and Testing the Project
 
 To be added in the future steps
