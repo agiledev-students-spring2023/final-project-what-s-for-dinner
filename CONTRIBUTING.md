@@ -1,2 +1,19 @@
 # Guide to Contributing
-Delete the contents of this file and replace with the contents of a proper guide to contributing to this project, as described in the [instructions](./instructions.md)
+
+
+# Our Values
+
+# Team Norms
+
+# Git Workflow
+
+# Rules Of Contributing
+
+# Instructions For Setting Up The Local Development Environment In Order To Work On This Project
+
+# Instructions For Building And Testing The Project
+
+# Code Of Conduct
+
+
+
