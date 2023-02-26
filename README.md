@@ -29,9 +29,8 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 Instructions for building and testing the project will be provided once the project reaches that stage.
 
 ## Additional Resources
-[README.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/README.md) - an overview of this project
-[LICENSE.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/LICENSE.md) - the license under which this project is released
-CODE_OF_CONDUCT.md - the code of conduct that governs the behavior of contributors to the project
+[README.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/README.md) - an overview of this project<br>
+[LICENSE.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/LICENSE.md) - the license under which this project is released<br>
 [UX-DESIGN.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/UX-DESIGN.md) - the wireframe diagrams and prototype for this project
 
 ### Important Note:
