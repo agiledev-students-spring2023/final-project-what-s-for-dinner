@@ -42,7 +42,8 @@ Important agreements so that everyone knows what is expected of them in terms of
 - Don't leave dead/commented out code behind. If you see such code, delete it.
 - Write automated tests to cover critical integration points and functionality (once you learn how to do that).
 
-
+### Planning Poker
+[Group Result](https://play.planningpoker.com/play/game/NgP7p13cVm8s636OC945o8YL7n9RbXK5)
 
 ## Git Workflow
 We follow the Git workflow outlined in the GitHub Flow guide. All changes to the project must be made through a pull request, and the pull request must be reviewed and approved by at least one other team member before it can be merged into the main branch.
