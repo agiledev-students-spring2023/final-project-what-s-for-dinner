@@ -1,101 +1,74 @@
+/* styles shared by all screens within the app */
+
 body {
-  margin: 0;
+  background-image: url('https://thefridgeagency.com/wp-content/uploads/sites/3/2020/04/Fridge_Zoom_Background_inside.jpg');
+  background-size: cover;
+  background-position: relative;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid black;
+  max-width: 800px;
+  margin: 0 auto;
   padding: 0;
-  font-family: sans-serif;
 }
 
-.App {
-  text-align: center;
+/* each screen has a main content area with an image, and a paragraph */
+.main-content {
+  margin: 20px;
+  display: flex; /* use css flexbox for elements inside of this element */
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.Refrigerator-container {
-  width: 200px;
-  height: 300px;
-  position: relative;
-}
-
-.Refrigerator-door {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: white;
-  transition: transform 0.5s ease-in-out;
-  transform-origin: left;
-}
-
-.Refrigerator-door.open {
-  transform: rotateY(-90deg);
-}
-
-.Refrigerator-handle {
-  width: 50px;
-  height: 10px;
-  background-color: gray;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 10px;
-}
-
-button {
-  background-color: #61dafb;
-  color: #282c34;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-}
-
-button:hover {
-  background-color: #42a5f5;
-}
-
-form {
-  display: flex;
-  flex-direction: column;
+.main-content p,
+.main-content img {
+  flex: auto;
   align-items: center;
 }
 
-label {
-  margin: 10px 0;
-  font-size: 1.2rem;
+.main-content p {
+  margin-left: 20px;
 }
 
-input[type='text'],
-input[type='password'] {
+.main-content img {
+  object-fit: contain;
+}
+
+.main-content form {
+  flex: auto;
+  margin-left: 20px;
+}
+
+h1 {
+  font-family: georgia;
+  margin-left: 20px;
+}
+
+p {
+  font-family: helvetica;
+}
+
+/* styles for form text fields */
+input[type="text"],
+input[type="password"] {
   padding: 10px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  border: 1px solid gray;
-  width: 100%;
-  margin-bottom: 10px;
+  margin: 10px 0;
+  width: 200px;
 }
 
-input[type='submit'] {
-  background-color: #61dafb;
-  color: #282c34;
-  border: none;
-  padding: 10px 20px;
-  font-size: 1.2rem;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+/* styles for the form submit button */
+input[type="submit"] {
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  padding: 20px;
+  font-size: 20px;
 }
 
-input[type='submit']:hover {
-  background-color: #42a5f5;
+/* changes to the submit button when it is being clicked */
+input[type="submit"]:active {
+  color: black;
+  background-color: white;
+  border-color: black;
 }

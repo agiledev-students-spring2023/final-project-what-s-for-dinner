@@ -8,7 +8,6 @@ const Home = props => {
     <div className="Home">
       <h1>Welcome!</h1>
       <section className="main-content">
-        <img alt="welcome!" src="https://picsum.photos/200?page=home" />
         <p>
         "What's for Dinner" is an open-source web application that 
         suggests recipes based on the ingredients and cooking utensils 
