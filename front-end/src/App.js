@@ -21,8 +21,8 @@ function App() {
   };
 
   return (
+    <div className="App">
       <Router>
-        <div className="App">
           <header className="App-header">
             <div className="Refrigerator-container">
               <div
@@ -51,8 +51,8 @@ function App() {
               <RestorePassword />
             </Route>
           </Routes>
-        </div>
       </Router>
+    </div>
   );
 }
 
