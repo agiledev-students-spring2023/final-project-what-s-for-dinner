@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react"
-import { Navigate, useSearchParams } from "react-router-dom"
+import { Link, Navigate, useSearchParams } from "react-router-dom"
 import axios from "axios"
 // import logo from './logo.svg';
 import "./Login.css"
@@ -83,10 +83,14 @@ const Login = props => {
             <input type="submit" value="Log In" />
           </form>
           <p>
-            Server response (for debugging purposes):
+            <label>New user? </label>
+            <br />
+            <Link to="/register">Create an account</Link>
             <br />
             <br />
-            {JSON.stringify(status, null, 2)}
+            <label>Forgot Password? </label>
+            <br />
+            <Link to="/restorepassword">Restore Password</Link>
           </p>
         </section>
       </div>
