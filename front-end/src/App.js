@@ -4,8 +4,8 @@ import {
   BrowserRouter as Router, Routes, Route, Link
 } from 'react-router-dom';
 
-import SignIn from './SignIn';
-import SignUp from './SignUp';
+import SignIn from './Login';
+import SignUp from './Register';
 import RestorePassword from './RestorePassword';
 
 function App() {

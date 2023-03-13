@@ -1,0 +1,10 @@
+.Login {
+}
+.Login .error {
+  margin-left: 20px;
+  color: red;
+}
+.Login .feedback {
+  font-size: 0.75em;
+  margin: 0 20px;
+}
