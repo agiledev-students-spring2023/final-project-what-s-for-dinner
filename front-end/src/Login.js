@@ -16,7 +16,7 @@ const Login = props => {
     const qsError = urlSearchParams.get("error") // get any 'error' field in the URL query string
     if (qsError === "protected")
       setErrorMessage(
-        "Please log in to view our fabulous protected animals list."
+        "Please log in to view your home page."
       )
   }, [])
 
