@@ -36,8 +36,10 @@ const Register = props => {
     try {
       // create an object with the data we want to send to the server
       const requestData = {
-        username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
-        password: e.target.password.value, // gets the value of the field in the submitted form with name='password',
+        email: e.target.email.value,
+        username: e.target.username.value,
+        password: e.target.password.value,
+        confirmPassword: e.target.confirmPassword.value,
       }
       // send the request to the server api to authenticate
       const response = await axios.post(

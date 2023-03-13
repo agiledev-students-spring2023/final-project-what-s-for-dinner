@@ -37,7 +37,7 @@ const RestorePassword = props => {
       // create an object with the data we want to send to the server
       const requestData = {
         username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
-        password: e.target.password.value, // gets the value of the field in the submitted form with name='password',
+        email: e.target.email.value, // gets the value of the field in the submitted form with name='password',
       }
       // send the request to the server api to authenticate
       const response = await axios.post(
@@ -57,8 +57,8 @@ const RestorePassword = props => {
   // if the user's password is not restored, show the restore password form
   if (!status.success)
     return (
-      <div className="Login">
-        <h1>Log in</h1>
+      <div className="RestorePassword">
+        <h1>Restore Your Password</h1>
         <p className="feedback">
           This page is placeholder only... without a back-end, we cannot support
           true restore password functionality. In this case, we fake a restore password request to a
