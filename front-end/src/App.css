@@ -9,7 +9,7 @@ body {
 .container {
   background-color: rgba(255, 255, 255, 0.8);
   border: 1px solid black;
-  max-width: 800px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 0;
 }
@@ -17,7 +17,8 @@ body {
 /* each screen has a main content area with an image, and a paragraph */
 .main-content {
   margin: 20px;
-  display: flex; /* use css flexbox for elements inside of this element */
+  display: flex;
+   /* use css flexbox for elements inside of this element */
 }
 
 .main-content p,
@@ -27,27 +28,23 @@ body {
 }
 
 .main-content p {
-  margin-left: 20px;
+  margin-left: 0px;
 }
 
 .main-content img {
   object-fit: contain;
 }
-
 .main-content form {
   flex: auto;
-  margin-left: 20px;
+  margin-left: 0px;
 }
-
 h1 {
   font-family: georgia;
-  margin-left: 20px;
+  margin-left: 0px;
 }
-
 p {
   font-family: helvetica;
 }
-
 /* styles for form text fields */
 input[type="text"],
 input[type="password"] {
@@ -72,3 +69,4 @@ input[type="submit"]:active {
   background-color: white;
   border-color: black;
 }
+
