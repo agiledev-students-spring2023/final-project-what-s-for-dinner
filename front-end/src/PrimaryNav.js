@@ -23,6 +23,7 @@ const PrimaryNav = props => {
       {logInOutComponent}
     </nav>
   )
+  
 }
 
 export default PrimaryNav
