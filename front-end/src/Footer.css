@@ -1,21 +1,19 @@
-
-
-nav {
+  /*css for footer - need to be moved to the botton of the page without moving the welcome text*/
+  footer {
     border: 1px solid black;
-    border-width: 1px 0px 1px 0px; /* no border on left or right */
+    border-width: 1px 0px 1px 0px; 
     font-family: georgia;
     padding: 20px;
-    margin: 20px 0; /* no margin on left or right */
+    margin: 40px 0; /* no margin on left or right */
     text-align: center;
   }
-  
-  nav a {
+  footer a {
     text-decoration: none;
     color: black;
     margin: 20px;
   }
   
-  nav a:hover {
+  footer a:hover {
     text-decoration: underline;
     background-color: yellow;
   }
