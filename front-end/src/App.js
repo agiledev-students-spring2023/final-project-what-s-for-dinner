@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import PrimaryNav from "./PrimaryNav"
-import Home from "./Home"
+import Welcome from "./Welcome"
 //import About from "./About"
 import MenuOverlay from "./MenuOverlay"
 import Recipes from "./Recipes"
@@ -27,10 +27,10 @@ const App = props => {
       <Router>
         {/* pass the setter function that can be called if the user successfully logs in from the login screen */}
         <PrimaryNav user={user} setuser={setUser} />
-        <Footer user={user} setuser={setUser} />
+        
         <Routes>
           {/* a route to the home screen */}
-          <Route path="/" element={<Home user={user} />} />
+          <Route path="/" element={<Welcome user={user} />} />
 
           {/* a route to the menu overlay */}
           <Route path="/menuoverlay" element={<MenuOverlay user={user} />} />
@@ -72,6 +72,7 @@ const App = props => {
             element={<Logout user={user} setuser={setUser} />}
           />
         </Routes>
+        <Footer user={user} setuser={setUser} />
       </Router>
     </div>
   )
