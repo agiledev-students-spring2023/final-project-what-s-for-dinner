@@ -24,11 +24,12 @@
   .cardContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: flex-start;
+    width: 100%;
   }
   
   .card {
-    flex-basis: calc(50% - 10px);
+    flex-basis: calc(50% - 2%);
     margin-bottom: 20px;
   }
   
