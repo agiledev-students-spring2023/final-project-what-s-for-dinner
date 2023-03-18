@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 const RecipeThumb = (props) => {
   const classes = useStyles();
-  const imgSrc = `https://picsum.photos/200?id=${props.details.id}`; // tack on this animal's id to the query
+  const imgSrc = `https://picsum.photos/200?id=${props.details.id}`;
 
   return (
     <article className="recipeThumb">
