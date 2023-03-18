@@ -1,8 +1,8 @@
 import React from "react";
 import "./RecipeThumb.css";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
+import { Card } from "@material-ui/core";
+import { CardContent } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -14,12 +14,12 @@ const useStyles = makeStyles((theme) => ({
   cardContainer: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "center"
+    justifyContent: "flex-start",
+    width: "100%"
   },
   card: {
-    minWidth: 275,
-    margin: "1%",
-    width: "45%"
+    flexBasis: "calc(50% - 2%)",
+    marginBottom: "20px"
   },
   cardTitle: {
     fontSize: 20,
@@ -41,9 +41,24 @@ const RecipeThumb = (props) => {
         <div className={classes.cardContainer}>
           <Card className={classes.card}>
             <CardContent>
-              <div className={classes.cardTitle}> {props.details.title} </div>
-              <img alt={props.details.title} src={imgSrc} />
-              <div className={classes.cardContent}>{props.recipe_detail}</div>
+              <div className={classes.cardTitle}>
+                {props.details.recipe_title}
+              </div>
+              <img alt={props.details.recipe_title} src={imgSrc} />
+              <div className={classes.cardContent}>
+                {props.details.recipe_description}
+              </div>
+            </CardContent>
+          </Card>
+          <Card className={classes.card}>
+            <CardContent>
+              <div className={classes.cardTitle}>
+                {props.details.recipe_title}
+              </div>
+              <img alt={props.details.recipe_title} src={imgSrc} />
+              <div className={classes.cardContent}>
+                {props.details.recipe_description}
+              </div>
             </CardContent>
           </Card>
         </div>
