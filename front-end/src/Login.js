@@ -98,7 +98,7 @@ const Login = props => {
   // otherwise, if the user has successfully logged-in, redirect them to a different page
   // in this example, we simply redirect to the home page, but a real app would redirect 
   //to a page that shows content only available to logged-in users
-  else return <Navigate to="/home" />
+  else return <Navigate to="/" />
 }
 
 export default Login

@@ -47,6 +47,4 @@ const Search = prop => {
     )
 }
 
-
-
 export default Search;
