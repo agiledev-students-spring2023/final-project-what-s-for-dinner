@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import "./MyIngredients.css"
 
 const MyIngredients = () => {
@@ -46,6 +47,14 @@ const MyIngredients = () => {
 
   return (
     <div>
+      <nav>
+        <ul>
+            <Link to="/my-ingredients">My Ingredients Page</Link>
+            <Link to="/my-utensils">My Utensils Page</Link>
+            <Link to="/saved-recipes">Saved Recipes Page</Link>
+        </ul>
+      </nav>
+
       <h1>My Ingredients Page</h1>
       <h2>Added Ingredients</h2>
       <ul>
@@ -58,7 +67,6 @@ const MyIngredients = () => {
       <h2>Search and Add Ingredients</h2>
       <div>
         <input type="text" value={searchTerm} onChange={handleSearch} placeholder="Search for ingredients..." />
-        <button onClick={handleSearch}>Search</button>
       </div>
       <ul>
         {searchResults.map((ingredient) => (
