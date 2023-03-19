@@ -1,0 +1,44 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    margin: 0 auto;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  label {
+    margin-top: 1rem;
+  }
+  
+  input,
+  textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    border: none;
+    border-radius: 5px;
+    background-color: #5985ec;
+    color: #fff;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #1a237e;
+  }
+  
+  button:active {
+    background-color: #1a237e;
+    transform: translateY(1px);
+  }
+  

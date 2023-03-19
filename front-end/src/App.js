@@ -19,6 +19,7 @@ import RightsReserved from "./RightsReserved";
 import TermsOfService from "./TermsOfService";
 import Footer from "./Footer";
 import { async } from "q"
+import ShareRecipe from "./ShareRecipe"
 
 
 // set up routes so different URL routes load up different main components
@@ -63,9 +64,13 @@ const App = props => {
           <Route
             path="/:recipeId" element={<RecipeDetails user={user} />}
           />
-
+          {/* a route to the search page for recipes */}
           <Route
             path="/search" element={<Search user={user} />}
+          />
+          {/* a route to the share recipe page */}
+          <Route
+            path="/share-recipes" element={<ShareRecipe user={user} />}
           />
           {/* a route to ingredient description */}
           <Route 
