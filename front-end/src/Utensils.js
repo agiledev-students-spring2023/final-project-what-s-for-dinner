@@ -1,19 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "./Search";
-import SortBy from "./SortBy";
+import Search from "./Searct";
 import UtensilThumb from "./UtensilThumb";
 import "./Utensils.css";
 
-const RecipeList = (props) => {
+const Utensils = (props) => {
   const [data, setData] = useState([]);
-  const [sortByIngredients, setSortByIngredients] = useState(false);
-  const [sortByDifficulty, setSortByDifficulty] = useState(false);
-  const [sortByTimeNeeded, setSortByTimeNeeded] = useState(false);
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log("fetching 10 random things...");
-    axios("https://api.mockaroo.com/api/2ed4ec20?count=10&key=1fd5b940")
+    axios("https://my.api.mockaroo.com/utensils?key=1fd5b940")
       .then((response) => {
         // extract the data from the server response
         setData(response.data);
@@ -53,10 +49,10 @@ const RecipeList = (props) => {
       });
   }, []); // only run it once!
   return (
-    <div className="RecipeList">
-      <h1>Recipes</h1>
-      <SearchUt />
-      <section className="recipes">
+    <div className="Utensil">
+      <h1>Utensils</h1>
+      <Search />
+      <section className="utensils">
         {/* show a thumbnail for each food item */}
         {data.map((item) => (
           <RecipeThumb key={item.id} details={item} />
@@ -66,4 +62,4 @@ const RecipeList = (props) => {
   );
 };
 
-export default RecipeList;
+export default Utensils;
