@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "./components/search/Search";
+import Search from "./Search";
 import SortBy from "./SortBy";
 import RecipeThumb from "./RecipeThumb";
 import "./RecipeThumb.css";
