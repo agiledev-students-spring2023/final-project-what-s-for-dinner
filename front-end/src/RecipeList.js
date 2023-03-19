@@ -1,11 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Search from "./components/search/Search";
+import SortBy from "./SortBy";
 import RecipeThumb from "./RecipeThumb";
 import "./RecipeThumb.css";
 
 const RecipeList = (props) => {
   const [data, setData] = useState([]);
+  const [sortByIngredients, setSortByIngredients] = useState(false);
+  const [sortByDifficulty, setSortByDifficulty] = useState(false);
+  const [sortByTimeNeeded, setSortByTimeNeeded] = useState(false);
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log("fetching 10 random animals...");
@@ -52,6 +56,14 @@ const RecipeList = (props) => {
     <div className="RecipeList">
       <h1>Recipes</h1>
       <Search />
+      <SortBy
+       sortByIngredients={sortByIngredients}
+       setSortByIngredients={setSortByIngredients}
+       sortByDifficulty={sortByDifficulty}
+       setSortByDifficulty={setSortByDifficulty}
+       sortByTimeNeeded={sortByTimeNeeded}
+       setSortByTimeNeeded={setSortByTimeNeeded}
+     />
       <section className="recipes">
         {/* show a thumbnail for each food item */}
         {data.map((item) => (
