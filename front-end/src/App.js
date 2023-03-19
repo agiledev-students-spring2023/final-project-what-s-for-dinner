@@ -20,6 +20,7 @@ import TermsOfService from "./TermsOfService";
 import Footer from "./Footer";
 import { async } from "q"
 import ShareRecipe from "./ShareRecipe"
+import MyIngredients from "./MyIngredients"
 
 
 // set up routes so different URL routes load up different main components
@@ -53,6 +54,15 @@ const App = props => {
 
           {/* a route to the welcome screen */} 
           <Route path="/home" element={<Home user={user} />} />
+
+          {/* a route to the user's ingredients page */}
+          <Route path="/my-ingredients" element={<MyIngredients user={user} />} />
+
+          {/* a route to the user's utensils page */}
+          {/* <Route path="/my-utensils" elemnt={<MyUtensils user={user} />} /> */}
+
+          {/* a route to the user's saved recipes page */}
+          {/* <Route path="/saved-recipes" elemnt={<SavedRecipes user={user} />} /> */}
 
           {/* a route to show a list of recipes - we pass the user data in as a prop */}
 
