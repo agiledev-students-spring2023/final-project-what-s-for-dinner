@@ -1,5 +1,8 @@
-  /*css for footer - need to be moved to the botton of the page without moving the welcome text*/
-  footer {
+.Welcome {
+    text-align: center;
+}
+
+.Welcome {
     border: 1px solid black;
     border-width: 1px 0px 1px 0px; 
     font-family: georgia;
@@ -7,13 +10,13 @@
     margin: 90%px 0; /* no margin on left or right */
     text-align: center;
   }
-  footer a {
+  .Welcome a {
     text-decoration: none;
     color: black;
     margin: 20px;
   }
   
-  footer a:hover {
+  .Welcome a:hover {
     text-decoration: underline;
     background-color: yellow;
   }
