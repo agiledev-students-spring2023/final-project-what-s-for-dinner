@@ -18,7 +18,6 @@ const PrimaryNav = props => {
   return (
     <nav>
       <Link to="/home">Home</Link>
-      <Link to="/menuoverlay">Menu Overlay</Link>
       <Link to="/recipes">Search Recipes</Link>
       {logInOutComponent}
     </nav>
