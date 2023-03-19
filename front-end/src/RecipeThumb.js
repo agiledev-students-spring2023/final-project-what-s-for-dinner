@@ -1,6 +1,7 @@
-import React from "react";
+import React,  { useState, useEffect } from "react";
 import "./RecipeThumb.css";
 import { makeStyles } from "@material-ui/core/styles";
+import { Link } from "react-router-dom"
 import { Card } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
 
@@ -32,36 +33,71 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 const RecipeThumb = (props) => {
+  const [item1, setItem1] = useState();
+  const [item2, setItem2] = useState();
+
+  useEffect(() => {
+    const getRecipe = async () => {
+      const response1 = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${52996 + props.details.id}`
+      );
+      const data1 = await response1.json();
+      setItem1(data1.meals[0]);
+
+      const response2 = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${52770 + props.details.id}`
+      );
+      const data2 = await response2.json();
+      setItem2(data2.meals[0]);
+    };
+    getRecipe();
+  }, []);
   const classes = useStyles();
-  const imgSrc1 = `https://picsum.photos/200?id=${props.details.id}`;
-  const imgSrc2 = `https://picsum.photos/200?id=${props.details.id*5}`;
 
   return (
     <article className="recipeThumb">
       <div className={classes.root}>
         <div className={classes.cardContainer}>
-          <Card className={classes.card}>
-            <CardContent>
-              <div className={classes.cardTitle}>
-                {props.details.recipe_title}
-              </div>
-              <img alt={props.details.recipe_title} src={imgSrc1} />
-              <div className={classes.cardContent}>
-                {props.details.recipe_description}
-              </div>
-            </CardContent>
-          </Card>
-          <Card className={classes.card}>
-            <CardContent>
-              <div className={classes.cardTitle}>
-                {props.details.recipe_title}
-              </div>
-              <img alt={props.details.recipe_title} src={imgSrc2} />
-              <div className={classes.cardContent}>
-                {props.details.recipe_description}
-              </div>
-            </CardContent>
-          </Card>
+          {item1 && (
+              <Card className={classes.card}>
+                <CardContent>
+                  <Link to={`/${52996 + props.details.id}`}>
+                    <div className={classes.cardTitle}>
+                      {props.details.recipe_title}
+                    </div>
+                    {item1.strMealThumb && (
+                      <img
+                        src={item1.strMealThumb}
+                        alt={props.details.recipe_title}
+                      />
+                    )}
+                    <div className={classes.cardContent}>
+                      {props.details.recipe_description}
+                    </div>
+                  </Link>
+                </CardContent>
+              </Card>
+            )}
+          {item2 && (
+            <Card className={classes.card}>
+              <CardContent>
+                <Link to={`/${52770 + props.details.id}`}>
+                  <div className={classes.cardTitle}>
+                    {props.details.recipe_title}
+                  </div>
+                  {item1.strMealThumb && (
+                    <img
+                      src={item2.strMealThumb}
+                      alt={props.details.recipe_title}
+                    />
+                  )}
+                  <div className={classes.cardContent}>
+                    {props.details.recipe_description}
+                  </div>
+                </Link>
+              </CardContent>
+            </Card>
+          )}
         </div>
       </div>
     </article>
