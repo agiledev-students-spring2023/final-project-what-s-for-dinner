@@ -33,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 const RecipeThumb = (props) => {
   const classes = useStyles();
-  const imgSrc = `https://picsum.photos/200?id=${props.details.id}`;
+  const imgSrc1 = `https://picsum.photos/200?id=${props.details.id}`;
+  const imgSrc2 = `https://picsum.photos/200?id=${props.details.id*5}`;
 
   return (
     <article className="recipeThumb">
@@ -44,7 +45,7 @@ const RecipeThumb = (props) => {
               <div className={classes.cardTitle}>
                 {props.details.recipe_title}
               </div>
-              <img alt={props.details.recipe_title} src={imgSrc} />
+              <img alt={props.details.recipe_title} src={imgSrc1} />
               <div className={classes.cardContent}>
                 {props.details.recipe_description}
               </div>
@@ -55,7 +56,7 @@ const RecipeThumb = (props) => {
               <div className={classes.cardTitle}>
                 {props.details.recipe_title}
               </div>
-              <img alt={props.details.recipe_title} src={imgSrc} />
+              <img alt={props.details.recipe_title} src={imgSrc2} />
               <div className={classes.cardContent}>
                 {props.details.recipe_description}
               </div>
