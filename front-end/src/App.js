@@ -2,13 +2,12 @@ import React, { useEffect, useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import PrimaryNav from "./PrimaryNav"
 import Welcome from "./Welcome"
-//import About from "./About"
+import Home from "./Home"
 import MenuOverlay from "./MenuOverlay"
 import Recipes from "./Recipe"
-// import IngredientDetails from "./IngredientDetails"
+import IngredientDetails from "./IngredientDetails"
 import RecipeDetails from "./RecipeDetails"
 import Search from "./Search" //TODO: I ADDED
-
 import Login from "./Login"
 import Register from "./Register"
 import RestorePassword from "./RestorePassword"
@@ -24,19 +23,34 @@ import { async } from "q"
 // set up routes so different URL routes load up different main components
 const App = props => {
   const [user, setUser] = useState({}) // a state variable that stores the logged-in user, if any
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <div className="container">
       <Router>
+
+      <MenuOverlay isOpen={isMenuOpen} closeMenu={closeMenu} />
+      <button onClick={toggleMenu} className="menu-button">
+        Menu
+      </button>
+
         {/* pass the setter function that can be called if the user successfully logs in from the login screen */}
         <PrimaryNav user={user} setuser={setUser} />
         
         <Routes>
-          {/* a route to the home screen */}
+          {/* a route to the welcome screen */}
           <Route path="/" element={<Welcome user={user} />} />
 
-          {/* a route to the menu overlay */}
-          {/* <Route path="/menuoverlay" element={<MenuOverlay user={user} />} /> */}
+          {/* a route to the welcome screen */} 
+          <Route path="/home" element={<Home user={user} />} />
 
           {/* a route to show a list of recipes - we pass the user data in as a prop */}
           {/* <Route path="/recipes" element={<Recipes user={user} />} /> */}
@@ -49,7 +63,10 @@ const App = props => {
           <Route
             path="/search" element={<Search user={user} />}
           />
-
+          {/* a route to ingredient description */}
+          <Route 
+            path="/ingredient-details" element={<IngredientDetails user={user} setuser={setUser} />}
+          />
           {/* a route to the log in form */}
           <Route
             path="/login" element={<Login user={user} setuser={setUser} />}
@@ -59,7 +76,7 @@ const App = props => {
             path="/register" element={<Register user={user} setuser={setUser} />}
           />
           {/* a route to all rights reserved */}
-          {/* <Route path="/allrightsresereved" element={<RightsReserved user={user} />} /> */}
+          <Route path="/allrightsreserved" element={<RightsReserved user={user} />} />
 
           {/* a route to terms of service */}
           <Route path="/termsofservice" element={<TermsOfService user={user} />} />

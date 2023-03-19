@@ -8,7 +8,7 @@ body {
 
 .container {
   background-color: rgba(255, 255, 255, 0.8);
-  border: 1px solid black;
+  border: 0px solid black;
   max-width: 900px;
   margin: 0 auto;
   padding: 0;
@@ -70,3 +70,20 @@ input[type="submit"]:active {
   border-color: black;
 }
 
+.menu-button {
+  position: fixed;
+  top: 1rem;
+  left: 700px; /* Move the button 100 pixels to the right */
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 1001; /* Place the button above the menu overlay */
+}
+
+.menu-button:hover {
+  background-color: #2980b9;
+}
