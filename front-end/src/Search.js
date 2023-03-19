@@ -3,7 +3,7 @@ import Recipe from "./Recipe"
 
 const Search = prop => {
     const [search, setSearch] = useState("");
-    const [keyword, setKeyword] = useState('broccoli');
+    const [keyword, setKeyword] = useState('null');
     const [recipes, setRecipies] = useState([]);
     const [show, setShow] = useState(false);
 
