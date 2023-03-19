@@ -1,0 +1,20 @@
+/* src/components/HomePage.css */
+.products-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    max-width: 95%; /* Add a max-width to the container to manage margins */
+    margin: 0 auto;
+  }
+  
+  .product {
+    flex-basis: calc(50% - 1rem); /* 50% width minus the gap size */
+    text-align: center; /* Align the title to the center */
+  }
+  
+  .product-image {
+    max-width: 100%; /* Make sure the image does not exceed the container width */
+    height: auto;
+  }
+  
