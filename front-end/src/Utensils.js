@@ -12,7 +12,7 @@ const RecipeList = (props) => {
   const [sortByTimeNeeded, setSortByTimeNeeded] = useState(false);
   useEffect(() => {
     // fetch some mock data about animals for sale
-    console.log("fetching 10 random animals...");
+    console.log("fetching 10 random things...");
     axios("https://api.mockaroo.com/api/2ed4ec20?count=10&key=1fd5b940")
       .then((response) => {
         // extract the data from the server response
@@ -25,7 +25,7 @@ const RecipeList = (props) => {
         const backupData = [
           {
             id: 1,
-            recipe_title: "Paddy heron",
+            recipe_title: "Whisk",
             country: "Brazil",
             price: "$10.51",
             recipe_description:
@@ -33,7 +33,7 @@ const RecipeList = (props) => {
           },
           {
             id: 2,
-            recipe_title: "Numbat",
+            recipe_title: "Spatula",
             country: "Russia",
             price: "$2.37",
             recipe_description:
@@ -41,7 +41,7 @@ const RecipeList = (props) => {
           },
           {
             id: 3,
-            recipe_title: "Spaghetti",
+            recipe_title: "Knife",
             country: "Russia",
             price: "$2.37",
             recipe_description:
@@ -55,15 +55,7 @@ const RecipeList = (props) => {
   return (
     <div className="RecipeList">
       <h1>Recipes</h1>
-      <Search />
-      <SortBy
-       sortByIngredients={sortByIngredients}
-       setSortByIngredients={setSortByIngredients}
-       sortByDifficulty={sortByDifficulty}
-       setSortByDifficulty={setSortByDifficulty}
-       sortByTimeNeeded={sortByTimeNeeded}
-       setSortByTimeNeeded={setSortByTimeNeeded}
-     />
+      <SearchUt />
       <section className="recipes">
         {/* show a thumbnail for each food item */}
         {data.map((item) => (
