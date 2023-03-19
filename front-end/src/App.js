@@ -2,13 +2,11 @@ import React, { useEffect, useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import PrimaryNav from "./PrimaryNav"
 import Welcome from "./Welcome"
-//import About from "./About"
 import MenuOverlay from "./MenuOverlay"
 import Recipes from "./Recipe"
 // import IngredientDetails from "./IngredientDetails"
 import RecipeDetails from "./RecipeDetails"
 import Search from "./Search" //TODO: I ADDED
-
 import Login from "./Login"
 import Register from "./Register"
 import RestorePassword from "./RestorePassword"
@@ -59,7 +57,7 @@ const App = props => {
             path="/register" element={<Register user={user} setuser={setUser} />}
           />
           {/* a route to all rights reserved */}
-          {/* <Route path="/allrightsresereved" element={<RightsReserved user={user} />} /> */}
+          <Route path="/allrightsreserved" element={<RightsReserved user={user} />} />
 
           {/* a route to terms of service */}
           <Route path="/termsofservice" element={<TermsOfService user={user} />} />
