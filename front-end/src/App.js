@@ -5,6 +5,7 @@ import Welcome from "./Welcome"
 import Home from "./Home"
 import MenuOverlay from "./MenuOverlay"
 import RecipeList from "./RecipeList"
+import Recipes from "./Recipe"
 import IngredientDetails from "./IngredientDetails"
 import RecipeDetails from "./RecipeDetails"
 import Search from "./Search" //TODO: I ADDED
@@ -53,7 +54,10 @@ const App = props => {
           <Route path="/home" element={<Home user={user} />} />
 
           {/* a route to show a list of recipes - we pass the user data in as a prop */}
+
            <Route path="/recipes" element={<RecipeList user={user} />} />
+
+          {/* <Route path="/recipes" element={<Recipes user={user} />} /> */}
 
           {/* a route to show the details of a specific recipe, given its id - we pass the user data in as a prop and the recipeId is passed in automatically as a param by react */}
           <Route
