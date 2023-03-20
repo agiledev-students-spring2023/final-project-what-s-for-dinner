@@ -13,7 +13,7 @@ const RecipeList = (props) => {
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log("fetching 10 random animals...");
-    axios("https://my.api.mockaroo.com/utensils?key=1fd5b940")
+    axios(axios("https://api.mockaroo.com/api/2ed4ec20?count=10&key=1fd5b940"))
       .then((response) => {
         // extract the data from the server response
         setData(response.data);
