@@ -36,6 +36,7 @@ const Home = props => {
         <ul>
             <Link to="/my-ingredients">My Ingredients Page</Link>
             <Link to="/utensils">My Utensils Page</Link>
+            <Link to="/saved-recipes">My Saved Recipes Page</Link>
         </ul>
       </nav>
       <Search onSearch={setSearchTerm} />
