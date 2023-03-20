@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "./Searct";
+import Search from "./Search";
 import UtensilThumb from "./UtensilThumb";
 import "./Utensils.css";
 
@@ -55,7 +55,7 @@ const Utensils = (props) => {
       <section className="utensils">
         {/* show a thumbnail for each food item */}
         {data.map((item) => (
-          <RecipeThumb key={item.id} details={item} />
+          <UtensilThumb key={item.id} details={item} />
         ))}
       </section>
     </div>
