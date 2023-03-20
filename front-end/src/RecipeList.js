@@ -4,7 +4,7 @@ import Search from "./Search";
 import { Link } from "react-router-dom"
 import SortBy from "./SortBy";
 import RecipeThumb from "./RecipeThumb";
-import "./RecipeThumb.css";
+import "./RecipeList.css";
 
 const RecipeList = (props) => {
   const [data, setData] = useState([]);
@@ -14,7 +14,7 @@ const RecipeList = (props) => {
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log("fetching 10 random animals...");
-    axios("https://www.themealdb.com/api/json/v1/1/search.php?s=chicken")
+    axios("https://www.themealdb.com/api/json/v1/1/search.php?s=a")
       .then((response) => {
         // extract the data from the server response
         setData(response.data.meals);
@@ -63,16 +63,17 @@ const RecipeList = (props) => {
     <div className="RecipeList">
     <h1>Recipes</h1>
     <Search />
-    <div className="recipe-container"></div>
+    <div className="recipe-container">
     {data.map((recipe) => (
-          <div key={recipe.idMeal} className="recipe">
-            <Link to={`/${recipe.idMeal}`}>
-              <img src={recipe.strMealThumb} alt={recipe.strMeal} className="recipe-image" />
-              <h3>{recipe.strMealThum}</h3>
-            </Link>
-          </div>
-        ))}
+      <div key={recipe.idMeal} className="recipe">
+        <Link to={`/${recipe.idMeal}`} className="recipe-link">
+          <img src={recipe.strMealThumb} alt={recipe.strMeal} className="recipe-image" />
+          <h3>{recipe.strMeal}</h3>
+        </Link>
       </div>
+    ))}
+      </div>
+    </div>
     /*
     <div className="RecipeList">
       <h1>Recipes</h1>

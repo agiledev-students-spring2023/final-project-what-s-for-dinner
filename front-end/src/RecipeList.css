@@ -1,37 +1,39 @@
 .RecipeList {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .RecipeList h1 {
-    text-align: center;
-  }
-  
-  .Search {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-  }
-  .recipe-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
-    max-width: 95%; /* Add a max-width to the container to manage margins */
-    margin: 0 auto;
-  }
-  
-  .recipe {
-    flex-basis: calc(50% - 1rem); /* 50% width minus the gap size */
-    display: flex; /* add this line to enable flexbox */
-    flex-wrap: wrap; /* add this line to wrap the items to a new line if there's not enough space */
-    align-items: center; /* align items along the vertical axis */
-    text-align: center; /* Align the title to the center */
-  }
-  
-  .recipe-image {
-    max-width: 100%; /* Make sure the image does not exceed the container width */
-    height: 200px;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.RecipeList h1 {
+  text-align: center;
+}
+
+.Search {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 95%;
+  margin: 0 auto;
+}
+
+.recipe {
+  flex-basis: calc(50% - 1rem);
+  text-align: center;
+  display: flex;
+}
+
+.recipe-link {
+  flex-grow: 1;
+}
+
+.recipe-image {
+  max-width: 100% !important;
+  height: auto;
+}
