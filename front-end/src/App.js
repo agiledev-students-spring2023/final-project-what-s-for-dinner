@@ -6,6 +6,7 @@ import Home from "./Home"
 import MenuOverlay from "./MenuOverlay"
 import RecipeList from "./RecipeList"
 import Recipes from "./Recipe"
+import Utensils from "./Utensils"
 import IngredientDetails from "./IngredientDetails"
 import RecipeDetails from "./RecipeDetails"
 import Search from "./Search" //TODO: I ADDED
@@ -85,6 +86,10 @@ const App = props => {
           {/* a route to ingredient description */}
           <Route 
             path="/ingredient-details" element={<IngredientDetails user={user} setuser={setUser} />}
+          />
+          {/* a route to ingredient description */}
+          <Route 
+            path="/utensils" element={<Utensils user={user} setuser={setUser} />}
           />
           {/* a route to the log in form */}
           <Route
