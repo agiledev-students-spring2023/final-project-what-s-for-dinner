@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import Search from './Search';
 import './Home.css';
 
-const Home = () => {
+const Home = props => {
   const [products, setProducts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -24,13 +24,18 @@ const Home = () => {
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // if the user is not logged in, redirect them to the login route
+  if (!props.user || !props.user.success) {
+    return <Navigate to="/login?error=protected" />
+  }
+
   return (
     <div>
       <h1>Home Page</h1>
       <nav>
         <ul>
             <Link to="/my-ingredients">My Ingredients Page</Link>
-            <Link to="/Utensils">My Utensils Page</Link>
+            <Link to="/utensils">My Utensils Page</Link>
         </ul>
       </nav>
       <Search onSearch={setSearchTerm} />
