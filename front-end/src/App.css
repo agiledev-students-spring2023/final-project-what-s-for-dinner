@@ -72,7 +72,7 @@ input[type="submit"]:active {
 
 .menu-button {
   position: fixed;
-  top: 1rem;
+  top: 0px;
   left: 700px; /* Move the button 100 pixels to the right */
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
