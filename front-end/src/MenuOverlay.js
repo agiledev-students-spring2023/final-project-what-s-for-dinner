@@ -19,9 +19,6 @@ const MenuOverlay = ({ isOpen, closeMenu }) => {
             <Link to="/login">Login</Link>
           </li>
           <li>
-            <Link to="/saved-recipes">Saved Recipes</Link>
-          </li>
-          <li>
             <Link to="/home">My Ingredients</Link>
           </li>
           <li>
