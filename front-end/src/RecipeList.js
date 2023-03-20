@@ -74,26 +74,6 @@ const RecipeList = (props) => {
     ))}
       </div>
     </div>
-    /*
-    <div className="RecipeList">
-      <h1>Recipes</h1>
-      <Search />
-      <SortBy
-       sortByIngredients={sortByIngredients}
-       setSortByIngredients={setSortByIngredients}
-       sortByDifficulty={sortByDifficulty}
-       setSortByDifficulty={setSortByDifficulty}
-       sortByTimeNeeded={sortByTimeNeeded}
-       setSortByTimeNeeded={setSortByTimeNeeded}
-     />
-      <section className="recipes">
-
-        {data.map((item) => (
-          <RecipeThumb key={item.id} details={item} />
-        ))}
-      </section>
-    </div>
-    */
   );
 };
 
