@@ -24,6 +24,9 @@ const MenuOverlay = ({ isOpen, closeMenu }) => {
           <li>
             <Link to="/share-recipes">Share Your Recipes</Link>
           </li>
+          <li>
+            <Link to="/saved-recipes">Access Saved Recipes</Link>
+          </li>
         </ul>
       </nav>
     </div>

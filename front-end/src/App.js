@@ -22,6 +22,7 @@ import Footer from "./Footer";
 import { async } from "q"
 import ShareRecipe from "./ShareRecipe"
 import MyIngredients from "./MyIngredients"
+import SavedRecipes from "./SavedRecipes"
 
 
 // set up routes so different URL routes load up different main components
@@ -63,7 +64,7 @@ const App = props => {
           {/* <Route path="/my-utensils" elemnt={<MyUtensils user={user} />} /> */}
 
           {/* a route to the user's saved recipes page */}
-          {/* <Route path="/saved-recipes" elemnt={<SavedRecipes user={user} />} /> */}
+          <Route path="/saved-recipes" elemnt={<SavedRecipes user={user} />} /> 
 
           {/* a route to show a list of recipes - we pass the user data in as a prop */}
 
