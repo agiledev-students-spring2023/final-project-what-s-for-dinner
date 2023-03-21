@@ -5,6 +5,7 @@ const MyIngredients = () => {
   const [ingredients, setIngredients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [selectedAmount, setSelectedAmount] = useState(1);
   const YOUR_API_KEY = "c7fc815cea624244bc3e8c2f06826c4b";
 
   useEffect(() => {
@@ -38,7 +39,17 @@ const MyIngredients = () => {
   const handleAdd = (ingredient) => {
     // API call to add ingredient to user's inventory
     setIngredients([...ingredients, ingredient]);
+    setSelectedAmount(1);
   };
+
+  const handleAmountChange = (event) => {
+    const amount = parseInt(event.target.value);
+    setSelectedAmount(amount >= 1 ? amount : 1);
+  };
+
+  const canAddIngredient = () => {
+    return selectedAmount > 0;
+  }
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value);
@@ -58,13 +69,13 @@ const MyIngredients = () => {
       <h2>Search and Add Ingredients</h2>
       <div>
         <input type="text" value={searchTerm} onChange={handleSearch} placeholder="Search for ingredients..." />
-        <button onClick={handleSearch}>Search</button>
       </div>
       <ul>
         {searchResults.map((ingredient) => (
           <li key={ingredient.id}>
             {ingredient.name}
-            <button onClick={() => handleAdd({ name: ingredient.name, amount: 1 })}>Add</button>
+            <input type="number" min="1" value={selectedAmount} onChange={handleAmountChange} />
+            <button onClick={() => handleAdd({ name: ingredient.name, amount: selectedAmount })} disabled={!canAddIngredient()}>Add</button>
           </li>
         ))}
       </ul>

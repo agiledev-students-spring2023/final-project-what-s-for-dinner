@@ -88,7 +88,7 @@ const Register = props => {
             <br />
             <label>Confirm Your Password: </label>
             <br />
-            <input type="text" name="password" placeholder="re-enter password" />
+            <input type="password" name="password" placeholder="re-enter password" />
             <br />
             <input type="submit" value="Create Account" />
           </form>
