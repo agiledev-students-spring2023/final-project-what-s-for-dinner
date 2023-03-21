@@ -35,7 +35,9 @@ const Home = props => {
       <nav>
         <ul>
             <Link to="/my-ingredients">My Ingredients Page</Link>
+            <br />
             <Link to="/utensils">My Utensils Page</Link>
+            <br />
             <Link to="/saved-recipes">My Saved Recipes Page</Link>
         </ul>
       </nav>

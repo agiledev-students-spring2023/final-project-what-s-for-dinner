@@ -11,7 +11,7 @@ const PrimaryNav = props => {
   if (props.user.success)
     logInOutComponent = (
       <>
-        <Link to="/logout">Logout {props.user.username}</Link>
+        <Link to="/logout">Logout</Link>
       </>
     )
 

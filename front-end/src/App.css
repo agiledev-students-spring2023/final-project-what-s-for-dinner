@@ -9,7 +9,7 @@ body {
 .container {
   background-color: rgba(255, 255, 255, 0.8);
   border: 0px solid black;
-  max-width: 900px;
+  max-width: 375px; /* adjust the max-width for iPhone 14 screen */
   margin: 0 auto;
   padding: 0;
 }
@@ -47,10 +47,12 @@ p {
 }
 /* styles for form text fields */
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+input[type="number"] {
   padding: 10px;
   margin: 10px 0;
-  width: 200px;
+  width: 200px; /* Changed the width to fit in the smaller screen */
+  max-width: 90%; /* Added a max-width to prevent overflowing on smaller screens */
 }
 
 /* styles for the form submit button */
@@ -73,7 +75,7 @@ input[type="submit"]:active {
 .menu-button {
   position: fixed;
   top: 0px;
-  left: 700px; /* Move the button 100 pixels to the right */
+  left: 265px; /* Changed the left position to align with the smaller screen */
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
   background-color: #3498db;

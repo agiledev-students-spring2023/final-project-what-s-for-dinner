@@ -67,19 +67,14 @@ const Login = props => {
         </p>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
-          <img alt="login!" src="https://picsum.photos/200?page=home" />
           <form onSubmit={handleSubmit}>
             {
               //handle error condition
             }
             <label>Username: </label>
             <input type="text" name="username" placeholder="username" />
-            <br />
-            <br />
             <label>Password: </label>
             <input type="password" name="password" placeholder="password" />
-            <br />
-            <br />
             <input type="submit" value="Log In" />
           </form>
           <p>

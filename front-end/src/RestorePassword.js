@@ -67,21 +67,14 @@ const RestorePassword = props => {
         </p>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
-          <img alt="restorepassword!" src="https://picsum.photos/200?page=home" />
           <form onSubmit={handleSubmit}>
             {
               //handle error condition
             }
             <label>Registered Username: </label>
-            <br />
             <input type="text" name="username" placeholder="username" />
-            <br />
-            <br />
             <label>Registered Email: </label>
-            <br />
             <input type="text" name="email" placeholder="email" />
-            <br />
-            <br />
             <input type="submit" value="Restore Password" />
           </form>
           <p>
