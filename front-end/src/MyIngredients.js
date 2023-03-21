@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import "./MyIngredients.css"
+import { Link, useParams } from 'react-router-dom';
+import './MyIngredients.css';
 
 const MyIngredients = () => {
   const [ingredients, setIngredients] = useState([]);
@@ -12,7 +13,9 @@ const MyIngredients = () => {
     // API call to fetch user's added ingredients
     const fetchIngredients = async () => {
       try {
-        const response = await fetch(`https://api.spoonacular.com/ingredients/list?apiKey=${YOUR_API_KEY}`);
+        const response = await fetch(
+          `https://api.spoonacular.com/ingredients/list?apiKey=${YOUR_API_KEY}`
+        );
         const data = await response.json();
         setIngredients(data);
       } catch (error) {
@@ -21,20 +24,6 @@ const MyIngredients = () => {
     };
     fetchIngredients();
   }, []);
-
-  useEffect(() => {
-    // API call to fetch search results for ingredient search term
-    const fetchSearchResults = async () => {
-      try {
-        const response = await fetch(`https://api.spoonacular.com/food/ingredients/search?apiKey=${YOUR_API_KEY}&query=${searchTerm}`);
-        const data = await response.json();
-        setSearchResults(data.results);
-      } catch (error) {
-        console.error('Error fetching data from API:', error);
-      }
-    };
-    fetchSearchResults();
-  }, [searchTerm]);
 
   const handleAdd = (ingredient) => {
     // API call to add ingredient to user's inventory
@@ -49,10 +38,19 @@ const MyIngredients = () => {
 
   const canAddIngredient = () => {
     return selectedAmount > 0;
-  }
+  };
 
-  const handleSearch = (event) => {
+  const handleSearch = async (event) => {
     setSearchTerm(event.target.value);
+    try {
+      const response = await fetch(
+        `https://api.spoonacular.com/food/ingredients/search?apiKey=${YOUR_API_KEY}&query=${event.target.value}`
+      );
+      const data = await response.json();
+      setSearchResults(data.results);
+    } catch (error) {
+      console.error('Error fetching data from API:', error);
+    }
   };
 
   return (
@@ -62,23 +60,46 @@ const MyIngredients = () => {
       <ul>
         {ingredients.map((ingredient) => (
           <li key={ingredient.id}>
-            {ingredient.name} ({ingredient.amount})
+            <Link to={`/ingredientdetails/${ingredient.id}`}>
+              {ingredient.name} ({ingredient.amount})
+            </Link>
           </li>
         ))}
       </ul>
       <h2>Search and Add Ingredients</h2>
       <div>
-        <input type="text" value={searchTerm} onChange={handleSearch} placeholder="Search for ingredients..." />
+        <input
+          type="text"
+          value={searchTerm}
+          onChange={handleSearch}
+          placeholder="Search for ingredients..."
+        />
       </div>
       <ul>
-        {searchResults.map((ingredient) => (
-          <li key={ingredient.id}>
-            {ingredient.name}
-            <input type="number" min="1" value={selectedAmount} onChange={handleAmountChange} />
-            <br />
-            <button onClick={() => handleAdd({ name: ingredient.name, amount: selectedAmount })} disabled={!canAddIngredient()}>Add</button>
-          </li>
-        ))}
+        {searchResults && searchResults.length > 0 &&
+          searchResults.map((ingredient) => (
+            <li key={ingredient.id}>
+              {ingredient.name}
+              <input
+                type="number"
+                min="1"
+                value={selectedAmount}
+                onChange={handleAmountChange}
+              />
+              <br />
+              <button
+                onClick={() =>
+                  handleAdd({
+                    name: ingredient.name,
+                    amount: selectedAmount,
+                  })
+                }
+                disabled={!canAddIngredient()}
+              >
+                Add
+              </button>
+            </li>
+          ))}
       </ul>
     </div>
   );

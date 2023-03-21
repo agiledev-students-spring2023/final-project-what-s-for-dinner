@@ -86,8 +86,9 @@ const App = props => {
           />
           {/* a route to ingredient description */}
           <Route 
-            path="/ingredient-details" element={<IngredientDetails user={user} setuser={setUser} />}
+            path="/ingredientdetails/:id" component={IngredientDetails} 
           />
+
           {/* a route to ingredient description */}
           <Route 
             path="/utensils" element={<Utensils user={user} setuser={setUser} />}
