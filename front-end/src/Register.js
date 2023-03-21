@@ -69,27 +69,18 @@ const Register = props => {
         </p>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
-          <img alt="register!" src="https://picsum.photos/200?page=home" />
           <form onSubmit={handleSubmit}>
             {
               //handle error condition
             }
             <label>Your Email: </label>
-            <br />
             <input type="text" name="email" placeholder="email@address.com" />
-            <br />
             <label>Preferred Username: </label>
-            <br />
             <input type="text" name="username" placeholder="username" />
-            <br />
             <label>Your Password: </label>
-            <br />
             <input type="password" name="password" placeholder="password" />
-            <br />
             <label>Confirm Your Password: </label>
-            <br />
             <input type="password" name="password" placeholder="re-enter password" />
-            <br />
             <input type="submit" value="Create Account" />
           </form>
           <p>

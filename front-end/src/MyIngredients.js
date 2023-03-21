@@ -75,6 +75,7 @@ const MyIngredients = () => {
           <li key={ingredient.id}>
             {ingredient.name}
             <input type="number" min="1" value={selectedAmount} onChange={handleAmountChange} />
+            <br />
             <button onClick={() => handleAdd({ name: ingredient.name, amount: selectedAmount })} disabled={!canAddIngredient()}>Add</button>
           </li>
         ))}
