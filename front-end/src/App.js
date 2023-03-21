@@ -64,7 +64,7 @@ const App = props => {
           {/* <Route path="/my-utensils" elemnt={<MyUtensils user={user} />} /> */}
 
           {/* a route to the user's saved recipes page */}
-          <Route path="/saved-recipes" elemnt={<SavedRecipes user={user} />} /> 
+          <Route path="/saved-recipes" element={<SavedRecipes user={user} />} /> 
 
           {/* a route to show a list of recipes - we pass the user data in as a prop */}
 
