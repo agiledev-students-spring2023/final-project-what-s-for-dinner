@@ -8,6 +8,7 @@ const Footer = props => {
         <footer>
         <Link to="/termsofservice">Terms of Service</Link>
         <Link to="/contactus">Contact Us</Link>
+        <br />
         <Link to="/allrightsreserved">©All Rights Reserved 2023</Link>
         </footer>
     );

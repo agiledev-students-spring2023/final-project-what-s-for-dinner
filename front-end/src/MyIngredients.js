@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import './MyIngredients.css';
 
 const MyIngredients = () => {
@@ -59,7 +60,9 @@ const MyIngredients = () => {
       <ul>
         {ingredients.map((ingredient) => (
           <li key={ingredient.id}>
-            {ingredient.name} ({ingredient.amount})
+            <Link to={`/ingredientdetails/${ingredient.id}`}>
+              {ingredient.name} ({ingredient.amount})
+            </Link>
           </li>
         ))}
       </ul>
