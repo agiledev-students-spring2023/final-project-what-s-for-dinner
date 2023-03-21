@@ -6,7 +6,7 @@ const MyIngredients = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAmount, setSelectedAmount] = useState(1);
-  const YOUR_API_KEY = 'c7fc815cea624244bc3e8c2f06826c4b';
+  const YOUR_API_KEY = "bff4a3b5c9944aca81e2b41246450fdb";
 
   useEffect(() => {
     // API call to fetch user's added ingredients
