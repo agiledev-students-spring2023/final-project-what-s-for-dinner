@@ -92,6 +92,7 @@ const MyIngredients = () => {
                   handleAdd({
                     name: ingredient.name,
                     amount: selectedAmount,
+                    id: "9266"
                   })
                 }
                 disabled={!canAddIngredient()}

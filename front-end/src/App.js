@@ -86,7 +86,7 @@ const App = props => {
           />
           {/* a route to ingredient description */}
           <Route 
-            path="/ingredientdetails/:id" component={IngredientDetails} 
+            path="/ingredientdetails/:id" element={<IngredientDetails/>} 
           />
 
           {/* a route to ingredient description */}
