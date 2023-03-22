@@ -28,11 +28,8 @@ const Home = (props) => {
       <nav>
         <ul>
           <Link to="/my-ingredients">My Ingredients</Link>
-          <br />
           <Link to="/utensils">My Utensils</Link>
-          <br />
           <Link to="/saved-recipes">My Saved Recipes</Link>
-          <br />
           <Link to="/recipes">Search Recipes</Link>
         </ul>
       </nav>
