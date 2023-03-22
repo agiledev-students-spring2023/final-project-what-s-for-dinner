@@ -27,11 +27,11 @@ const Home = (props) => {
       <h1>Home Page</h1>
       <nav>
         <ul>
-          <Link to="/my-ingredients">My Ingredients Page</Link>
+          <Link to="/my-ingredients">My Ingredients</Link>
           <br />
-          <Link to="/utensils">My Utensils Page</Link>
+          <Link to="/utensils">My Utensils</Link>
           <br />
-          <Link to="/saved-recipes">My Saved Recipes Page</Link>
+          <Link to="/saved-recipes">My Saved Recipes</Link>
           <br />
           <Link to="/recipes">Search Recipes</Link>
         </ul>
