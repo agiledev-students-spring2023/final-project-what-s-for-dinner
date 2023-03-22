@@ -9,7 +9,7 @@ import Recipes from "./Recipe"
 import Utensils from "./Utensils"
 import IngredientDetails from "./IngredientDetails"
 import RecipeDetails from "./RecipeDetails"
-import Search from "./Search" //TODO: I ADDED
+import Search from "./Search" 
 import Login from "./Login"
 import Register from "./Register"
 import RestorePassword from "./RestorePassword"
