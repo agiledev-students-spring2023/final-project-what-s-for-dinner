@@ -4,8 +4,6 @@ import axios from "axios";
 import './Home.css';
 
 const Home = (props) => {
-  const [products, setProducts] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
 
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
 
@@ -18,23 +16,6 @@ const Home = (props) => {
         console.error(error);
       });
   }, []);
-
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching data from Fake Store API:', error);
-      }
-    };
-    fetchProducts();
-  }, []);
-
-  const filteredProducts = products.filter((product) =>
-    product.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
 
   // if the user is not logged in, redirect them to the login route
   if (!props.user || !props.user.success) {

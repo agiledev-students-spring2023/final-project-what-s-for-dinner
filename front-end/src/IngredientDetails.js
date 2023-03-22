@@ -15,7 +15,7 @@ const IngredientDescription = () => {
         const data = await response.json();
         setProduct(data);
       } catch (error) {
-        console.error('Error fetching data from Fake Store API:', error);
+        console.error('Error fetching data from API:', error);
       }
     };
     fetchProduct();

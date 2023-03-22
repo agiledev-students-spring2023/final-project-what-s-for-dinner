@@ -15,7 +15,7 @@ const SavedRecipes = (props) => {
 
     useEffect(() => {
         // fetch some mock data about animals for sale
-        console.log("fetching 10 random animals...");
+        console.log("fetching 10 random recipes...");
         axios("https://www.themealdb.com/api/json/v1/1/search.php?s=a")
           .then((response) => {
             // extract the data from the server response
