@@ -7,7 +7,7 @@ const MyIngredients = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAmount, setSelectedAmount] = useState(1);
-  const YOUR_API_KEY = "bff4a3b5c9944aca81e2b41246450fdb";
+  const YOUR_API_KEY = "f2bec4050b0a4618abf65fde4f95492a";
 
   useEffect(() => {
     // API call to fetch user's added ingredients
@@ -60,9 +60,7 @@ const MyIngredients = () => {
       <ul>
         {ingredients.map((ingredient) => (
           <li key={ingredient.id}>
-            <Link to={`/ingredientdetails/${ingredient.id}`}>
-              {ingredient.name} ({ingredient.amount})
-            </Link>
+            {ingredient.name} ({ingredient.amount})
           </li>
         ))}
       </ul>
