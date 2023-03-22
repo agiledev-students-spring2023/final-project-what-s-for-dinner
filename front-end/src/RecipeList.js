@@ -11,6 +11,8 @@ const RecipeList = (props) => {
   const [sortByIngredients, setSortByIngredients] = useState(false);
   const [sortByDifficulty, setSortByDifficulty] = useState(false);
   const [sortByTimeNeeded, setSortByTimeNeeded] = useState(false);
+  const [sortedData, setSortedData] = useState([]);
+  const [sortOption, setSortOption] = useState("");
   useEffect(() => {
     // fetch some mock data about animals for sale
     console.log("fetching 10 random animals...");
@@ -56,15 +58,52 @@ const RecipeList = (props) => {
             },
         ];
 
-        setData(backupData);
+        if (sortOption) {
+          setSortedData(sortData(data, sortOption));
+        } else {
+          setSortedData(data);
+        }
       });
-  }, []); // only run it once!
+      }, [data, sortOption]); // only run it once!
+  const sortData = (data, option) => {
+    let sortedData = [...data];
+    switch (option) {
+      case "ingredients":
+        sortedData.sort((a, b) => a.strIngredient1.localeCompare(b.strIngredient1));
+        break;
+      case "difficulty":
+        sortedData.sort((a, b) => a.strArea.localeCompare(b.strArea));
+        break;
+      case "time":
+        sortedData.sort((a, b) => a.idMeal.localeCompare(b.idMeal));
+        break;
+      default:
+        break;
+    }
+    return sortedData;
+  };
+  useEffect(() => {
+    if (sortOption) {
+      setSortedData(sortData(data, sortOption));
+    } else {
+      setSortedData(data);
+    }
+  }, [data, sortOption]);
   return (
     <div className="RecipeList">
     <h1>Recipes</h1>
     <Search />
+    <button onClick={() => setSortOption("ingredients")}>
+      Sort by Ingredients
+    </button>
+    <button onClick={() => setSortOption("difficulty")}>
+      Sort by Difficulty
+    </button>
+    <button onClick={() => setSortOption("time")}>
+      Sort by Time Needed
+    </button>
     <div className="recipe-container">
-    {data.map((recipe) => (
+    {sortedData.map((recipe) => (
       <div key={recipe.idMeal} className="recipe">
         <Link to={`/${recipe.idMeal}`} className="recipe-link">
           <img src={recipe.strMealThumb} alt={recipe.strMeal} className="recipe-image" />
