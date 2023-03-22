@@ -75,7 +75,7 @@ input[type="submit"]:active {
 .menu-button {
   position: fixed;
   top: 0px;
-  left: 265px; /* Changed the left position to align with the smaller screen */
+  left: 0px; /* Change the left position to 0px to always align it to the left corner */
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
   background-color: #3498db;
@@ -88,4 +88,11 @@ input[type="submit"]:active {
 
 .menu-button:hover {
   background-color: #2980b9;
+}
+
+/* media query to override the menu button style for larger screens */
+@media only screen and (min-width: 768px) {
+  .menu-button {
+    left: 265px; /* Align the button with the menu overlay on larger screens */
+  }
 }
