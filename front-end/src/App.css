@@ -74,7 +74,7 @@ input[type="submit"]:active {
 
 .menu-button {
   position: fixed;
-  top: 0px;
+  top: 55px;
   left: 0px; /* Change the left position to 0px to always align it to the left corner */
   padding: 0.5rem 1rem;
   font-size: 1.1rem;
@@ -93,6 +93,6 @@ input[type="submit"]:active {
 /* media query to override the menu button style for larger screens */
 @media only screen and (min-width: 768px) {
   .menu-button {
-    left: 265px; /* Align the button with the menu overlay on larger screens */
+    left: 650px; /* Align the button with the menu overlay on larger screens */
   }
 }
