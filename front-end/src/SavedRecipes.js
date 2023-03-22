@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Search from "./Search";
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import SortBy from "./SortBy";
 import RecipeThumb from "./RecipeThumb";
 import "./SavedRecipes.css"
 
 
-const SavedRecipes = () => {
+const SavedRecipes = (props) => {
     const [data, setData] = useState([]);
     const [sortByIngredients, setSortByIngredients] = useState(false);
     const [sortByDifficulty, setSortByDifficulty] = useState(false);
@@ -61,6 +61,12 @@ const SavedRecipes = () => {
             setData(backupData);
           });
       }, []); // only run it once!
+
+      // if the user is not logged in, redirect them to the login route
+      if (!props.user || !props.user.success) {
+        return <Navigate to="/login?error=protected" />;
+      }
+
       return (
         <div className="RecipeList">
         <Search />
@@ -77,11 +83,6 @@ const SavedRecipes = () => {
           </div>
         </div>
       );
-
-
-
-
-
 }
 
 export default SavedRecipes
