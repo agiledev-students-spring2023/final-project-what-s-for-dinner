@@ -19,19 +19,6 @@ const Home = (props) => {
       });
   }, []);
 
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await fetch('https://fakestoreapi.com/products');
-        const data = await response.json();
-        setProducts(data);
-      } catch (error) {
-        console.error('Error fetching data from Fake Store API:', error);
-      }
-    };
-    fetchProducts();
-  }, []);
-
   const filteredProducts = products.filter((product) =>
     product.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -46,11 +33,11 @@ const Home = (props) => {
       <h1>Home Page</h1>
       <nav>
         <ul>
-          <Link to="/my-ingredients">My Ingredients Page</Link>
+          <Link to="/my-ingredients">My Ingredients</Link>
           <br />
-          <Link to="/utensils">My Utensils Page</Link>
+          <Link to="/utensils">My Utensils</Link>
           <br />
-          <Link to="/saved-recipes">My Saved Recipes Page</Link>
+          <Link to="/saved-recipes">My Saved Recipes</Link>
           <br />
           <Link to="/recipes">Search Recipes</Link>
         </ul>
