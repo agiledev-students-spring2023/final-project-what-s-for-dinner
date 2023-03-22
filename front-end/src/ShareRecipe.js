@@ -7,6 +7,7 @@ const ShareRecipe = () => {
   const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
+  const [image, setImage] = useState(null);
 
   // Handle form submit
   const handleSubmit = (e) => {
@@ -17,6 +18,7 @@ const ShareRecipe = () => {
       description: description,
       ingredients: ingredients,
       instructions: instructions,
+      image: image,
     };
     // Send recipe data to API or database
     console.log(recipe);
@@ -25,6 +27,7 @@ const ShareRecipe = () => {
     setDescription("");
     setIngredients([]);
     setInstructions("");
+    setImage(null);
   };
 
   // Handle ingredient input
@@ -38,6 +41,11 @@ const ShareRecipe = () => {
   const handleAddIngredientField = () => {
     setIngredients([...ingredients, ""]);
   };
+
+  // Handle uploading a picture of the recipe
+  const handleImageUpload = (e) => {
+    setImage(e.target.files[0]);
+  };  
 
   // Render form for entering recipe information
   return (
@@ -80,6 +88,14 @@ const ShareRecipe = () => {
         onChange={(e) => setInstructions(e.target.value)}
         required
       ></textarea>
+
+      <label htmlFor="image">Image:</label>
+      <input
+        type="file"
+        id="image"
+        accept=".jpg,.jpeg,.png"
+        onChange={handleImageUpload}
+      />
 
       <button type="submit">Share Recipe</button>
     </form>
