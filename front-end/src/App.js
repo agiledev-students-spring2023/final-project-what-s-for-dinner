@@ -23,6 +23,7 @@ import { async } from "q"
 import ShareRecipe from "./ShareRecipe"
 import MyIngredients from "./MyIngredients"
 import SavedRecipes from "./SavedRecipes"
+import AboutUs from "./AboutUs";
 
 
 // set up routes so different URL routes load up different main components
@@ -109,6 +110,9 @@ const App = props => {
 
           {/* a route to the contact us */}
           <Route path="/contactus" element={<ContactUs user={user} />} />
+
+          {/* a route to the user's saved recipes page */}
+          <Route path="/about-us" element={<AboutUs user={user} />} /> 
 
           {/* a route to the restore password form */}
           <Route
