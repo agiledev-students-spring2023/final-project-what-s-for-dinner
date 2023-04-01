@@ -1,5 +1,5 @@
-import express from "express";
-import axios from "axios";
+const express = require('express');
+const axios = require('axios');
 
 const router = express.Router();
 router.get("/recipes", async function (req, res) {
@@ -15,4 +15,4 @@ router.get("/recipes", async function (req, res) {
   
 });
 
-export default router;
+module.exports = router;
