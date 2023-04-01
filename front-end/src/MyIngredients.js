@@ -7,15 +7,12 @@ const MyIngredients = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAmount, setSelectedAmount] = useState(1);
-  const YOUR_API_KEY = "f2bec4050b0a4618abf65fde4f95492a";
 
   useEffect(() => {
     // API call to fetch user's added ingredients
     const fetchIngredients = async () => {
       try {
-        const response = await fetch(
-          `https://api.spoonacular.com/ingredients/list?apiKey=${YOUR_API_KEY}`
-        );
+        const response = await fetch('/ingredients-api/ingredients');
         const data = await response.json();
         setIngredients(data);
       } catch (error) {
@@ -25,10 +22,22 @@ const MyIngredients = () => {
     fetchIngredients();
   }, []);
 
-  const handleAdd = (ingredient) => {
+  const handleAdd = async (ingredient) => {
     // API call to add ingredient to user's inventory
-    setIngredients([...ingredients, ingredient]);
-    setSelectedAmount(1);
+    try {
+      const response = await fetch('/ingredients-api/ingredients', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(ingredient),
+      });
+      const data = await response.json();
+      setIngredients([...ingredients, data]);
+      setSelectedAmount(1);
+    } catch (error) {
+      console.error('Error adding ingredient:', error);
+    }
   };
 
   const handleAmountChange = (event) => {
@@ -43,11 +52,9 @@ const MyIngredients = () => {
   const handleSearch = async (event) => {
     setSearchTerm(event.target.value);
     try {
-      const response = await fetch(
-        `https://api.spoonacular.com/food/ingredients/search?apiKey=${YOUR_API_KEY}&query=${event.target.value}`
-      );
+      const response = await fetch(`/ingredients-api/ingredients/search?q=${event.target.value}`);
       const data = await response.json();
-      setSearchResults(data.results);
+      setSearchResults(data);
     } catch (error) {
       console.error('Error fetching data from API:', error);
     }
@@ -58,7 +65,7 @@ const MyIngredients = () => {
       <h1>My Ingredients Page</h1>
       <h2>Added Ingredients</h2>
       <ul>
-        {ingredients.map((ingredient) => (
+        {Array.isArray(ingredients) && ingredients.map((ingredient) => (
           <li key={ingredient.id}>
             {ingredient.name} ({ingredient.amount})
           </li>
@@ -90,7 +97,6 @@ const MyIngredients = () => {
                   handleAdd({
                     name: ingredient.name,
                     amount: selectedAmount,
-                    id: "9266"
                   })
                 }
                 disabled={!canAddIngredient()}
