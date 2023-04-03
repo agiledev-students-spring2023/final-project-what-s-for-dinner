@@ -32,8 +32,7 @@ app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming 
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"));
 
-app.listen(3001, () => {
-  console.log('Server is listening on port 3001');
-});
+app.use(recipeRouter);
+app.use(ingredientsRouter);
 
 module.exports = app;

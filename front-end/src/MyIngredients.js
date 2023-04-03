@@ -25,7 +25,7 @@ const MyIngredients = () => {
   const handleAdd = async (ingredient) => {
     // API call to add ingredient to user's inventory
     try {
-      const response = await fetch('/ingredients-api/ingredients', {
+      const response = await fetch('/ingredients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -52,7 +52,7 @@ const MyIngredients = () => {
   const handleSearch = async (event) => {
     setSearchTerm(event.target.value);
     try {
-      const response = await fetch(`/ingredients-api/ingredients/search?q=${event.target.value}`);
+      const response = await fetch(`/search-ingredient?q=${event.target.value}`);
       const data = await response.json();
       setSearchResults(data);
     } catch (error) {
@@ -65,7 +65,7 @@ const MyIngredients = () => {
       <h1>My Ingredients Page</h1>
       <h2>Added Ingredients</h2>
       <ul>
-        {Array.isArray(ingredients) && ingredients.map((ingredient) => (
+        {ingredients.map((ingredient) => (
           <li key={ingredient.id}>
             {ingredient.name} ({ingredient.amount})
           </li>

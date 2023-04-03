@@ -22,7 +22,7 @@ router.get('/ingredients', async (req, res) => {
   }
 });
 
-router.get('/search', async (req, res) => {
+router.get('/search-ingredient', async (req, res) => {
   const { query } = req.query;
   try {
     const fetch = (await import('node-fetch')).default;
@@ -34,8 +34,8 @@ router.get('/search', async (req, res) => {
     }
     const data = await response.json();
     // Transform the data to match the expected format
-    const transformedData = data.results.map(item => ({ name: item.name }));
-    res.json(transformedData);
+    // const transformedData = data.results.map(item => ({ name: item.name }));
+    res.json(data.results);
   } catch (error) {
     console.error('Error fetching data from API:', error);
     res.status(500).json({ error: 'Failed to search ingredients' });
