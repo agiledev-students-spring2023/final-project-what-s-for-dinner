@@ -29,6 +29,7 @@ app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming 
 
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"));
+
 // enable file uploads saved to disk in a directory named 'public/uploads'
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -48,8 +49,5 @@ const upload = multer({ storage: storage })
 
 app.use(recipeRouter);
 app.use(ingredientsRouter);
-app.listen(3001, () => {
-  console.log('Server is listening on port 3001');
-});
 
 module.exports = app;
