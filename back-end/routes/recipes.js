@@ -32,7 +32,8 @@ router.get('/recipes/sort-by-time', async function(req, res) {
     if (!meals || meals.length === 0) {
       return res.status(404).send('No meals found');
     }
-    meals.sort((a, b) => parseInt(a.time) - parseInt(b.time));
+    //meals.sort((a, b) => parseInt(a.time) - parseInt(b.time)); //will make this what the code is when we have a database with these parameters
+    meals.sort((a, b) => a.idMeal.localeCompare(b.idMeal));
     res.status(200).json({ meals });
   } catch (error) {
     console.error(error);
@@ -47,10 +48,12 @@ router.get('/recipes/sort-by-difficulty', async function(req, res) {
     }
     const response = await axios.get(`${API_URL}?i=${ingredients}`);
     const meals = response.data.meals;
+    console.log(meals);
     if (!meals || meals.length === 0) {
       return res.status(404).send('No meals found');
     }
-    meals.sort((a, b) => parseInt(a.difficulty) - parseInt(b.difficulty));
+    //meals.sort((a, b) => parseInt(a.difficulty) - parseInt(b.difficulty)); // will make this what the code is when we have a database with these parameters
+    meals.sort((a, b) => a.strMeal.localeCompare(b.strMeal));//this is a palce holder just for display purposes
     res.status(200).json({ meals });
   } catch (error) {
     console.error(error);
