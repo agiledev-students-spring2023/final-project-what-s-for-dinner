@@ -1,38 +1,15 @@
 import React, { useState } from "react";
 
-const SortBy = ({
-  sortByIngredients,
-  setSortByIngredients,
-  sortByDifficulty,
-  setSortByDifficulty,
-  sortByTimeNeeded,
-  setSortByTimeNeeded
-}) => {
+const SortBy = ({ handleSortChange }) => {
   return (
     <div>
-      <label htmlFor="ingredients">Ingredients</label>
-      <input
-        type="checkbox"
-        id="ingredients"
-        checked={sortByIngredients}
-        onChange={() => setSortByIngredients(!sortByIngredients)}
-      />
+      <label htmlFor="sortBy">Sort By:</label>
+      <select id="sortBy" onChange={(event) => handleSortChange(event.target.value)}>
+        <option value="">--Select--</option>
+        <option value="difficulty">Difficulty</option>
+        <option value="time">Time Needed</option>
+      </select>
 
-      <label htmlFor="difficulty">Difficulty</label>
-      <input
-        type="checkbox"
-        id="difficulty"
-        checked={sortByDifficulty}
-        onChange={() => setSortByDifficulty(!sortByDifficulty)}
-      />
-
-      <label htmlFor="timeNeeded">Time Needed</label>
-      <input
-        type="checkbox"
-        id="timeNeeded"
-        checked={sortByTimeNeeded}
-        onChange={() => setSortByTimeNeeded(!sortByTimeNeeded)}
-      />
     </div>
   );
 };
