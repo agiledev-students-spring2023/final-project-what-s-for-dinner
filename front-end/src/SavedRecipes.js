@@ -63,9 +63,9 @@ const SavedRecipes = (props) => {
       }, []); // only run it once!
 
       // if the user is not logged in, redirect them to the login route
-      //if (!props.user || !props.user.success) {
-      //  return <Navigate to="/login?error=protected" />;
-      //}
+      if (!props.user || !props.user.success) {
+        return <Navigate to="/login?error=protected" />;
+      }
 
       return (
         <div className="RecipeList">
