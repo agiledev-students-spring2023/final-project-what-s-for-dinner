@@ -21,7 +21,7 @@ const RecipeList = (props) => {
         }
         axios.get(url, {
           params: {
-            ingredients: 'tomato' // need to replace this with ingredients selected by user
+            ingredients: 'egg' // need to replace this with ingredients selected by user
           }
         })
         .then(response => {
