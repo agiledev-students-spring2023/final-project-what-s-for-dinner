@@ -12,7 +12,7 @@ const MyIngredients = () => {
     // API call to fetch user's added ingredients
     const fetchIngredients = async () => {
       try {
-        const response = await fetch('/ingredients-api/ingredients');
+        const response = await fetch('/my-ingredients');
         const data = await response.json();
         setIngredients(data);
       } catch (error) {
@@ -25,16 +25,29 @@ const MyIngredients = () => {
   const handleAdd = async (ingredient) => {
     // API call to add ingredient to user's inventory
     try {
-      const response = await fetch('/ingredients', {
+      const response = await fetch('/my-ingredients', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(ingredient),
       });
-      const data = await response.json();
-      setIngredients([...ingredients, data]);
-      setSelectedAmount(1);
+      if (response.ok) {
+        // Update the list of ingredients if the API call was successful
+        const updatedIngredients = [...ingredients];
+        const existingIngredient = updatedIngredients.find(
+          (i) => i.name === ingredient.name
+        );
+        if (existingIngredient) {
+          existingIngredient.amount += ingredient.amount;
+        } else {
+          updatedIngredients.push(ingredient);
+        }
+        setIngredients(updatedIngredients);
+        setSelectedAmount(1);
+      } else {
+        console.error('Error adding ingredient:', response.statusText);
+      }
     } catch (error) {
       console.error('Error adding ingredient:', error);
     }
@@ -50,11 +63,12 @@ const MyIngredients = () => {
   };
 
   const handleSearch = async (event) => {
-    setSearchTerm(event.target.value);
+    //setSearchTerm(event.target.value);
     try {
-      const response = await fetch(`/search-ingredient?q=${event.target.value}`);
+      const response = await fetch(`/search-ingredient?query=${searchTerm}`);
       const data = await response.json();
       setSearchResults(data);
+      console.log(searchResults);
     } catch (error) {
       console.error('Error fetching data from API:', error);
     }
@@ -65,7 +79,8 @@ const MyIngredients = () => {
       <h1>My Ingredients Page</h1>
       <h2>Added Ingredients</h2>
       <ul>
-        {ingredients.map((ingredient) => (
+        {ingredients && ingredients.length > 0 && 
+          ingredients.map((ingredient) => (
           <li key={ingredient.id}>
             {ingredient.name} ({ingredient.amount})
           </li>
@@ -76,9 +91,10 @@ const MyIngredients = () => {
         <input
           type="text"
           value={searchTerm}
-          onChange={handleSearch}
+          onChange={(event) => setSearchTerm(event.target.value)}
           placeholder="Search for ingredients..."
         />
+        <button onClick={handleSearch}>Search</button>
       </div>
       <ul>
         {searchResults && searchResults.length > 0 &&
@@ -97,6 +113,7 @@ const MyIngredients = () => {
                   handleAdd({
                     name: ingredient.name,
                     amount: selectedAmount,
+                    id: "9266"
                   })
                 }
                 disabled={!canAddIngredient()}
