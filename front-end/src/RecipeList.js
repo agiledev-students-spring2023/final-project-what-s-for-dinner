@@ -7,15 +7,17 @@ import RecipeThumb from "./RecipeThumb";
 import "./RecipeList.css";
 
 const RecipeList = (props) => {
+  const baseUrl = 'http://localhost:3000';
+  const endpoint = '/recipes';
   const [data, setData] = useState([]);
   //const [sortedData, setSortedData] = useState([]);
   const [sortOption, setSortOption] = useState("");
   useEffect(() => {
-        let url = "/recipes"
+        let  url = `${baseUrl}${endpoint}`
         if (sortOption === "time") {
-          url = "/recipes/sort-by-time";
+          url = `${baseUrl}/recipes/sort-by-time`;
         } else if (sortOption === "difficulty") {
-          url = "/recipes/sort-by-difficulty";
+          url = `${baseUrl}/sort-by-difficulty`;
         }
         axios.get(url, {
           params: {
