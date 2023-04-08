@@ -8,8 +8,12 @@ const corsOptions = {
     credentials: true,
     optionsSuccessStatus: 200
 };
-
 app.use(cors(corsOptions));
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 // import and use the recipe and ingredients routes
 const recipeRouter = require('./routes/recipes');
@@ -46,7 +50,6 @@ const storage = multer.diskStorage({
   },
 })
 const upload = multer({ storage: storage })
-
 app.use(recipeRouter);
 app.use(ingredientsRouter);
 
