@@ -1,22 +1,23 @@
 import React from "react"
 import { useNavigate } from "react-router"
 import "./Recipe.css";
-const Recipe = ({data}) =>{
-    console.log(data);
+const Recipe = ({recipes}) =>{
+    console.log(recipes);
     let navigate = useNavigate();
-    return(
+    return (
         <div>
             {
-                (!data) ? "Not Found" : data.map(item=>{
-                    return(
+                recipes && recipes.length ? recipes.map((recipe) => {
+                    return (
                         <div className="card" 
-                        key = {item.idMeal}
-                        onClick = {()=>navigate(`/${item.idMeal}`)}>
-                            <img src={item.strMealThumb} alt = "" className = "recipe-image" />
-                            <h3>{item.strMeal}</h3>
+                            key={recipe.id}
+                            onClick={() => navigate(`/${recipe.id}`)}
+                        >
+                            <img src={recipe.thumbnail} alt="" className="recipe-image" />
+                            <h3>{recipe.name}</h3>
                         </div>
-                    )
-                })
+                    );
+                }) : "Recipe Not Found"
             }
         </div>
     )
