@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+const path = require('path');
 require('dotenv').config();
 const API_KEY = process.env.MEAL_DB_API_KEY;
 const API_URL = `https://www.themealdb.com/api/json/v2/${API_KEY}/filter.php`;
 const API_SPEC_URL = `https://www.themealdb.com/api/json/v2/${API_KEY}/lookup.php`;
-const FILE_PATH = '../tmp_data/recipes.txt';
+const FILE_PATH = path.join(__dirname, '../tmp_data/recipes.txt');
 const API_SEARCH_URL = "www.themealdb.com/api/json/v1/1/search.php";
 
 router.get("/recipes", async function (req, res) {
@@ -19,7 +20,9 @@ router.get("/recipes", async function (req, res) {
         response = await axios.get(`${API_URL}?i=${ingredients}`);
       } catch (error) {
         console.error(error);
-        return res.status(500).send('An error occurred while searching for meals.');
+        const fileData = fs.readFileSync(FILE_PATH, 'utf8');
+        const meals = JSON.parse(fileData);
+        return res.status(200).json({ meals });
       }
       const meals = response.data.meals;
       //JUST IN CASE THE MEALDB API has a server error again!
