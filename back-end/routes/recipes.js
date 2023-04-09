@@ -89,13 +89,11 @@ router.get('/recipes/sort-by-difficulty', async function(req, res) {
 
 router.get('/recipes/:id', async (req, res, next) => {
   try {
-    
     const mealId = req.params.id;
-    console.log(mealId);
     let response;
     try {
       response = await axios.get(`${API_SPEC_URL}?i=${mealId}`);
-      console.log(response.data.meals[0]);
+      console.log(response);
     } catch (apiError) {
       if (apiError.response && apiError.response.status === 500) {
         console.log('API error: ', apiError);
@@ -103,7 +101,7 @@ router.get('/recipes/:id', async (req, res, next) => {
         const data = fs.readFileSync('../tmp_data/recipes.txt', 'utf-8');
         const meals = JSON.parse(data).meals;
         const meal = meals.find(m => m.idMeal === mealId);
-        if (!meal) {
+        if (meals.length === 0 || !meal) {
           return res.status(404).send('Meal not found');
         }
         response = { data: { meals: [meal] } };
@@ -111,13 +109,10 @@ router.get('/recipes/:id', async (req, res, next) => {
         throw apiError;
       }
     }
-    console.log('After API request');
-
-    const meal = response.data.meals[0];
-    if (!meal) {
+    if (!response.data.meals || response.data.meals.length === 0) {
       return res.status(404).send('Meal not found');
     }
-
+    const meal = response.data.meals[0];
     const {
       strMeal,
       strCategory,
@@ -125,7 +120,6 @@ router.get('/recipes/:id', async (req, res, next) => {
       strInstructions,
       strMealThumb,
     } = meal;
-
     const ingredients = [];
     for (let i = 1; i <= 20; i++) {
       if (meal[`strIngredient${i}`]) {
@@ -135,7 +129,6 @@ router.get('/recipes/:id', async (req, res, next) => {
         });
       }
     }
-
     const data = {
       name: strMeal,
       category: strCategory,
@@ -150,6 +143,7 @@ router.get('/recipes/:id', async (req, res, next) => {
   }
 });
 
+
 router.get('/search', async (req, res, next) => {
   try {
     console.log(req.query);
@@ -157,10 +151,6 @@ router.get('/search', async (req, res, next) => {
     console.log(keyword);
     const response = await axios.get(`${API_URL}?i=${keyword}`);
     const meals = response.data.meals;
-
-    if (!meals) {
-      return res.status(404).send('No meals found');
-    }
 
     const data = meals.map(meal => {
       const {
