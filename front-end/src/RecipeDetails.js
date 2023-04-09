@@ -7,11 +7,11 @@ const RecipeDetails = prop => {
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
     const {recipeId} = useParams();
-    
+    const baseUrl = 'http://localhost:3000';
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
-              const response = await fetch(`/recipes/${recipeId}`);
+              const response = await fetch(`${baseUrl}/recipes/${recipeId}`);
               const data = await response.json();
               console.log("Before setItem(): ", data);
               setItem(() => data);
