@@ -150,6 +150,9 @@ router.get('/search', async (req, res, next) => {
     const keyword = req.query.keyword;
     console.log(keyword);
     const response = await axios.get(`${API_URL}?i=${keyword}`);
+    if (!response.data.meals || response.data.meals.length === 0) {
+      return res.status(200).json({ data: [] });
+    }
     const meals = response.data.meals;
 
     const data = meals.map(meal => {
@@ -157,22 +160,19 @@ router.get('/search', async (req, res, next) => {
         idMeal,
         strMeal,
         strMealThumb,
-        strCategory,
-        strArea,
       } = meal;
 
       return {
         id: idMeal,
         name: strMeal,
         thumbnail: strMealThumb,
-        category: strCategory,
-        area: strArea,
       };
     });
 
     res.json({ data });
   } catch (error) {
-    next(error);
+    console.error(error);
+    res.status(500).json({ message: 'An error occurred while searching for meals.' });
   }
 });
 
