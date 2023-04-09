@@ -19,7 +19,7 @@ describe('The "/recipes" route', () => {
         const res = await chai.request(server).get('/recipes?ingredients=chicken,onion');
         expect(res).to.have.status(200);
         expect(res.body.meals).to.be.an('array');
-        });
+        });        
     });
 
     describe('GET /recipes/sort-by-time', () => {
