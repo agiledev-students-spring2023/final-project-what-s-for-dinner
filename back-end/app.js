@@ -3,12 +3,16 @@ const express = require("express"); // CommonJS import style!
 const app = express(); // instantiate an Express object
 const path = require("path");
 const cors = require('cors');
+const utensilsRouter = require('./routes/utensils');
+
+
 const corsOptions = {
     origin: 'http://localhost:3000',
     credentials: true,
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
+app.use(utensilsRouter);
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
