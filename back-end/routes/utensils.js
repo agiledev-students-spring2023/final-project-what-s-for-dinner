@@ -1,12 +1,36 @@
 const express = require('express');
 const router = express.Router();
 
+//since there is no api, data is hardcoded
 let utensils = [
-  // Your utensils data here (you can copy it from your frontend code)
-];
+    {
+      id: 1,
+      recipe_title: "Whisk",
+      country: "Brazil",
+      price: "$10.51",
+      recipe_description:
+        "Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec pharetra, magna vestibulum aliquet ultrices, erat tortor sollicitudin mi, sit amet lobortis sapien sapien non mi. Integer ac neque."
+    },
+    {
+      id: 2,
+      recipe_title: "Spatula",
+      country: "Russia",
+      price: "$2.37",
+      recipe_description:
+        "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque."
+    },
+    {
+      id: 3,
+      recipe_title: "Knife",
+      country: "Russia",
+      price: "$2.37",
+      recipe_description:
+        "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque."
+    }
+  ];
 
 // Get all utensils
-router.get('/api/utensils', (req, res) => {
+router.get('/api/utensils', (req, res) => { //api needed
   res.json(utensils);
 });
 
