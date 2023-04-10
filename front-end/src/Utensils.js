@@ -9,7 +9,7 @@ const Utensils = (props) => {
 
   useEffect(() => {
     // Fetch utensils data from the new backend API
-    axios("http://localhost:3001/api/utensils")
+    axios("http://localhost:3001/utensils")
       .then((response) => {
         setData(response.data);
       })
