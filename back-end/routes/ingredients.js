@@ -38,10 +38,10 @@ router.post('/my-ingredients', async (req, res) => {
     if (ingredientsData) {
       const ingredientsArray = ingredientsData.split('\n').filter((line) => line.trim() !== '');
       for (let i = 0; i < ingredientsArray.length; i++) {
-        const [existingId, existingName, existingAmount] = ingredientsArray[i].split(',');
+        const { name: existingName, amount: existingAmount } = JSON.parse(ingredientsArray[i]);
         if (existingName.toLowerCase() === name.toLowerCase()) {
           const newAmount = parseInt(existingAmount) + parseInt(amount);
-          ingredientsArray[i] = `${existingId},${existingName},${newAmount}`;
+          ingredientsArray[i] = `{"id": ${id}, "name": "${name}", "amount": ${newAmount}}`;
           existingIngredient = true;
           break;
         }
@@ -50,7 +50,7 @@ router.post('/my-ingredients', async (req, res) => {
     }
     if (!existingIngredient) {
       // If the ingredient does not exist, add it to the file
-      fs.appendFileSync(ingredientsFilePath, `\n{"id": ${id}, "name": ${name}, "amount": ${amount}}`);
+      fs.appendFileSync(ingredientsFilePath, `\n{"id": ${id}, "name": "${name}", "amount": ${amount}}`);
     } else {
       // If the ingredient exists, overwrite the file with the updated ingredient list
       fs.writeFileSync(ingredientsFilePath, ingredientsData, 'utf8');
