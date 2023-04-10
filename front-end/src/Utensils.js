@@ -24,7 +24,7 @@ const Utensils = (props) => {
       <h1>Utensils</h1>
       <Search />
       <section className="utensils">
-        {/* show a thumbnail for each food item */}
+        {/* show a thumbnail for each utensil item */}
         {data.map((item) => (
           <UtensilThumb key={item.id} details={item} />
         ))}
