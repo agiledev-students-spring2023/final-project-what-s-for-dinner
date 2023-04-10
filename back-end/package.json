@@ -29,8 +29,5 @@
     "mocha": "^10.2.0",
     "nodemon": "^2.0.22",
     "nyc": "^15.1.0"
-  },
-  "directories": {
-    "test": "test"
   }
 }

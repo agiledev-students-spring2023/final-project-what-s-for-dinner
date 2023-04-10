@@ -21,6 +21,7 @@ app.use(function(req, res, next) {
 const recipeRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients');
 const utensilsRouter = require('./routes/utensils');
+const uploadrecipeRouter = require('./routes/upload-recipe');
 
 // import some useful middleware
 const multer = require("multer"); // middleware to handle HTTP POST requests with file uploads
@@ -33,6 +34,8 @@ app.use(morgan('dev'));
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
+
+//app.use(cookieParser);
 
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"));
@@ -56,5 +59,6 @@ const upload = multer({ storage: storage })
 app.use(recipeRouter);
 app.use(ingredientsRouter);
 app.use(utensilsRouter);
+app.use(uploadrecipeRouter);
 
 module.exports = app;
