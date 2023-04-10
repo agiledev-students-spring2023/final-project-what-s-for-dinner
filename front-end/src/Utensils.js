@@ -6,19 +6,20 @@ import "./Utensils.css";
 
 const Utensils = (props) => {
   const [data, setData] = useState([]);
+
   useEffect(() => {
+    // Fetch utensils data from the new backend API
+    axios("http://localhost:3001/api/utensils")
     // Fetch utensils data from the new backend API
     axios("http://localhost:3000/utensils")
       .then((response) => {
-        // extract the data from the server response
         setData(response.data);
       })
       .catch((err) => {
-        console.log(`Error fetching utensils data`);
-        console.error(err);
+        console.log(`Error fetching utensils data: ${err}`);
         setData([]);
       });
-  }, []); // only run it once!
+  }, []);
 
   return (
     <div className="Utensils">

@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const fs = require('fs');
-const path = require('path'); // add this line
+const path = require('path');
 
-const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt'); // this line specifies the filepath to utensil data
+const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt');
 const utensilsData = fs.readFileSync(utensilsFilePath, 'utf8');
 
 // Route to get all utensils
