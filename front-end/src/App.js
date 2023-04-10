@@ -59,10 +59,10 @@ const App = props => {
           <Route path="/home" element={<Home user={user} />} />
 
           {/* a route to the user's ingredients page */}
-          <Route path="/my-ingredients" element={<MyIngredients user={user} />} />
+          <Route path="/my-ingredients" element={<MyIngredients user={user} />} /> 
 
           {/* a route to the user's utensils page */}
-          {/* <Route path="/my-utensils" elemnt={<MyUtensils user={user} />} /> */}
+          <Route path="/my-utensils" element={<Utensils user={user} />} />
 
           {/* a route to the user's saved recipes page */}
           <Route path="/saved-recipes" element={<SavedRecipes user={user} />} /> 
