@@ -73,22 +73,13 @@ const UtensilThumb = (props) => {
     <article className="UtensilThumb">
       <div className={classes.root}>
         <div className={classes.cardContainer}>
-          {cards.map((card, index) => (
-            <Card key={index} className={classes.card} onClick={() => handleCardClick(index)}>
-              <CardContent>
-                <div className={classes.cardTitle}>
-                  {card.title}
-                </div>
-                <img
-                  src={card.img}
-                  alt={card.title}
-                />
-                <div className={classes.cardContent}>
-                  {card.description}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+          <Card className={classes.card}>
+            <CardContent>
+            <div className={classes.cardTitle}>{props.details.utensil_title}</div>
+              <img src={props.details.image_url} alt={props.details.utensil_title} />
+              <div className={classes.cardContent}>{props.details.description}</div>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </article>

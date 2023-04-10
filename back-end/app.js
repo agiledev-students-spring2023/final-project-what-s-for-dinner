@@ -3,7 +3,7 @@ const express = require("express"); // CommonJS import style!
 const app = express(); // instantiate an Express object
 const path = require("path");
 const cors = require('cors');
-
+app.use(express.static(path.join(__dirname, 'public')));
 
 const corsOptions = {
     origin: 'http://localhost:3000',

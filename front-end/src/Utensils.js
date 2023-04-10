@@ -7,9 +7,8 @@ import "./Utensils.css";
 const Utensils = (props) => {
   const [data, setData] = useState([]);
   useEffect(() => {
-    // fetch utensils data from the backend
-    console.log("Fetching utensils data...");
-    axios("http://localhost:3001/api/utensils")
+    // Fetch utensils data from the new backend API
+    axios("http://localhost:3000/utensils")
       .then((response) => {
         // extract the data from the server response
         setData(response.data);
@@ -22,9 +21,8 @@ const Utensils = (props) => {
   }, []); // only run it once!
 
   return (
-    <div className="Utensil">
-      <h1>Utensils</h1>
-      <Search />
+    <div className="Utensils">
+      <h1>My Utensils</h1>
       <section className="utensils">
         {/* show a thumbnail for each food item */}
         {data.map((item) => (

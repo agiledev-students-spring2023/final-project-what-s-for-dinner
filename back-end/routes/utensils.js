@@ -5,22 +5,25 @@ const path = require('path'); // add this line
 
 const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt'); // this line specifies the filepath to utensil data
 const utensilsData = fs.readFileSync(utensilsFilePath, 'utf8');
-const utensils = JSON.parse(utensilsData);
 
 // Route to get all utensils
 router.get("/utensils", (req, res) => {
-  res.json(utensils);
-});
-
-// Route to get a specific utensil by ID
-router.get("/utensils/:id", (req, res) => {
-  const utensilId = parseInt(req.params.id);
-  const utensil = utensils.find((u) => u.id === utensilId);
-
-  if (utensil) {
-    res.json(utensil);
-  } else {
-    res.status(404).json({ message: "Utensil not found" });
+  try {
+    const fileContent = fs.readFileSync(utensilsFilePath, 'utf-8');
+    const utensils = fileContent.split('\n').map(line => {
+      try {
+        const { utensil_title, image_url, description } = JSON.parse(line);
+        return { utensil_title, image_url, description };
+      } catch (error) {
+        console.error(`Error parsing utensil: ${line}`, error);
+        return null;
+      }
+    }).filter(utensil => utensil !== null);
+    
+    res.json(utensils);
+  } catch (error) {
+    console.error('Error fetching data from file:', error);
+    res.status(500).json({ error: 'Failed to fetch utensils' });
   }
 });
 
