@@ -21,6 +21,7 @@ app.use(function(req, res, next) {
 const recipeRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients');
 const utensilsRouter = require('./routes/utensils');
+const uploadrecipeRouter = require('./routes/upload-recipe');
 
 // import some useful middleware
 const multer = require("multer"); // middleware to handle HTTP POST requests with file uploads
@@ -56,5 +57,6 @@ const upload = multer({ storage: storage })
 app.use(recipeRouter);
 app.use(ingredientsRouter);
 app.use(utensilsRouter);
+app.use(uploadrecipeRouter);
 
 module.exports = app;

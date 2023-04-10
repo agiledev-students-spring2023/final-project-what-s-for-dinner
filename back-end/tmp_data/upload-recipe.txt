@@ -1,0 +1,4 @@
+{"title": broccoli cheddar soup, "description": "just a broccoli cheddar soup", "instructions": "add everything", "ingredients": broccoli, "image": "/static/images/img2.jpeg"}
+{"title": pizza, "description": "just a pizza", "instructions": "add everything", "ingredients": cheese, "image": "/static/images/img2.jpeg"}
+
+
