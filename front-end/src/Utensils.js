@@ -20,7 +20,7 @@ const Utensils = (props) => {
   }, []);
 
   return (
-    <div className="Utensil">
+    <div className="Utensils">
       <h1>Utensils</h1>
       <Search />
       <section className="utensils">
