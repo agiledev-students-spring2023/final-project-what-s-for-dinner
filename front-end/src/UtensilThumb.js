@@ -41,11 +41,9 @@ const UtensilThumb = (props) => {
         <div className={classes.cardContainer}>
           <Card className={classes.card}>
             <CardContent>
-              <div className={classes.cardTitle}>{props.details.utensil_title}</div>
-              <img
-                src={props.details.image_url}
-                alt={props.details.utensil_title}
-              />
+            <div className={classes.cardTitle}>{props.details.utensil_title}</div>
+              <img src={props.details.image_url} alt={props.details.utensil_title} />
+              <div className={classes.cardContent}>{props.details.description}</div>
             </CardContent>
           </Card>
         </div>

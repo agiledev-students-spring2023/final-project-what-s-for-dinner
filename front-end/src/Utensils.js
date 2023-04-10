@@ -9,7 +9,7 @@ const Utensils = (props) => {
 
   useEffect(() => {
     // Fetch utensils data from the new backend API
-    axios("http://localhost:3001/utensils")
+    axios("http://localhost:3000/utensils")
       .then((response) => {
         setData(response.data);
       })
@@ -21,8 +21,7 @@ const Utensils = (props) => {
 
   return (
     <div className="Utensils">
-      <h1>Utensils</h1>
-      <Search />
+      <h1>My Utensils</h1>
       <section className="utensils">
         {/* show a thumbnail for each utensil item */}
         {data.map((item) => (

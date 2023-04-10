@@ -11,7 +11,8 @@ router.get("/utensils", (req, res) => {
     const fileContent = fs.readFileSync(utensilsFilePath, 'utf-8');
     const utensils = fileContent.split('\n').map(line => {
       try {
-        return JSON.parse(line);
+        const { utensil_title, image_url, description } = JSON.parse(line);
+        return { utensil_title, image_url, description };
       } catch (error) {
         console.error(`Error parsing utensil: ${line}`, error);
         return null;

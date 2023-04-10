@@ -1,3 +1,3 @@
-{"id": 1, "utensil_title": "Whisk", "image": "/static/images/img2.jpeg"}
-{"id": 2, "utensil_title": "Spatula", "image": "/static/images/im7.jpeg"}
-{"id": 3, "utensil_title": "Knife", "image": "/static/images/img1.jpeg"}
+{"id": 1, "utensil_title": "Whisk", "image_url": "../images/img2.jpeg", "description": "A kitchen utensil used to blend ingredients together smoothly and incorporate air into the mixture."}
+{"id": 2, "utensil_title": "Spatula", "image_url": "../images/img7.jpeg", "description": "A flat, flexible utensil used for flipping food, spreading condiments, or scraping the sides of bowls or jars."}
+{"id": 3, "utensil_title": "Knife", "image_url": "../images/img1.jpeg", "description": "A sharp tool used for cutting, slicing, or chopping food."}
