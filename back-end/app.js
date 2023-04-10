@@ -35,8 +35,6 @@ app.use(morgan('dev'));
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
 
-//app.use(cookieParser);
-
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"));
 
