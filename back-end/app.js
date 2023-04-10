@@ -3,7 +3,6 @@ const express = require("express"); // CommonJS import style!
 const app = express(); // instantiate an Express object
 const path = require("path");
 const cors = require('cors');
-const utensilsRouter = require('./routes/utensils');
 
 
 const corsOptions = {
@@ -12,7 +11,6 @@ const corsOptions = {
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
-app.use(utensilsRouter);
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -22,6 +20,7 @@ app.use(function(req, res, next) {
 // import and use the recipe and ingredients routes
 const recipeRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients');
+const utensilsRouter = require('./routes/utensils');
 
 // import some useful middleware
 const multer = require("multer"); // middleware to handle HTTP POST requests with file uploads
@@ -56,5 +55,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 app.use(recipeRouter);
 app.use(ingredientsRouter);
+app.use(utensilsRouter);
 
 module.exports = app;

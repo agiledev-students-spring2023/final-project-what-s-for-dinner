@@ -8,12 +8,12 @@ const utensilsData = fs.readFileSync(utensilsFilePath, 'utf8');
 const utensils = JSON.parse(utensilsData);
 
 // Route to get all utensils
-router.get("/api/utensils", (req, res) => {
+router.get("/utensils", (req, res) => {
   res.json(utensils);
 });
 
 // Route to get a specific utensil by ID
-router.get("/api/utensils/:id", (req, res) => {
+router.get("/utensils/:id", (req, res) => {
   const utensilId = parseInt(req.params.id);
   const utensil = utensils.find((u) => u.id === utensilId);
 
@@ -25,7 +25,7 @@ router.get("/api/utensils/:id", (req, res) => {
 });
 
 // Route to add a new utensil
-router.post("/api/utensils", (req, res) => {
+router.post("/utensils", (req, res) => {
   const newUtensil = req.body;
   newUtensil.id = utensils.length + 1;
   utensils.push(newUtensil);
@@ -33,7 +33,7 @@ router.post("/api/utensils", (req, res) => {
 });
 
 // Route to update a utensil
-router.put("/api/utensils/:id", (req, res) => {
+router.put("/utensils/:id", (req, res) => {
   const utensilId = parseInt(req.params.id);
   const updatedUtensil = req.body;
   const index = utensils.findIndex((u) => u.id === utensilId);
@@ -47,7 +47,7 @@ router.put("/api/utensils/:id", (req, res) => {
 });
 
 // Route to delete a utensil
-router.delete("/api/utensils/:id", (req, res) => {
+router.delete("/utensils/:id", (req, res) => {
   const utensilId = parseInt(req.params.id);
   const index = utensils.findIndex((u) => u.id === utensilId);
 

@@ -7,10 +7,10 @@ chai.use(chaiHttp);
 chai.should();
 
 describe('Utensils', () => {
-  describe('GET /api/utensils', () => {
+  describe('GET /utensils', () => {
     it('should return all utensils', (done) => {
       chai.request(app)
-        .get('/api/utensils')
+        .get('/utensils')
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('array');
@@ -19,7 +19,7 @@ describe('Utensils', () => {
     });
   });
 
-  describe('POST /api/utensils', () => {
+  describe('POST /utensils', () => {
     it('should add a new utensil', (done) => {
       const utensil = {
         recipe_title: 'Test Utensil',
@@ -28,7 +28,7 @@ describe('Utensils', () => {
         recipe_description: 'Test description'
       };
       chai.request(app)
-        .post('/api/utensils')
+        .post('/utensils')
         .send(utensil)
         .end((err, res) => {
           res.should.have.status(200);
