@@ -1,2 +1,3 @@
 {"id": 9266, "name": "egg", "amount": 13}
 {"id": 9266, "name": "tomato", "amount": 5}
+{"id": 9266, "name": "veggie nuggets", "amount": 3}
