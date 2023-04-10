@@ -9,8 +9,6 @@ const Utensils = (props) => {
 
   useEffect(() => {
     // Fetch utensils data from the new backend API
-    axios("http://localhost:3001/api/utensils")
-    // Fetch utensils data from the new backend API
     axios("http://localhost:3000/utensils")
       .then((response) => {
         setData(response.data);
@@ -25,7 +23,7 @@ const Utensils = (props) => {
     <div className="Utensils">
       <h1>My Utensils</h1>
       <section className="utensils">
-        {/* show a thumbnail for each food item */}
+        {/* show a thumbnail for each utensil item */}
         {data.map((item) => (
           <UtensilThumb key={item.id} details={item} />
         ))}

@@ -22,10 +22,7 @@ describe('Utensils', () => {
   describe('POST /utensils', () => {
     it('should add a new utensil', (done) => {
       const utensil = {
-        recipe_title: 'Test Utensil',
-        country: 'Test Country',
-        price: '$5.00',
-        recipe_description: 'Test description'
+        utensil_title: 'Test Utensil'
       };
       chai.request(app)
         .post('/utensils')
@@ -33,10 +30,7 @@ describe('Utensils', () => {
         .end((err, res) => {
           res.should.have.status(200);
           res.body.should.be.a('object');
-          res.body.should.have.property('recipe_title').eql(utensil.recipe_title);
-          res.body.should.have.property('country').eql(utensil.country);
-          res.body.should.have.property('price').eql(utensil.price);
-          res.body.should.have.property('recipe_description').eql(utensil.recipe_description);
+          res.body.should.have.property('utensil_title').eql(utensil.utensil_title);
           done();
         });
     });
