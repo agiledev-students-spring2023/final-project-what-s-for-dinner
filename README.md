@@ -29,7 +29,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 ### Building
 **Front-end**
 1. run `cd front-end` to navigate to front-end folder
-2. first run `npm install` (please ignore the error for now)
+2. first run `npm install --legacy-peer-deos` (please ignore the error for now)
 3. then run `npm i @material-ui/core --force --save`
 **Back-end**
 1. run `cd back-end` to navigate to back-end folder

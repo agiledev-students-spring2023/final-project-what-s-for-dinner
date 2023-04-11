@@ -179,5 +179,17 @@ router.get('/search', async (req, res, next) => {
   }
 });
 
+router.get('/random-recipe', (req, res) => {
+  axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
+    .then(response => {
+      const recipe = response.data.meals[0];
+      res.json(recipe);
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500).send('Error retrieving random recipe');
+    });
+});
+
 
 module.exports = router;
