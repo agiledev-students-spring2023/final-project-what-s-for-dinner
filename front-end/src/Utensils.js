@@ -19,6 +19,11 @@ const Utensils = (props) => {
       });
   }, []);
 
+  // if the user is not logged in, redirect them to the login route
+  if (!props.user || !props.user.success) {
+    return <Navigate to="/login?error=protected" />;
+  }
+
   return (
     <div className="Utensils">
       <h1>My Utensils</h1>
