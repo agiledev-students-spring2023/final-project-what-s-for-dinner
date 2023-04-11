@@ -101,5 +101,31 @@ describe('The "/recipes" route', () => {
           axiosMock.restore();
         });
       });
+
+
+      describe('GET /random-recipe', () => {
+        it('should return a random recipe', (done) => {
+          chai.request(server).get('/random-recipe')
+            .end((err, res) => {
+              expect(res).to.have.status(200);
+              expect(res.body).to.have.property('idMeal');
+              expect(res.body).to.have.property('strMeal');
+              expect(res.body).to.have.property('strMealThumb');
+              done();
+            });
+        });
+      
+        it('should handle errors', (done) => {
+          const axiosGetStub = sinon.stub(axios, 'get').rejects(new Error('Test error'));
+      
+          chai.request(server)
+            .get('/random-recipe')
+            .end((err, res) => {
+              expect(res).to.have.status(500);
+              axiosGetStub.restore();             
+              done();
+            });
+        });
+      });      
       
 });

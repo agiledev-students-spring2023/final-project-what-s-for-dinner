@@ -25,6 +25,7 @@ The back-end provides the following API endpoints:
 /recipes/sort-by-difficulty - GET
 /recipes/:id - GET
 /search - GET
+/random-recipe -GET
 /my-ingredients - GET, POST
 /search-ingredient - GET
 /utensils - GET, POST
