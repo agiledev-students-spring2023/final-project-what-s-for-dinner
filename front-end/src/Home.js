@@ -6,11 +6,12 @@ import './Home.css';
 const Home = (props) => {
 
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
-
+  const baseUrl = 'http://localhost:3000';
+  const endpoint = '/random-recipe';
   useEffect(() => {
-    axios.get("https://www.themealdb.com/api/json/v1/1/random.php")
+    axios.get(`${baseUrl}${endpoint}`)
       .then((response) => {
-        setRecommendedRecipes(response.data.meals);
+        setRecommendedRecipes(response.data);
       })
       .catch((error) => {
         console.error(error);
@@ -36,14 +37,13 @@ const Home = (props) => {
       <div className="RecipeList">
       <h2>Recommended Recipe for Today</h2>
       <div className="recipe-container">
-        {recommendedRecipes.map((recipe) => (
-          <div key={recipe.idMeal} className="recipe">
-            <Link to={`/${recipe.idMeal}`} className="recipe-link">
-              <img src={recipe.strMealThumb} alt={recipe.strMeal} className="recipe-image" />
-              <h3>{recipe.strMeal}</h3>
+          <div key={recommendedRecipes.idMeal} className="recipe">
+            <Link to={`/${recommendedRecipes.idMeal}`} className="recipe-link">
+              <img src={recommendedRecipes.strMealThumb} alt={recommendedRecipes.strMeal} className="recipe-image" />
+              <h3>{recommendedRecipes.strMeal}</h3>
             </Link>
           </div>
-        ))}
+
       </div>
     </div>
     </div>
