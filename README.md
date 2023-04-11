@@ -31,12 +31,14 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 1. run `cd front-end` to navigate to front-end folder
 2. first run `npm install` (please ignore the error for now)
 3. then run `npm i @material-ui/core --force --save`
+
 **Back-end**
 1. run `cd back-end` to navigate to back-end folder
 2. run `npm install`
 3. create a `.env` file in the back-end directory with the following information:
     > MEAL_DB_API_KEY=9973533
-    *Note: You should to "https://www.themealdb.com/" to create your own account and replace the value with your own api key. But for demonstrantion simplicity we provide you with the api key for now.*
+    
+    *Note: You should go to "https://www.themealdb.com/" to create your own account and replace the value with your own api key. But for demonstrantion simplicity we provide you with the api key for now.*
 
 ### Running
 1. if you are only running the front-end or back-end for testing purpose, you can simply run `npm start` in the corresponding front-end/back-end folder
