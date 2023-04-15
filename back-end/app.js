@@ -3,7 +3,23 @@ const express = require("express"); // CommonJS import style!
 const app = express(); // instantiate an Express object
 const path = require("path");
 const cors = require('cors');
+require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 app.use(express.static(path.join(__dirname, 'public')));
+
+// mongoose models for MongoDB data manipulation
+const mongoose = require("mongoose")
+
+// connect to the database
+// console.log(`Conneting to MongoDB at ${process.env.MONGODB_URI}`)
+try {
+  //mongoose.connect(process.env.MONGODB_URI)
+  mongoose.connect('mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/?retryWrites=true&w=majority')
+  console.log(`Connected to MongoDB.`)
+} catch (err) {
+  console.log(
+    `Error connecting to MongoDB user account authentication will fail: ${err}`
+  )
+}
 
 const corsOptions = {
     origin: 'http://localhost:3000',
