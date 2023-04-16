@@ -2,6 +2,9 @@ const express = require('express');
 const router = express.Router();
 const axios = require('axios');
 const path = require('path');
+//const Recipe = require('../models/recipes');
+//const Ingredient = require('../models/ingredients');
+//const RecipeController = require('./RecipeController');
 require('dotenv').config();
 const API_KEY = process.env.MEAL_DB_API_KEY;
 const API_URL = `https://www.themealdb.com/api/json/v2/${API_KEY}/filter.php`;
@@ -10,6 +13,10 @@ const FILE_PATH = path.join(__dirname, '../tmp_data/recipes.txt');
 const API_SEARCH_URL = "www.themealdb.com/api/json/v1/1/search.php";
 
 router.get("/recipes", async function (req, res) {
+  /*
+  //IN CASE OF USING RECIPE CONTROLLER CHANGE SUCH THAT IT IS AS FOLLOWS: 
+  router.get('/recipes', RecipeController.getRecipesByIngredients);
+  */
   try{
       const ingredients = req.query.ingredients;
       if (!ingredients || ingredients.length === 0) {
@@ -37,7 +44,16 @@ router.get("/recipes", async function (req, res) {
   }
   
 });
+/*
+router.get('/recipes/most-similar', async (req, res) => {
+   //IN CASE OF USING RECIPE CONTROLLER CHANGE SUCH THAT IT IS AS FOLLOWS: 
+  router.get('/recipes', RecipeController.getRecipesSimilar);
+*/
 router.get('/recipes/sort-by-time', async function(req, res) {
+  /*
+     //IN CASE OF USING RECIPE CONTROLLER CHANGE SUCH THAT IT IS AS FOLLOWS: 
+  router.get('/recipes', RecipeController.getRecipesSorted);
+  */
   try {
     const ingredients = req.query.ingredients;
     if (!ingredients || ingredients.length === 0) {
