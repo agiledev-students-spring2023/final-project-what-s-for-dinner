@@ -11,9 +11,11 @@ const mongoose = require("mongoose")
 
 // connect to the database
 // console.log(`Conneting to MongoDB at ${process.env.MONGODB_URI}`)
+
 try {
   //mongoose.connect(process.env.MONGODB_URI)
-  mongoose.connect('mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/?retryWrites=true&w=majority')
+  //changed so that it connects to test database where all collections will be
+  mongoose.connect('mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
   console.log(`Connected to MongoDB.`)
 } catch (err) {
   console.log(
