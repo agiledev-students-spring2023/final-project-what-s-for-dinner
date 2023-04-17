@@ -41,7 +41,7 @@ const RestorePassword = props => {
       }
       // send the request to the server api to authenticate
       const response = await axios.post(
-        "https://my.api.mockaroo.com/login.json?key=d9ddfc40",
+        "/reset-password",
         requestData
       )
 

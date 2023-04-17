@@ -12,6 +12,11 @@ const UserSchema = new Schema({
     unique: true,
     required: true,
   },
+  email: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   password: {
     type: String,
     required: true,
@@ -20,44 +25,45 @@ const UserSchema = new Schema({
 
 // hash the password before the user is saved
 // mongoose provides hooks that allow us to run code before or after specific events
-UserSchema.pre("save", function (next) {
-  const user = this
-  if (!user.isModified("password")) return next()
-  // otherwise, the password is being modified, so hash it
-  bcrypt.hash(user.password, 10, (err, hash) => {
-    if (err) return next(err)
-    user.password = hash // update the password to the hashed version
-    next()
-  })
-})
+UserSchema.pre('save', async function (next) {
+  try {
+    if (!this.isModified('password')) {
+      return next();
+    }
+    const hashed = await bcrypt.hash(this.password, 10);
+    this.password = hashed;
+    return next();
+  } catch (error) {
+    return next(error);
+  }
+});
 
-// mongoose allows us to attach methods to a model...
-
-// compare a given password with the database hash
-UserSchema.methods.validPassword = function (password) {
-  return bcrypt.compareSync(password, this.password)
-}
+UserSchema.methods.validPassword = async function (password) {
+  try {
+    return await bcrypt.compare(password, this.password);
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 // return a JWT token for the user
 UserSchema.methods.generateJWT = function () {
-  const today = new Date()
-  const exp = new Date(today)
-  exp.setDate(today.getDate() + process.env.JWT_EXP_DAYS) // assuming an environment variable with num days in it
+  const today = new Date();
+  const expirationDate = new Date(today);
+  expirationDate.setDate(today.getDate() + 60);
 
-  return jwt.sign(
-    {
-      id: this._id,
-      username: this.username,
-      exp: parseInt(exp.getTime() / 1000),
-    },
-    process.env.JWT_SECRET
-  )
-}
+  return jwt.sign({
+    username: this.username,
+    id: this._id,
+    exp: parseInt(expirationDate.getTime() / 1000, 10),
+  }, 'secret');
+};
 
 // return the user information without sensitive data
 UserSchema.methods.toAuthJSON = function () {
   return {
     username: this.username,
+    email: this.email,
     token: this.generateJWT(),
   }
 }

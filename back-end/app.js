@@ -26,6 +26,7 @@ const User = require("./models/users.js")
 // connect to the database
 // console.log(`Conneting to MongoDB at ${process.env.MONGODB_URI}`)
 
+/*
 try {
   //mongoose.connect(process.env.MONGODB_URI)
   //changed so that it connects to test database where all collections will be
@@ -35,7 +36,22 @@ try {
   console.log(
     `Error connecting to MongoDB user account authentication will fail: ${err}`
   )
+}*/
+
+async function connectToMongoDB() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    //await mongoose.connect('mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log(`Connected to MongoDB.`)
+  } catch (err) {
+    console.log(
+      err
+      //`Error connecting to MongoDB user account authentication will fail: ${err}`
+    )
+  }
 }
+
+connectToMongoDB();
 
 const corsOptions = {
     origin: 'http://localhost:3000',
@@ -54,9 +70,10 @@ const recipeRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients');
 const utensilsRouter = require('./routes/utensils');
 const uploadrecipeRouter = require('./routes/upload-recipe');
-const authenticationRouter = require("./routes/authentication")
-const cookieRouter = require("./routes/cookie")
-const protectedContentRouter = require("./routes/protected-content")
+const authenticationRouter = require('./routes/authentication');
+const cookieRouter = require('./routes/cookie');
+const protectedContentRouter = require('./routes/protected-content');
+const resetPasswordRouter = require('./routes/reset-password.js');
 
 // import some useful middleware
 const multer = require("multer"); // middleware to handle HTTP POST requests with file uploads
@@ -97,8 +114,9 @@ app.use(recipeRouter);
 app.use(ingredientsRouter);
 app.use(utensilsRouter);
 app.use(uploadrecipeRouter);
-app.use("/auth", authenticationRouter()) // all requests for /auth/* will be handled by the authenticationRoutes router
-app.use("/cookie", cookieRouter()) // all requests for /cookie/* will be handled by the cookieRoutes router
-app.use("/protected", protectedContentRouter()) // all requests for /protected/* will be handled by the protectedRoutes router
+app.use("/auth", authenticationRouter()); // all requests for /auth/* will be handled by the authenticationRoutes router
+app.use("/cookie", cookieRouter()); // all requests for /cookie/* will be handled by the cookieRoutes router
+app.use("/protected", protectedContentRouter()); // all requests for /protected/* will be handled by the protectedRoutes router
+app.use(resetPasswordRouter);
 
 module.exports = app;

@@ -30,29 +30,23 @@ const Login = props => {
   }, [status])
 
   const handleSubmit = async e => {
-    // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault()
-
+  
     try {
-      // create an object with the data we want to send to the server
       const requestData = {
-        username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
-        password: e.target.password.value, // gets the value of the field in the submitted form with name='password',
+        username: e.target.username.value,
+        password: e.target.password.value,
       }
-      // send the request to the server api to authenticate
-      const response = await axios.post(
-        "https://my.api.mockaroo.com/login.json?key=d9ddfc40",
-        requestData
-      )
-
-      // store the response data into the data state variable
+      const response = await axios.post("/auth/login", requestData) // send the request to the backend server
+  
       console.log(response.data)
       setStatus(response.data)
     } catch (err) {
-      // throw an error
-      throw new Error(err)
+      console.error(err)
+      setErrorMessage("An error occurred during login. Please try again.")
     }
   }
+  
 
   // if the user is not logged in, show the login form
   if (!status.success)
