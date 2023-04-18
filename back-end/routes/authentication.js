@@ -1,6 +1,7 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const User = require("../models/users.js");
+const { pass } = require("../config/jwt-config.js");
 
 const authenticationRouter = () => {
   const router = express.Router();
@@ -79,7 +80,7 @@ const authenticationRouter = () => {
         });
       }
 
-      if (!user.validPassword(password)) {
+      if (!await user.validPassword(password)) {
         console.error(`Incorrect password.`);
         return res.status(401).json({
           success: false,
