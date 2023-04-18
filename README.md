@@ -35,11 +35,13 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 2. run `npm install`
 3. create a `.env` file in the back-end directory with the following information:
     > MEAL_DB_API_KEY=9973533
-    (Note: You should to "https://www.themealdb.com/" to create your own account and replace the value with your own api key. But for demonstrantion simplicity we provide you with the api key for now.)
+    
+    *Note: You should go to "https://www.themealdb.com/" to create your own account and replace the value with your own api key. But for demonstrantion simplicity we provide you with the api key for now.*
 
 ### Running
 1. if you are only running the front-end or back-end for testing purpose, you can simply run `npm start` in the corresponding front-end/back-end folder
 2. if you are running both front-end and back-end, please first run `npm start` in front-end folder and then in back-end folder, this will run both front-end and back-end on port 3000 
+
 *Note: some of our pages won't work properly if you run back-end on port 3000 and front-end on port 3001*
 3. now you can open [http://localhost:3000](http://localhost:3000) in your browser to view our app.
 

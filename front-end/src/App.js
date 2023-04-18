@@ -12,7 +12,7 @@ import RecipeDetails from "./RecipeDetails"
 import Search from "./Search" 
 import Login from "./Login"
 import Register from "./Register"
-import RestorePassword from "./RestorePassword"
+import ResetPassword from "./ResetPassword"
 import Logout from "./Logout"
 import "./App.css"
 import ContactUs from "./ContactUs";
@@ -116,8 +116,8 @@ const App = props => {
 
           {/* a route to the restore password form */}
           <Route
-            path="/restorepassword"
-            element={<RestorePassword user={user} setuser={setUser} />}
+            path="/reset-password"
+            element={<ResetPassword user={user} setuser={setUser} />}
           />
 
           {/* a route to logout */}

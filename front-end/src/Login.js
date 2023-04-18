@@ -30,41 +30,29 @@ const Login = props => {
   }, [status])
 
   const handleSubmit = async e => {
-    // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault()
-
+  
     try {
-      // create an object with the data we want to send to the server
       const requestData = {
-        username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
-        password: e.target.password.value, // gets the value of the field in the submitted form with name='password',
+        username: e.target.username.value,
+        password: e.target.password.value,
       }
-      // send the request to the server api to authenticate
-      const response = await axios.post(
-        "https://my.api.mockaroo.com/login.json?key=d9ddfc40",
-        requestData
-      )
-
-      // store the response data into the data state variable
+      const response = await axios.post("/auth/login", requestData) // send the request to the backend server
+  
       console.log(response.data)
       setStatus(response.data)
     } catch (err) {
-      // throw an error
-      throw new Error(err)
+      console.error(err)
+      setErrorMessage(err.response.data.message)
     }
   }
+  
 
   // if the user is not logged in, show the login form
   if (!status.success)
     return (
       <div className="Login">
         <h1>Log in</h1>
-        <p className="feedback">
-          This page is placeholder only... without a back-end, we cannot support
-          true login functionality. In this case, we fake a login request to a
-          mock API and randomly allow the user in or not. Keep trying until you
-          get in.
-        </p>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
           <form onSubmit={handleSubmit}>
@@ -85,7 +73,7 @@ const Login = props => {
             <br />
             <label>Forgot Password? </label>
             <br />
-            <Link to="/restorepassword">Restore Password</Link>
+            <Link to="/reset-password">Restore Password</Link>
           </p>
         </section>
       </div>

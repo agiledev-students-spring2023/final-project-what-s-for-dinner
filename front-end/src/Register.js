@@ -1,78 +1,57 @@
 import React, { useState, useEffect } from "react"
 import { Link, Navigate, useSearchParams } from "react-router-dom"
 import axios from "axios"
-// import logo from './logo.svg';
 import "./Register.css"
 
-const Register = props => {
-  let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
+const Register = (props) => {
+  const [urlSearchParams] = useSearchParams() 
+  const [status, setStatus] = useState({})
+  const [errorMessage, setErrorMessage] = useState("")
+  const [showPopup, setShowPopup] = useState(false);
 
-  // create state variables to hold username and password
-  const [status, setStatus] = useState({}) // the API will return an object indicating the login status in a success field of the response object
-  const [errorMessage, setErrorMessage] = useState(``) // will contain any error message that explains why the user was redirected to this page.
-
-  // if the user got here by trying to access our Protected page, there will be a query string parameter called 'error' with the value 'protected'
   useEffect(() => {
-    const qsError = urlSearchParams.get("error") // get any 'error' field in the URL query string
-    if (qsError === "protected")
-      setErrorMessage(
-        "Please log in to view your home page."
-      )
-  }, [])
+    const qsError = urlSearchParams.get("error")
+    if (qsError === "protected") {
+      setErrorMessage("Please log in to view your home page.")
+    }
+  }, [urlSearchParams])
 
-  // if the user's logged-in status changes, call the setuser function that was passed to this component from the PrimaryNav component.
   useEffect(() => {
-    // if the login was a success, call the setuser function that was passed to this component as a prop
     if (status.success) {
       console.log(`User successfully logged in: ${status.username}`)
       props.setuser(status)
     }
-  }, [status])
+  }, [status, props])
 
-  const handleSubmit = async e => {
-    // prevent the HTML form from actually submitting... we use React's javascript code instead
+  const handleSubmit = async (e) => {
     e.preventDefault()
 
     try {
-      // create an object with the data we want to send to the server
       const requestData = {
         email: e.target.email.value,
         username: e.target.username.value,
         password: e.target.password.value,
-        confirmPassword: e.target.confirmPassword.value,
+        passwordConfirm: e.target.confirmPassword.value,
       }
-      // send the request to the server api to authenticate
-      const response = await axios.post(
-        "https://my.api.mockaroo.com/login.json?key=d9ddfc40",
-        requestData
-      )
 
-      // store the response data into the data state variable
+      const response = await axios.post("/auth/register", requestData)
+
       console.log(response.data)
       setStatus(response.data)
+      setShowPopup(true)
     } catch (err) {
-      // throw an error
-      throw new Error(err)
+      console.error(err)
+      setErrorMessage(err.response.data.message)
     }
   }
 
-  // if the user is not registered, show the register form
-  if (!status.success)
-    return (
-      <div className="Register">
-        <h1>Create an account</h1>
-        <p className="feedback">
-          This page is placeholder only... without a back-end, we cannot support
-          true register functionality. In this case, we fake a register request to a
-          mock API and randomly allow the user in or not. Keep trying until you
-          get in.
-        </p>
-        {errorMessage ? <p className="error">{errorMessage}</p> : ""}
+  return (
+    <div className="Register">
+      <h1>Create an account</h1>
+      {errorMessage ? <p className="error">{errorMessage}</p> : ""}
+      {!status.success && (
         <section className="main-content">
           <form onSubmit={handleSubmit}>
-            {
-              //handle error condition
-            }
             <label>Your Email: </label>
             <input type="text" name="email" placeholder="email@address.com" />
             <label>Preferred Username: </label>
@@ -80,7 +59,11 @@ const Register = props => {
             <label>Your Password: </label>
             <input type="password" name="password" placeholder="password" />
             <label>Confirm Your Password: </label>
-            <input type="password" name="password" placeholder="re-enter password" />
+            <input
+              type="password"
+              name="confirmPassword"
+              placeholder="re-enter password"
+            />
             <input type="submit" value="Create Account" />
           </form>
           <p>
@@ -89,10 +72,17 @@ const Register = props => {
             <Link to="/login">Log in</Link>
           </p>
         </section>
-      </div>
-    )
-  // if the user has successfully registered, redirect them to the login page
-  else return <Navigate to="/home" />
+      )}
+      {/* Popup window */}
+      {showPopup && (
+        <div className="popup">
+          <p>User created successfully.</p>
+          <button onClick={() => setShowPopup(false)}>Close</button>
+        </div>
+      )}
+      {status.success && <Navigate to="/login" />}
+    </div>
+  )
 }
 
 export default Register

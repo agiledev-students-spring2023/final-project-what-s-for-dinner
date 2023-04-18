@@ -2,16 +2,31 @@
 const express = require("express"); // CommonJS import style!
 const app = express(); // instantiate an Express object
 const path = require("path");
+const cookieParser = require("cookie-parser") // middleware useful for parsing cookies in requests
 const cors = require('cors');
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
 app.use(express.static(path.join(__dirname, 'public')));
 
+// the following are used for authentication with JSON Web Tokens
+const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
+const jwt = require("jsonwebtoken")
+const passport = require("passport")
+
+// use this JWT strategy within passport for authentication handling
+const jwtStrategy = require("./config/jwt-config.js") // import setup options for using JWT in passport
+passport.use(jwtStrategy)
+
+// tell express to use passport middleware
+app.use(passport.initialize())
+
 // mongoose models for MongoDB data manipulation
 const mongoose = require("mongoose")
+const User = require("./models/users.js")
 
 // connect to the database
 // console.log(`Conneting to MongoDB at ${process.env.MONGODB_URI}`)
 
+/*
 try {
   //mongoose.connect(process.env.MONGODB_URI)
   //changed so that it connects to test database where all collections will be
@@ -21,7 +36,22 @@ try {
   console.log(
     `Error connecting to MongoDB user account authentication will fail: ${err}`
   )
+}*/
+
+async function connectToMongoDB() {
+  try {
+    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+    //await mongoose.connect('mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+    console.log(`Connected to MongoDB.`)
+  } catch (err) {
+    console.log(
+      err
+      //`Error connecting to MongoDB user account authentication will fail: ${err}`
+    )
+  }
 }
+
+connectToMongoDB();
 
 const corsOptions = {
     origin: 'http://localhost:3000',
@@ -40,6 +70,10 @@ const recipeRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients');
 const utensilsRouter = require('./routes/utensils');
 const uploadrecipeRouter = require('./routes/upload-recipe');
+const authenticationRouter = require('./routes/authentication');
+const cookieRouter = require('./routes/cookie');
+const protectedContentRouter = require('./routes/protected-content');
+const resetPasswordRouter = require('./routes/reset-password.js');
 
 // import some useful middleware
 const multer = require("multer"); // middleware to handle HTTP POST requests with file uploads
@@ -52,6 +86,10 @@ app.use(morgan('dev'));
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
+app.use(cookieParser()) // useful middleware for dealing with cookies
+
+// the following cors setup is important when working with cookies on your local machine
+//app.use(cors({ origin: process.env.FRONT_END_DOMAIN, credentials: true })) // allow incoming requests only from a "trusted" host
 
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"));
@@ -76,5 +114,9 @@ app.use(recipeRouter);
 app.use(ingredientsRouter);
 app.use(utensilsRouter);
 app.use(uploadrecipeRouter);
+app.use("/auth", authenticationRouter()); // all requests for /auth/* will be handled by the authenticationRoutes router
+app.use("/cookie", cookieRouter()); // all requests for /cookie/* will be handled by the cookieRoutes router
+app.use("/protected", protectedContentRouter()); // all requests for /protected/* will be handled by the protectedRoutes router
+app.use(resetPasswordRouter);
 
 module.exports = app;

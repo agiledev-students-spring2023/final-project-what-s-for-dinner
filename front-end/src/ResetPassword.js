@@ -2,14 +2,15 @@ import React, { useState, useEffect } from "react"
 import { Link, Navigate, useSearchParams } from "react-router-dom"
 import axios from "axios"
 // import logo from './logo.svg';
-import "./RestorePassword.css"
+import "./ResetPassword.css"
 
-const RestorePassword = props => {
+const ResetPassword = props => {
   let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
 
   // create state variables to hold username and password
   const [status, setStatus] = useState({}) // the API will return an object indicating the login status in a success field of the response object
   const [errorMessage, setErrorMessage] = useState(``) // will contain any error message that explains why the user was redirected to this page.
+  const [showPopup, setShowPopup] = useState(false)
 
   // if the user got here by trying to access our Protected page, there will be a query string parameter called 'error' with the value 'protected'
   useEffect(() => {
@@ -41,16 +42,18 @@ const RestorePassword = props => {
       }
       // send the request to the server api to authenticate
       const response = await axios.post(
-        "https://my.api.mockaroo.com/login.json?key=d9ddfc40",
+        "/reset-password",
         requestData
       )
 
       // store the response data into the data state variable
       console.log(response.data)
       setStatus(response.data)
+      setShowPopup(true)
     } catch (err) {
       // throw an error
-      throw new Error(err)
+      console.error(err)
+      setErrorMessage(err.response.data.message)
     }
   }
 
@@ -58,13 +61,7 @@ const RestorePassword = props => {
   if (!status.success)
     return (
       <div className="RestorePassword">
-        <h1>Restore Your Password</h1>
-        <p className="feedback">
-          This page is placeholder only... without a back-end, we cannot support
-          true restore password functionality. In this case, we fake a restore password request to a
-          mock API and randomly allow the user in or not. Keep trying until you
-          get in.
-        </p>
+        <h1>Reset Your Password</h1>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
           <form onSubmit={handleSubmit}>
@@ -88,10 +85,18 @@ const RestorePassword = props => {
             <Link to="/login">Log in</Link>
           </p>
         </section>
+        {/* Popup window */}
+        {showPopup && (
+          <div className="popup">
+            <p>A new password has been sent to your registered email.</p>
+            <button onClick={() => setShowPopup(false)}>Close</button>
+          </div>
+        )}
+        {status.success && <Navigate to="/login" />}
       </div>
     )
   // if the user's password has successfully restored, redirect them to the login page
   else return <Navigate to="/login" />
 }
 
-export default RestorePassword
+export default ResetPassword
