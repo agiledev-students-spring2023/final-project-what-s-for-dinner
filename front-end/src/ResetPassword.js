@@ -21,15 +21,6 @@ const ResetPassword = props => {
       )
   }, [])
 
-  // if the user's logged-in status changes, call the setuser function that was passed to this component from the PrimaryNav component.
-  useEffect(() => {
-    // if the login was a success, call the setuser function that was passed to this component as a prop
-    if (status.success) {
-      console.log(`User successfully logged in: ${status.username}`)
-      props.setuser(status)
-    }
-  }, [status])
-
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault()

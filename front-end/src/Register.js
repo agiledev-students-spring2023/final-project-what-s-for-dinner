@@ -16,13 +16,6 @@ const Register = (props) => {
     }
   }, [urlSearchParams])
 
-  useEffect(() => {
-    if (status.success) {
-      console.log(`User successfully logged in: ${status.username}`)
-      props.setuser(status)
-    }
-  }, [status, props])
-
   const handleSubmit = async (e) => {
     e.preventDefault()
 
