@@ -7,6 +7,7 @@ const Register = (props) => {
   const [urlSearchParams] = useSearchParams() 
   const [status, setStatus] = useState({})
   const [errorMessage, setErrorMessage] = useState("")
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const qsError = urlSearchParams.get("error")
@@ -37,21 +38,17 @@ const Register = (props) => {
 
       console.log(response.data)
       setStatus(response.data)
+      setShowPopup(true)
     } catch (err) {
       console.error(err)
-      setErrorMessage("Something went wrong, please try again later.")
+      setErrorMessage(err.response.data.message)
     }
   }
 
   return (
     <div className="Register">
       <h1>Create an account</h1>
-      <p className="feedback">
-        This page is a placeholder only... without a back-end, we cannot support true
-        register functionality. In this case, we fake a register request to a mock API
-        and randomly allow the user in or not. Keep trying until you get in.
-      </p>
-      {errorMessage && <p className="error">{errorMessage}</p>}
+      {errorMessage ? <p className="error">{errorMessage}</p> : ""}
       {!status.success && (
         <section className="main-content">
           <form onSubmit={handleSubmit}>
@@ -76,7 +73,14 @@ const Register = (props) => {
           </p>
         </section>
       )}
-      {status.success && <Navigate to="/home" />}
+      {/* Popup window */}
+      {showPopup && (
+        <div className="popup">
+          <p>User created successfully.</p>
+          <button onClick={() => setShowPopup(false)}>Close</button>
+        </div>
+      )}
+      {status.success && <Navigate to="/login" />}
     </div>
   )
 }
