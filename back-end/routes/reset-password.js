@@ -15,10 +15,11 @@ router.post("/reset-password", async (req, res) => {
     }
 
     // check if user exists with the given username and email
-    const user = await User.findOne({ email:email })
+    const user = await User.findOne({ email:email, username:username })
     if (!user) {
       return res.status(404).json({
-        error: "User with the given username and email not found",
+        success: false,
+        message: "User with the given username and email not found",
       })
     }
 
@@ -41,7 +42,7 @@ router.post("/reset-password", async (req, res) => {
     const mailOptions = {
       from: process.env.EMAIL_USERNAME,
       to: user.email,
-      subject: "Password Restoration",
+      subject: "What's for Dinner: Password Restoration",
       text: `Your new password is ${newPassword}.`,
     }
 
@@ -49,11 +50,13 @@ router.post("/reset-password", async (req, res) => {
       if (error) {
         console.log(error)
         return res.status(500).json({
+          success: false,
           error: "Failed to send email with new password",
         })
       } else {
         console.log("Email sent: " + info.response)
         return res.status(200).json({
+          success: true,
           message: "New password sent to email",
         })
       }
@@ -61,6 +64,7 @@ router.post("/reset-password", async (req, res) => {
   } catch (error) {
     console.log(error)
     return res.status(500).json({
+      success: false,
       error: "Failed to restore password",
     })
   }

@@ -48,8 +48,9 @@ const ResetPassword = props => {
 
       // store the response data into the data state variable
       console.log(response.data)
-      setStatus(response.data)
       setShowPopup(true)
+      setStatus(response.data)
+      //setShowPopup(true)
     } catch (err) {
       // throw an error
       console.error(err)
@@ -60,7 +61,7 @@ const ResetPassword = props => {
   // if the user's password is not restored, show the restore password form
   if (!status.success)
     return (
-      <div className="RestorePassword">
+      <div className="ResetPassword">
         <h1>Reset Your Password</h1>
         {errorMessage ? <p className="error">{errorMessage}</p> : ""}
         <section className="main-content">
@@ -85,14 +86,12 @@ const ResetPassword = props => {
             <Link to="/login">Log in</Link>
           </p>
         </section>
-        {/* Popup window */}
         {showPopup && (
           <div className="popup">
             <p>A new password has been sent to your registered email.</p>
             <button onClick={() => setShowPopup(false)}>Close</button>
           </div>
         )}
-        {status.success && <Navigate to="/login" />}
       </div>
     )
   // if the user's password has successfully restored, redirect them to the login page
