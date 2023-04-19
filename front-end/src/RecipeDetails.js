@@ -13,8 +13,9 @@ const RecipeDetails = prop => {
             try {
               const response = await fetch(`${baseUrl}/recipes/${recipeId}`);
               const data = await response.json();
+              console.log("just data", data);
               console.log("Before setItem(): ", data);
-              setItem(() => data);
+              setItem(data.recipe[0]);
               console.log("After setItem(): ", item);
             } catch (error) {
               console.error(error);
@@ -47,29 +48,20 @@ const RecipeDetails = prop => {
 
     return(
         <>
+
         {
             (!item) ? "" : <div className="content">
-                <img src={item.data.thumbnail} alt={item.idMeal} />
+                <img src={item.thumbnail} alt={item._id} />
                 <div className="title">
-                    <h1>{item.data.name}</h1>   
-                </div>
-                <div className="cuisine">
-                    <h2>{item.data.area} Food</h2>
-                </div>
-                <div className="category">
-                    <h2>Category: {item.data.category}</h2>
+                    <h1>{item.Title}</h1>   
                 </div>
                 <div className="ingredients">
                     <h2>Ingredients</h2>
-                    {item.data.ingredients.map((ingredient, index) => (
-                    <h4 key={index}>
-                        {ingredient.name}: {ingredient.measurement}
-                    </h4>
-                    ))}
+                    {item.Cleaned_Ingredients}
                 </div>
                 <div className="instructions">
                     <h2>Instructions</h2>
-                    <h4>{item.data.instructions}</h4>
+                    <h4>{item.Instructions}</h4>
                 </div>
 
                 <div className="comments">
