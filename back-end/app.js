@@ -5,6 +5,8 @@ const path = require("path");
 const cookieParser = require("cookie-parser") // middleware useful for parsing cookies in requests
 const cors = require('cors');
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
+app.use(express.static('static'));
+app.use('../static/images', express.static(path.join(__dirname, 'front-end/static/images')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // the following are used for authentication with JSON Web Tokens
@@ -36,8 +38,8 @@ try {
   console.log(
     `Error connecting to MongoDB user account authentication will fail: ${err}`
   )
-}*/
-
+ }
+*/
 async function connectToMongoDB() {
   try {
     await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });

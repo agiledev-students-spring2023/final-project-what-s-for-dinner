@@ -3,12 +3,12 @@ import axios from "axios";
 import Search from "./Search";
 import { Link } from "react-router-dom"
 import SortBy from "./SortBy";
-import RecipeThumb from "./RecipeThumb";
 import "./RecipeList.css";
 
 const RecipeList = (props) => {
   const baseUrl = 'http://localhost:3000';
   const endpoint = '/recipes';
+  const images = '/api/images/';
   const [data, setData] = useState([]);
   //const [sortedData, setSortedData] = useState([]);
   const [sortOption, setSortOption] = useState("");
@@ -16,47 +16,18 @@ const RecipeList = (props) => {
         let  url = `${baseUrl}${endpoint}`
         if (sortOption === "time") {
           url = `${baseUrl}/recipes/sort-by-time`;
-        } else if (sortOption === "difficulty") {
-          url = `${baseUrl}/sort-by-difficulty`;
+        } else if (sortOption === "similar") {
+          url = `${baseUrl}/sort-by-similar`;
         }
-        axios.get(url, {
-          params: {
-            ingredients: 'tomato' // need to replace this with ingredients selected by user
-          }
-        })
+        axios.get(url)
         .then(response => {
-          setData(response.data.meals);
+          setData(response.data.recipes);
+          console.log(response);
         })
         .catch(error => {
           console.error(error);
         });
       }, [sortOption]); // only run it once!
-    /*
-  const sortData = (data, option) => {
-    let sortedData = [...data];
-    switch (option) {
-      case "ingredients":
-        sortedData.sort((a, b) => a.strIngredient1.localeCompare(b.strIngredient1));
-        break;
-      case "difficulty":
-        sortedData.sort((a, b) => a.strArea.localeCompare(b.strArea));
-        break;
-      case "time":
-        sortedData.sort((a, b) => a.idMeal.localeCompare(b.idMeal));
-        break;
-      default:
-        break;
-    }
-    return sortedData;
-  };
-  useEffect(() => {
-    if (sortOption) {
-      setSortedData(sortData(data, sortOption));
-    } else {
-      setSortedData(data);
-    }
-  }, [data, sortOption]);
-  */
   const handleSortChange = (option) => {
     setSortOption(option);
   }
@@ -67,10 +38,10 @@ const RecipeList = (props) => {
     <div className="recipe-container">
     <SortBy handleSortChange={handleSortChange} />
     {data.map((recipe) => (
-      <div key={recipe.idMeal} className="recipe">
-        <Link to={`/${recipe.idMeal}`} className="recipe-link">
-          <img src={recipe.strMealThumb} alt={recipe.strMeal} className="recipe-image" />
-          <h3>{recipe.strMeal}</h3>
+      <div key={recipe._id} className="recipe">
+        <Link to={`/${recipe._id}`} className="recipe-link">
+          <img src={`${baseUrl}${images}${recipe.Image_Name}.jpg`} alt={recipe.Title} className="recipe-image" />
+          <h3>{recipe.Title}</h3>
         </Link>
       </div>
     ))}

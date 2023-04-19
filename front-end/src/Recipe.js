@@ -2,6 +2,8 @@ import React from "react"
 import { useNavigate } from "react-router"
 import "./Recipe.css";
 const Recipe = ({recipes}) =>{
+    const baseUrl = 'http://localhost:3000';
+    const images = '/api/images/';
     console.log(recipes);
     let navigate = useNavigate();
     return (
@@ -10,11 +12,11 @@ const Recipe = ({recipes}) =>{
                 recipes && recipes.length ? recipes.map((recipe) => {
                     return (
                         <div className="card" 
-                            key={recipe.id}
-                            onClick={() => navigate(`/${recipe.id}`)}
+                            key={recipe._id}
+                            onClick={() => navigate(`/${recipe._id}`)}
                         >
-                            <img src={recipe.thumbnail} alt="" className="recipe-image" />
-                            <h3>{recipe.name}</h3>
+                            <img src={`${baseUrl}${images}${recipe.Image_Name}.jpg`} alt={recipe.Title} className="recipe-image" />
+                            <h3>{recipe.Title}</h3>
                         </div>
                     );
                 }) : "Recipe Not Found"
