@@ -8,6 +8,7 @@ const Home = (props) => {
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
   const baseUrl = 'http://localhost:3000';
   const endpoint = '/random-recipe';
+  const images = '/api/images/';
   useEffect(() => {
     axios.get(`${baseUrl}${endpoint}`)
       .then((response) => {
@@ -39,7 +40,7 @@ const Home = (props) => {
       <div className="recipe-container">
           <div key={recommendedRecipes._id} className="recipe">
             <Link to={`/${recommendedRecipes._id}`} className="recipe-link">
-              <img src={`/static/foodimages/${recommendedRecipes.Image_Name}.jpg`} alt={recommendedRecipes.Title} className="recipe-image" />
+              <img src={`${baseUrl}${images}${recommendedRecipes.Image_Name}.jpg`} alt={recommendedRecipes.Title} className="recipe-image" />
               <h3>{recommendedRecipes.Title}</h3>
             </Link>
           </div>
