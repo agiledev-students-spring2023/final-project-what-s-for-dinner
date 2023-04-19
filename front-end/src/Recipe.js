@@ -10,11 +10,11 @@ const Recipe = ({recipes}) =>{
                 recipes && recipes.length ? recipes.map((recipe) => {
                     return (
                         <div className="card" 
-                            key={recipe.id}
-                            onClick={() => navigate(`/${recipe.id}`)}
+                            key={recipe._id}
+                            onClick={() => navigate(`/${recipe._id}`)}
                         >
-                            <img src={recipe.thumbnail} alt="" className="recipe-image" />
-                            <h3>{recipe.name}</h3>
+                            <img src={`/static/foodimages/${recipe.Image_Name}.jpg`} alt={recipe.Title} className="recipe-image" />
+                            <h3>{recipe.Title}</h3>
                         </div>
                     );
                 }) : "Recipe Not Found"
