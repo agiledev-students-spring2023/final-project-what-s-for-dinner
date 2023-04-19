@@ -6,7 +6,7 @@ const SortBy = ({ handleSortChange }) => {
       <label htmlFor="sortBy">Sort By:</label>
       <select id="sortBy" onChange={(event) => handleSortChange(event.target.value)}>
         <option value="">--Select--</option>
-        <option value="difficulty">Difficulty</option>
+        <option value="similar">Similar</option>
         <option value="time">Time Needed</option>
       </select>
 

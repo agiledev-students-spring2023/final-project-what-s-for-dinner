@@ -27,7 +27,7 @@ const Search = prop => {
           })
           .then(response => {
             console.log(response)
-            setRecipes(response.data.data);
+            setRecipes(response.data.recipes);
             setShow(true);
           })
           .catch(error => {
