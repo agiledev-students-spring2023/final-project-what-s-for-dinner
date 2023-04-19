@@ -100,6 +100,11 @@ const RecipeDetails = prop => {
                     </form>
                 </div>
 
+                <div className="add-saved-recipes">
+                    <button type="add">Add to saved recipes</button>
+
+                </div>
+
             </div>
         }
         </>
