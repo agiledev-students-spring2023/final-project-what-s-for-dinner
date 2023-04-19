@@ -8,6 +8,7 @@ import "./RecipeList.css";
 const RecipeList = (props) => {
   const baseUrl = 'http://localhost:3000';
   const endpoint = '/recipes';
+  const images = '/api/images/';
   const [data, setData] = useState([]);
   //const [sortedData, setSortedData] = useState([]);
   const [sortOption, setSortOption] = useState("");
@@ -39,7 +40,7 @@ const RecipeList = (props) => {
     {data.map((recipe) => (
       <div key={recipe._id} className="recipe">
         <Link to={`/${recipe._id}`} className="recipe-link">
-          <img src={`/static/foodimages/${recipe.Image_Name}.jpg`} alt={recipe.Title} className="recipe-image" />
+          <img src={`${baseUrl}${images}${recipe.Image_Name}.jpg`} alt={recipe.Title} className="recipe-image" />
           <h3>{recipe.Title}</h3>
         </Link>
       </div>
