@@ -12,7 +12,29 @@ class RecipeController {
         //if (!ingredients || ingredients.length === 0) {
           //return res.status(400).send('No ingredients found');
         //}
-        const ingredients = ["eggs", "rice"];
+        const ingredients = ["broccolini"];
+        // Find recipes that contain at least one of the ingredients
+        //const recipes = await Recipe.find({ Cleaned_Ingredients: { $in: ingredients } }).exec();
+        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredients.join("|"), "i") } }).exec();
+        console.log(recipes);
+        // Return the list of recipes
+        res.status(200).json({ recipes });
+        //return recipes
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('An error occurred while retrieving recipes');
+      }
+    }
+    static async getIngredients(req, res) {
+      try {
+        // Retrieve the list of ingredients from the ingredients collection
+        //const ingredients = await Ingredient.find().distinct('name').exec();
+  
+        // Check if there are any ingredients in the collection
+        //if (!ingredients || ingredients.length === 0) {
+          //return res.status(400).send('No ingredients found');
+        //}
+        const ingredients = ["broccolini"];
         // Find recipes that contain at least one of the ingredients
         //const recipes = await Recipe.find({ Cleaned_Ingredients: { $in: ingredients } }).exec();
         const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredients.join("|"), "i") } }).exec();
@@ -28,8 +50,10 @@ class RecipeController {
     static async getRecipesSorted(req, res) {
       try {
         // Get recipes by ingredients
-        const recipes = await RecipeController.getRecipesByIngredients(req, res);
-        await console.log(recipes)
+        //const ingredients = ["broccolini"];
+        const recipes = await RecipeController.getIngredients(req, res);
+        //const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredients.join("|"), "i") } }).exec();
+        console.log(recipes)
         // Create a new sorted array of recipes
         const sortedRecipes = [...recipes].sort((a, b) => a.Instructions.length - b.Instructions.length);
     
@@ -47,7 +71,7 @@ class RecipeController {
       try {
         const ingredients = ["eggs", "rice"];
     
-        const recipes = await RecipeController.getRecipesByIngredients(req, res);
+        const recipes = await RecipeController.getIngredients(req, res);
         
         const recipeSimilarities = recipes.map((recipe) => {
           const recipeIngredients = recipe.Cleaned_Ingredients;
