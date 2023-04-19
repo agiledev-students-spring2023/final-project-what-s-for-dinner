@@ -6,8 +6,8 @@ const { body, validationResult } = require('express-validator');
 // Get all ingredients from the database
 router.get('/my-ingredients', async (req, res) => {
   try {
-    const user_id = req.query.user_id;
-    const ingredients = await IngredientModel.find({ user_id }, { _id: 0, __v: 0 });
+    const username = req.query.username;
+    const ingredients = await IngredientModel.find({ username }, { _id: 0, __v: 0 });
     res.json(ingredients);
   } catch (error) {
     console.error('Error fetching data from database:', error);
@@ -21,7 +21,7 @@ router.post('/my-ingredients', [
   body('amount').isInt({ min: 1 }),
 ], async (req, res) => {
   try {
-    const { name, amount, id } = req.body;
+    const { name, amount, username } = req.body; // Modify to get username from req.body
 
     // Validate the request body
     const errors = validationResult(req);
@@ -29,15 +29,15 @@ router.post('/my-ingredients', [
       return res.status(400).json({ errors: errors.array() });
     }
 
-    // Check if the ingredient already exists in the database
-    let existingIngredient = await IngredientModel.findOne({ name: name.toLowerCase() });
+    // Check if the ingredient already exists in the database for the specific user
+    let existingIngredient = await IngredientModel.findOne({ name: name.toLowerCase(), username }); // Modify to search by name and username
     if (existingIngredient) {
       existingIngredient.amount += amount;
       await existingIngredient.save();
       res.json({ message: `Successfully added ${amount} ${name}(s)` });
     } else {
-      // Create a new ingredient in the database
-      const newIngredient = new IngredientModel({ id, name: name.toLowerCase(), amount });
+      // Create a new ingredient in the database for the specific user
+      const newIngredient = new IngredientModel({ username, name: name.toLowerCase(), amount }); // Modify to include username
       await newIngredient.save();
       res.json({ message: `Successfully added ${amount} ${name}(s)` });
     }

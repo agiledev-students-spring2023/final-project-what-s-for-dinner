@@ -2,17 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import './MyIngredients.css';
 
-const MyIngredients = () => {
+const MyIngredients = (props) => {
   const [ingredients, setIngredients] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAmount, setSelectedAmount] = useState(1);
+  const username = props.user.username;
 
   useEffect(() => {
     // API call to fetch user's added ingredients
     const fetchIngredients = async () => {
       try {
-        const response = await fetch('/my-ingredients');
+        const response = await fetch(`/my-ingredients?username=${username}`); // pass user_id to the API endpoint
         const data = await response.json();
         setIngredients(data);
       } catch (error) {
@@ -20,7 +21,7 @@ const MyIngredients = () => {
       }
     };
     fetchIngredients();
-  }, []);
+  }, [username]); // include userId as a dependency to re-fetch ingredients when it changes
 
   const handleAdd = async (ingredient) => {
     // API call to add ingredient to user's inventory
@@ -30,7 +31,10 @@ const MyIngredients = () => {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(ingredient),
+        body: JSON.stringify({
+          ...ingredient,
+          username: username // add username to the ingredient object being sent to the server
+        }),
       });
       if (response.ok) {
         // Update the list of ingredients if the API call was successful
