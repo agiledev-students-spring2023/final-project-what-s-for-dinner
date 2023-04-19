@@ -30,14 +30,16 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 **Front-end**
 1. run `cd front-end` to navigate to front-end folder
 2. first run `npm install --legacy-peer-deps` (please ignore the error for now)
+
 **Back-end**
 1. run `cd back-end` to navigate to back-end folder
 2. run `npm install`
 3. create a `.env` file in the back-end directory with the following information:
     > MEAL_DB_API_KEY=9973533
+    > SPOONACULAR_API_KEY=86b8ac3348974b5ab495921e201be0de
     > JWT_SECRET=whats.for.dinner
     > JWT_EXP_DAYS=60
-    > MONGODB_URI=mongodb+srv://cx2054:GKxpFW1aGNchzgZK@whatsfordinner.xapp6ti.mongodb.net/?retryWrites=true&w=majority
+    > MONGODB_URI=mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority
     > EMAIL_USERNAME=whatsfordinneragile@gmail.com
     > EMAIL_PASSWORD=nuzvkswprpbdvozh
     
