@@ -37,10 +37,10 @@ const Home = (props) => {
       <div className="RecipeList">
       <h2>Recommended Recipe for Today</h2>
       <div className="recipe-container">
-          <div key={recommendedRecipes.idMeal} className="recipe">
-            <Link to={`/${recommendedRecipes.idMeal}`} className="recipe-link">
-              <img src={recommendedRecipes.strMealThumb} alt={recommendedRecipes.strMeal} className="recipe-image" />
-              <h3>{recommendedRecipes.strMeal}</h3>
+          <div key={recommendedRecipes._id} className="recipe">
+            <Link to={`/${recommendedRecipes._id}`} className="recipe-link">
+              <img src={`/static/foodimages/${recommendedRecipes.Image_Name}.jpg`} alt={recommendedRecipes.Title} className="recipe-image" />
+              <h3>{recommendedRecipes.Title}</h3>
             </Link>
           </div>
 
