@@ -14,14 +14,7 @@ class RecipeController {
         const ingredientAmounts = ingredients.map(({ amount }) => amount);
         console.log(ingredientNames);
         const regexPatterns = ingredientNames.map(name => new RegExp(`\\b${name}\\b`, "i"));
-        const recipes = await Recipe.find({ 
-          $and: [ { 
-            Cleaned_Ingredients: {
-              $all: regexPatterns
-            }
-          } ]
-        }).exec();
-        
+        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientNames.join("|"), "i") } }).exec();  
         return recipes
       } catch (error) {
         console.error(error);

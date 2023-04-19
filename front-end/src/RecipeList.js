@@ -17,7 +17,7 @@ const RecipeList = (props) => {
         if (sortOption === "time") {
           url = `${baseUrl}/recipes/sort-by-time?username=${username}`;
         } else if (sortOption === "similar") {
-          url = `${baseUrl}recipes/sort-by-similar?username=${username}`;
+          url = `${baseUrl}/recipes/sort-by-similar?username=${username}`;
         }
         axios.get(url)
         .then(response => {
