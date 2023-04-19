@@ -207,6 +207,12 @@ router.get('/search', async (req, res, next) => {
 });
 */
 router.get('/random-recipe', RecipeController.getReccomended);
+router.get('/api/images/:imageName', (req, res) => {
+  const imageName = req.params.imageName;
+  const imagePath = path.join(__dirname, '../public/foodimages', imageName);
+
+  res.sendFile(imagePath);
+});
 /*
 router.get('/random-recipe', (req, res) => {
   axios.get('https://www.themealdb.com/api/json/v1/1/random.php')
