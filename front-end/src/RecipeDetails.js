@@ -8,6 +8,7 @@ const RecipeDetails = prop => {
     const [rating, setRating] = useState(0);
     const {recipeId} = useParams();
     const baseUrl = 'http://localhost:3000';
+    const images = '/api/images/';
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
@@ -51,7 +52,7 @@ const RecipeDetails = prop => {
 
         {
             (!item) ? "" : <div className="content">
-                <img src={item.thumbnail} alt={item._id} />
+                <img src={`${baseUrl}${images}${item.Image_Name}.jpg`} alt={item._id} />
                 <div className="title">
                     <h1>{item.Title}</h1>   
                 </div>
