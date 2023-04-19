@@ -7,17 +7,17 @@ import "./RecipeList.css";
 
 const RecipeList = (props) => {
   const baseUrl = 'http://localhost:3000';
-  const endpoint = '/recipes';
   const images = '/api/images/';
   const [data, setData] = useState([]);
-  //const [sortedData, setSortedData] = useState([]);
   const [sortOption, setSortOption] = useState("");
+  const username = props.user.username;
+  const endpoint = `/recipes?username=${username}`;
   useEffect(() => {
         let  url = `${baseUrl}${endpoint}`
         if (sortOption === "time") {
-          url = `${baseUrl}/recipes/sort-by-time`;
+          url = `${baseUrl}/recipes/sort-by-time?username=${username}`;
         } else if (sortOption === "similar") {
-          url = `${baseUrl}/sort-by-similar`;
+          url = `${baseUrl}recipes/sort-by-similar?username=${username}`;
         }
         axios.get(url)
         .then(response => {
@@ -27,7 +27,7 @@ const RecipeList = (props) => {
         .catch(error => {
           console.error(error);
         });
-      }, [sortOption]); // only run it once!
+      }, [sortOption, username]); // only run it once!
   const handleSortChange = (option) => {
     setSortOption(option);
   }

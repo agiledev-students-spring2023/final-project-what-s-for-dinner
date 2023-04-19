@@ -1,47 +1,39 @@
-const Ingredient = require('../models/ingredients');
+const IngredientModel = require('../models/ingredients');
 const Recipe = require('../models/recipes');
 const ObjectId = require('mongodb').ObjectId;
 
 class RecipeController {
-    static async getRecipesByIngredients(req, res) {
+    static async getIngredients(req, res) {
       try {
         // Retrieve the list of ingredients from the ingredients collection
-        //const ingredients = await Ingredient.find().distinct('name').exec();
-  
-        // Check if there are any ingredients in the collection
-        //if (!ingredients || ingredients.length === 0) {
-          //return res.status(400).send('No ingredients found');
-        //}
-        const ingredients = ["broccolini"];
-        // Find recipes that contain at least one of the ingredients
-        //const recipes = await Recipe.find({ Cleaned_Ingredients: { $in: ingredients } }).exec();
-        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredients.join("|"), "i") } }).exec();
-        console.log(recipes);
-        // Return the list of recipes
-        res.status(200).json({ recipes });
-        //return recipes
+        const username = req.query.username;
+        const ingredients = await IngredientModel.find({ username }, { _id: 0, __v: 0 });
+
+        // Find recipes that contain all of the ingredients, but not guaranteed to have ONLY the ingredients
+        const ingredientNames = ingredients.map(({ name }) => name);
+        const ingredientAmounts = ingredients.map(({ amount }) => amount);
+        console.log(ingredientNames);
+        const regexPatterns = ingredientNames.map(name => new RegExp(`\\b${name}\\b`, "i"));
+        const recipes = await Recipe.find({ 
+          $and: [ { 
+            Cleaned_Ingredients: {
+              $all: regexPatterns
+            }
+          } ]
+        }).exec();
+        
+        return recipes
       } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred while retrieving recipes');
       }
     }
-    static async getIngredients(req, res) {
+    static async getRecipesByIngredients(req, res) {
       try {
-        // Retrieve the list of ingredients from the ingredients collection
-        //const ingredients = await Ingredient.find().distinct('name').exec();
-  
-        // Check if there are any ingredients in the collection
-        //if (!ingredients || ingredients.length === 0) {
-          //return res.status(400).send('No ingredients found');
-        //}
-        const ingredients = ["broccolini"];
-        // Find recipes that contain at least one of the ingredients
-        //const recipes = await Recipe.find({ Cleaned_Ingredients: { $in: ingredients } }).exec();
-        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredients.join("|"), "i") } }).exec();
-        console.log(recipes);
-        // Return the list of recipes
-        //res.status(200).json({ recipes });
-        return recipes
+        const recipes = await RecipeController.getIngredients(req, res);
+
+        res.status(200).json({ recipes });
+
       } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred while retrieving recipes');

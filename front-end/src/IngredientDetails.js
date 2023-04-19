@@ -1,6 +1,6 @@
 // src/components/IngredientDescription.js
 import React, { useState, useEffect } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Ingredient from './Ingredient'
 
 const IngredientDescription = () => {
