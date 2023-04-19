@@ -2,16 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Search from "./Search";
 import { Link, Navigate } from "react-router-dom"
-import SortBy from "./SortBy";
-import RecipeThumb from "./RecipeThumb";
 import "./SavedRecipes.css"
 
 
 const SavedRecipes = (props) => {
     const [data, setData] = useState([]);
-    const [sortByIngredients, setSortByIngredients] = useState(false);
-    const [sortByDifficulty, setSortByDifficulty] = useState(false);
-    const [sortByTimeNeeded, setSortByTimeNeeded] = useState(false);
 
     useEffect(() => {
         // fetch some mock data about animals for sale

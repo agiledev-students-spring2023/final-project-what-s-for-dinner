@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import PrimaryNav from "./PrimaryNav"
 import Welcome from "./Welcome"
 import Home from "./Home"
 import MenuOverlay from "./MenuOverlay"
 import RecipeList from "./RecipeList"
-import Recipe from "./Recipe"
 import Utensils from "./Utensils"
 import IngredientDetails from "./IngredientDetails"
 import RecipeDetails from "./RecipeDetails"
@@ -19,7 +18,6 @@ import ContactUs from "./ContactUs";
 import RightsReserved from "./RightsReserved";
 import TermsOfService from "./TermsOfService";
 import Footer from "./Footer";
-import { async } from "q"
 import ShareRecipe from "./ShareRecipe"
 import MyIngredients from "./MyIngredients"
 import SavedRecipes from "./SavedRecipes"
