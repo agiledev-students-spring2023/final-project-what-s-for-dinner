@@ -120,6 +120,51 @@ class RecipeController {
           res.status(500).send('Internal server error');
       }
     }
+/*
+      static async getRecipeComments(req, res) {
+        try {
+          const { recipeId } = req.params.id;
+          const recipe = await Recipe.findById(recipeId);
+
+          if (!recipe) {
+            return res.status(404).json({ message: 'Recipe not found' });
+          }
+
+          const comments = recipe.comments.map(comment => ({
+            username: comment.username,
+            comment: comment.comment,
+            rating: comment.rating,
+          }));
+
+          res.json({ comments });
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('An error occurred while retrieving comments');
+        }
+      }
+      */
+      static async addComment(req, res) {
+        const { recipeId, username, comment, rating } = req.body;
+        try {
+          const recipe = await Recipe.findById(recipeId);
+          if (!recipe) {
+            return res.status(404).json({ message: 'Recipe not found' });
+          }
+          const newComment = {
+            username,
+            comment,
+            rating
+          };
+          recipe.Comments.push(newComment);
+          await recipe.save();
+          res.status(200).json({ message: 'Comment added successfully' });
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('Internal server error');
+        }
+      }
+
+    
   }
   
   module.exports = RecipeController;
