@@ -207,6 +207,7 @@ router.get('/search', async (req, res, next) => {
 });
 */
 router.get('/random-recipe', RecipeController.getReccomended);
+router.post('/reviews', RecipeController.addComment);
 router.get('/api/images/:imageName', (req, res) => {
   const imageName = req.params.imageName;
   const imagePath = path.join(__dirname, '../public/foodimages', imageName);
