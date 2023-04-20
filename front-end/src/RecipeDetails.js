@@ -2,12 +2,13 @@ import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import "./RecipeDetails.css"
 
-const RecipeDetails = prop => {
+const RecipeDetails = (props) => {
     const [item, setItem] = useState();
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
     const {recipeId} = useParams();
     const baseUrl = 'http://localhost:3000';
+    const username = props.user.username;
     const images = '/api/images/';
     useEffect(() => {
         const fetchRecipe = async () => {
@@ -39,9 +40,32 @@ const RecipeDetails = prop => {
     const handleRatingChange = e => {
         setRating(parseInt(e.target.value));
     };
-
+    const sendComment = async () => {
+        try {
+          const response = await fetch(`${baseUrl}/reviews`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              recipeId: item._id,
+              username: username, 
+              comment,
+              rating,
+            }),
+          });
+          const data = await response.json();
+          console.log(data.message); // log the response from the server
+          setComment(""); // clear the input fields
+          setRating(0);
+        } catch (error) {
+          console.error(error);
+        }
+      };
+    
     const handleSubmit = e => {
         e.preventDefault();
+        sendComment();
         // TODO: submit the comment and rating to the server
         console.log("Comment:", comment);
         console.log("Rating:", rating);
@@ -64,7 +88,16 @@ const RecipeDetails = prop => {
                     <h2>Instructions</h2>
                     <h4>{item.Instructions}</h4>
                 </div>
-
+                <div className="Reviews">
+                    <h2>Reviews</h2>
+                    {item.Comments.map((comment, index) => (
+                        <div key={index}>
+                        <h3>{comment.username}</h3>
+                        <p>{comment.comment}</p>
+                        <p>Rating: {comment.rating}</p>
+                        </div>
+                    ))}
+                </div>
                 <div className="comments">
                     <h2>Comments</h2>
                     <form onSubmit={handleSubmit}>
