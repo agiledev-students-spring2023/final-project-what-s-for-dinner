@@ -1,11 +1,12 @@
-// import and instantiate express
 const express = require("express"); // CommonJS import style!
 const app = express(); // instantiate an Express object
 const path = require("path");
 const cookieParser = require("cookie-parser") // middleware useful for parsing cookies in requests
 const cors = require('cors'); // middleware useful for enabling CORS (Cross-Origin Resource Sharing) in Express apps
 const contactRoutes = require('./routes/contact'); // contact us form route
+
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
+
 app.use(express.static('static')); // serve static files from the static folder
 app.use('../static/images', express.static(path.join(__dirname, 'front-end/static/images')));
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from the public folder
