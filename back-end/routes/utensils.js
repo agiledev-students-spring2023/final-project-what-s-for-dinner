@@ -2,8 +2,11 @@ const express = require("express");
 const router = express.Router();
 const fs = require("fs");
 const path = require("path");
-const fetch = require("node-fetch");
 const Utensils = require("../models/utensils");
+let fetch;
+import("node-fetch").then((module) => {
+  fetch = module.default;
+});
 
 const utensilsFilePath = path.join(__dirname, "../tmp_data/utensils.txt");
 

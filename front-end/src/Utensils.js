@@ -19,6 +19,16 @@ const Utensils = (props) => {
       });
   }, []);
 
+  // Fetch and save the utensils data from the Spoonacular API
+  const fetchAndSaveUtensils = async (recipeId) => {
+    try {
+      await axios.get(`http://localhost:3000/utensils/fetch-from-api?recipeId=${recipeId}`);
+      console.log('Utensils data fetched and saved successfully');
+    } catch (error) {
+      console.error('Error fetching and saving utensils data:', error);
+    }
+  };
+
   // if the user is not logged in, redirect them to the login route
   if (!props.user || !props.user.success) {
     return <Navigate to="/login?error=protected" />;
@@ -27,6 +37,7 @@ const Utensils = (props) => {
   return (
     <div className="Utensils">
       <h1>My Utensils</h1>
+      <button onClick={() => fetchAndSaveUtensils(715538)}>Fetch and Save Utensils Data</button>
       <section className="utensils">
         {/* show a thumbnail for each utensil item */}
         {data.map((item) => (
