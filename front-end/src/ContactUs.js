@@ -1,31 +1,29 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 
 const ContactUs = () => {
+  // Use the useState hook to manage the form submission status
   const [formStatus, setFormStatus] = useState('Send');
 
-  const handleSubmit = async (event) => {
+  // Handle form submission
+  const handleSubmit = (event) => {
     event.preventDefault();
+    
+    // Update the form status to indicate that the form is being submitted
     setFormStatus('Submitting...');
 
+    // Extract the values of the form fields
     const { name, email, message } = event.target.elements;
 
+    // Create an object with the form data
     const formData = {
       name: name.value,
       email: email.value,
       message: message.value,
     };
 
-    try {
-      const response = await axios.post('/contact/submit', formData);
-      setFormStatus('Sent!');
-      console.log(response.data.message);
-    } catch (error) {
-      setFormStatus('Error sending');
-      console.error('Error submitting contact form:', error);
-    }
+    // Log the form data to the console
+    console.log(formData);
   };
-
 
   return (
     <div className="container mt-5">

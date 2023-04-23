@@ -1,22 +1,30 @@
+// import and instantiate express
 const express = require("express"); // CommonJS import style!
 const app = express(); // instantiate an Express object
 const path = require("path");
 const cookieParser = require("cookie-parser") // middleware useful for parsing cookies in requests
+<<<<<<< HEAD
 
 const cors = require('cors'); // middleware useful for enabling CORS (Cross-Origin Resource Sharing) in Express apps
 const contactRoutes = require('./routes/contact'); // contact us form route
 const contactRouter = require('./routes/contact');
 
 
+=======
+const cors = require('cors');
+>>>>>>> bd58469 (Revert "Alex db work + contact us+ npm fix")
 require("dotenv").config({ silent: true }) // load environmental variables from a hidden file named .env
-
-app.use(express.static('static')); // serve static files from the static folder
+app.use(express.static('static'));
 app.use('../static/images', express.static(path.join(__dirname, 'front-end/static/images')));
+<<<<<<< HEAD
 
 app.use(express.static(path.join(__dirname, 'public'))); // serve static files from the public folder
 app.use('/contact', contactRoutes); // contact us form route
 app.use('/contact', contactRouter)
 app.use(express.json());
+=======
+app.use(express.static(path.join(__dirname, 'public')));
+>>>>>>> bd58469 (Revert "Alex db work + contact us+ npm fix")
 
 // the following are used for authentication with JSON Web Tokens
 const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
