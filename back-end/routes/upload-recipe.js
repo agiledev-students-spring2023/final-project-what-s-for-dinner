@@ -17,7 +17,7 @@ router.post("/upload-recipe", async (req, res) => {
             description: req.body.description,
             instructions: req.body.instructions,
             ingredients: req.body.ingredients,
-            // image: req.file ? req.file.filename : ''
+            image: req.file ? req.file.filename : ''
         })
         // const newRecipe = req.body;
 
@@ -28,12 +28,13 @@ router.post("/upload-recipe", async (req, res) => {
             fs.writeFileSync(path.join(__dirname, '../public/images', filename), req.file.buffer);
             newRecipe.image = filename;
         }
-        // const image = req.file;
-        // if (image) {
-        //     const filename = "";
-        //     fs.writeFileSync(uploadrecipeFilePath, image.buffer);
-        //     newRecipe.image = filename;
-        // }
+        
+        const image = req.file;
+        if (image) {
+            const filename = "";
+            fs.writeFileSync(uploadrecipeFilePath, image.buffer);
+            newRecipe.image = filename;
+        }
 
         const fileContent = fs.readFileSync(uploadrecipeFilePath, 'utf-8');
         const recipes = fileContent ? JSON.parse(fileContent) : [];
@@ -41,10 +42,6 @@ router.post("/upload-recipe", async (req, res) => {
         fs.writeFileSync(uploadrecipeFilePath, JSON.stringify(recipes), 'utf8');
         res.status(200).json({ message: 'Recipe uploaded successfully.' });
 
-        // const recipe = fileContent.split('\n').filter((line) => line.trim() !== '').map(line => JSON.parse(line));
-        // fs.writeFileSync(uploadrecipeFilePath, `${fileContent}\n${JSON.stringify(newRecipe)}`, 'utf8');
-        // res.status(200).json({ message: 'Recipe uploaded successfully.' });
-// });
     } catch (error) {
         console.error('Error Uploading Recipe:', error);
         res.status(500).json({ error: 'Failed to Upload Recipe' });
