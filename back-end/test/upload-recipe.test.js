@@ -62,41 +62,73 @@ describe('POST /upload-recipe', () => {
 //   });
 // });
 
-// const request = require("supertest");
-// const app = require("../app");
+// const chai = require('chai');
+// const chaiHttp = require('chai-http');
+// const expect = chai.expect;
+// const fs = require('fs');
+// const path = require('path');
 
-// describe("POST /upload-recipe", () => {
+// const app = require('../app');
+
+// chai.use(chaiHttp);
+
+// describe('upload-recipe', () => {
+//   const uploadrecipeFilePath = path.join(__dirname, '../tmp_data/upload-recipe.txt');
 //   const testRecipe = {
-//     title: "Test Recipe",
-//     description: "A test recipe",
-//     ingredients: ["Ingredient 1", "Ingredient 2"],
-//     instructions: "1. Do this. 2. Do that.",
+//     title: 'Test Recipe',
+//     description: 'This is a test recipe',
+//     instructions: 'Test instruction',
+//     ingredients: 'Test ingredient',
+//   };
+//   const testImage = {
+//     fieldname: 'image',
+//     originalname: 'test.jpg',
+//     encoding: '7bit',
+//     mimetype: 'image/jpeg',
+//     buffer: fs.readFileSync(path.join(__dirname, 'test.jpg'))
 //   };
 
-//   it("should upload a recipe and return a success message", async () => {
-//     const response = await request(app)
-//       .post("/upload-recipe")
-//       .field("title", testRecipe.title)
-//       .field("description", testRecipe.description)
-//       .field("instructions", testRecipe.instructions)
-//       .field("ingredients", testRecipe.ingredients[0])
-//       .field("ingredients", testRecipe.ingredients[1])
-//       .attach("image", "test/image.jpg");
-
-//     expect(response.status).toBe(200);
-//     expect(response.body).toEqual({ message: "Recipe uploaded successfully." });
+//   beforeEach(() => {
+//     fs.writeFileSync(uploadrecipeFilePath, '', 'utf8');
 //   });
 
-//   it("should return an error message if the recipe upload fails", async () => {
-//     const response = await request(app)
-//       .post("/upload-recipe")
-//       .field("title", testRecipe.title)
-//       .field("description", testRecipe.description)
-//       .field("instructions", testRecipe.instructions)
-//       .field("ingredients", testRecipe.ingredients[0])
-//       .field("ingredients", testRecipe.ingredients[1]);
+//   afterEach(() => {
+//     fs.unlinkSync(uploadrecipeFilePath);
+//   });
 
-//     expect(response.status).toBe(500);
-//     expect(response.body).toEqual({ error: "Failed to Upload Recipe" });
+//   it('should upload recipe without image', async () => {
+//     const res = await chai
+//       .request(app)
+//       .post('/upload-recipe')
+//       .send(testRecipe);
+
+//     expect(res).to.have.status(200);
+//     expect(res.body).to.have.property('message', 'Recipe uploaded successfully.');
+
+//     const fileContent = fs.readFileSync(uploadrecipeFilePath, 'utf8');
+//     const recipes = JSON.parse(fileContent);
+//     expect(recipes).to.have.lengthOf(1);
+//     expect(recipes[0]).to.deep.include(testRecipe);
+//     expect(recipes[0]).to.not.have.property('image');
+//   });
+
+//   it('should upload recipe with image', async () => {
+//     const res = await chai
+//       .request(app)
+//       .post('/upload-recipe')
+//       .field('title', testRecipe.title)
+//       .field('description', testRecipe.description)
+//       .field('instructions', testRecipe.instructions)
+//       .field('ingredients', testRecipe.ingredients)
+//       .attach('image', testImage.buffer, testImage.originalname);
+
+//     expect(res).to.have.status(200);
+//     expect(res.body).to.have.property('message', 'Recipe uploaded successfully.');
+
+//     const fileContent = fs.readFileSync(uploadrecipeFilePath, 'utf8');
+//     const recipes = JSON.parse(fileContent);
+//     expect(recipes).to.have.lengthOf(1);
+//     expect(recipes[0]).to.deep.include(testRecipe);
+//     expect(recipes[0]).to.have.property('image').that.is.a('string').with.lengthOf.greaterThan(0));
 //   });
 // });
