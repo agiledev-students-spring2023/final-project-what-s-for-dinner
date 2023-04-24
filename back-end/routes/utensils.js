@@ -1,18 +1,7 @@
 const express = require("express");
 const router = express.Router();
-<<<<<<< HEAD
-
-const fs = require("fs");
-const path = require("path");
-const Utensils = require("../models/utensils");
-let fetch;
-import("node-fetch").then((module) => {
-  fetch = module.default;
-});
-=======
 const fs = require('fs');
 const path = require('path');
->>>>>>> bd58469 (Revert "Alex db work + contact us+ npm fix")
 
 const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt');
 
