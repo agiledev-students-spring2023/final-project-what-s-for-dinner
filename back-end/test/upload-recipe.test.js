@@ -132,3 +132,33 @@ describe('POST /upload-recipe', () => {
 //     expect(recipes[0]).to.have.property('image').that.is.a('string').with.lengthOf.greaterThan(0));
 //   });
 // });
+
+// const chai = require('chai');
+// const chaiHttp = require('chai-http');
+// const app = require('../app'); //assuming the app is exported in app.js
+// const fs = require('fs');
+// const path = require('path');
+
+// const { expect } = chai;
+
+// chai.use(chaiHttp);
+
+// describe('POST /upload-recipe', () => {
+//   it('should upload a recipe', (done) => {
+//     chai.request(app)
+//       .post('/upload-recipe')
+//       .set('content-type', 'multipart/form-data')
+//       .field('title', 'Test Recipe')
+//       .field('description', 'This is a test recipe')
+//       .field('instructions', 'Test instructions')
+//       .field('ingredients', 'Test ingredients')
+//       .attach('image', fs.readFileSync(path.join(__dirname, 'test-image.jpg')), 'test-image.jpg')
+//       .end((err, res) => {
+//         expect(err).to.be.null;
+//         expect(res).to.have.status(200);
+//         expect(res.body).to.have.property('message', 'Recipe uploaded successfully.');
+//         done();
+//       });
+//   });
+// });
+
