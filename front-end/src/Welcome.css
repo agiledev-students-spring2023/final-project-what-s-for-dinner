@@ -10,6 +10,12 @@ Welcome {
   margin: 90%px 0; /* no margin on left or right */
   text-align: center;
 }
+
+.Welcome b {
+  font-size: large;
+  font-weight: bold;
+}
+
 .Welcome a {
   text-decoration: none;
   color: black;
