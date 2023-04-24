@@ -1,22 +1,22 @@
-.Welcome {
-    text-align: center;
+Welcome {
+  text-align: center;
 }
 
 .Welcome {
-    border: 1px solid black;
-    border-width: 1px 0px 1px 0px; 
-    font-family: georgia;
-    padding: 20px;
-    margin: 90%px 0; /* no margin on left or right */
-    text-align: center;
-  }
-  .Welcome a {
-    text-decoration: none;
-    color: black;
-    margin: 20px;
-  }
-  
-  .Welcome a:hover {
-    text-decoration: underline;
-    background-color: yellow;
-  }
+  border: 1px solid black;
+  border-width: 1px 0px 1px 0px; 
+  font-family: georgia;
+  padding: 20px;
+  margin: 90%px 0; /* no margin on left or right */
+  text-align: center;
+}
+.Welcome a {
+  text-decoration: none;
+  color: black;
+  margin: 20px;
+}
+
+.Welcome a:hover {
+  text-decoration: underline;
+  background-color: yellow;
+}

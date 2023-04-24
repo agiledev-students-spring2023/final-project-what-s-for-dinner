@@ -1,27 +1,99 @@
-.AboutUs {
+body {
+  background-image: url('https://thefridgeagency.com/wp-content/uploads/sites/3/2020/04/Fridge_Zoom_Background_inside.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 0px solid black;
+  max-width: 375px; /* adjust the max-width for iPhone 14 screen */
+  margin: 0 auto;
+  padding: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: top;
-  height: 100vh;
+  justify-content: center;
 }
 
-li.ContactLink
-{
-  color: grey;
+.main-content {
+  margin: 20px;
+  display: flex;
 }
 
-li.ContactLink:hover
-{
-  color: teal;
+.main-content p,
+.main-content img {
+  flex: auto;
+  align-items: center;
 }
 
-li.ContactLink:active
-{
-  color: teal;
+.main-content p {
+  margin-left: 0px;
 }
 
-li.ContactLink:visited
-{
-  color: green;
+.main-content img {
+  object-fit: contain;
+}
+.main-content form {
+  flex: auto;
+  margin-left: 0px;
+}
+h1 {
+  font-family: georgia;
+  margin-left: 0px;
+}
+p {
+  font-family: helvetica;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  padding: 10px;
+  margin: 10px 0;
+  width: 200px;
+  max-width: 90%;
+}
+
+input[type="submit"] {
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  padding: 20px;
+  font-size: 20px;
+}
+
+input[type="submit"]:active {
+  color: black;
+  background-color: white;
+  border-color: black;
+}
+
+.menu-button {
+  position: fixed;
+  top: 55px;
+  left: 0px;
+  padding: 0.5rem 1rem;
+  font-size: 1.1rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 1001;
+}
+
+.menu-button:hover {
+  background-color: #2980b9;
+}
+
+@media only screen and (min-width: 768px) {
+  .menu-button {
+    left: 650px;
+  }
 }
