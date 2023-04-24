@@ -5,7 +5,7 @@ const path = require('path');
 const multer = require("multer");
 
 // Set up multer middleware to handle file upload
-const upload = multer();
+//const upload = multer();
 
 const uploadrecipeFilePath = path.join(__dirname, '../tmp_data/upload-recipe.txt');
   
@@ -28,7 +28,7 @@ router.post("/upload-recipe", async (req, res) => {
             fs.writeFileSync(path.join(__dirname, '../public/images', filename), req.file.buffer);
             newRecipe.image = filename;
         }
-        
+
         const image = req.file;
         if (image) {
             const filename = "";
