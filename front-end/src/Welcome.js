@@ -18,10 +18,13 @@ const Welcome = (props) => {
           dietary restrictions, meal type, and cooking time/difficulty
           to help find the perfect recipe for users at all levels.
           <br /><br />
+          <b>
           <Link to="/recipes">Check out our recipes!</Link>
-          <h1>
+          </b>
+          <br /><br />
+          <b>
             <Link to="/home">Click Here to Start</Link>
-          </h1>
+          </b>
         </p>
       </section>
     </div>
