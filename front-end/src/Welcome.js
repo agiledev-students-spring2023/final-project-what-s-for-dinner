@@ -17,13 +17,12 @@ const Welcome = (props) => {
           Our app also includes advanced search filters such as
           dietary restrictions, meal type, and cooking time/difficulty
           to help find the perfect recipe for users at all levels.
-        </p>
-        <div className="links">
+          <br /><br />
           <Link to="/recipes">Check out our recipes!</Link>
           <h1>
             <Link to="/home">Click Here to Start</Link>
           </h1>
-        </div>
+        </p>
       </section>
     </div>
   );
