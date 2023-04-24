@@ -1,27 +1,27 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../app');
-const expect = chai.expect;
+// const expect = chai.expect;
 
-chai.use(chaiHttp);
+// chai.use(chaiHttp);
 
-describe('POST /upload-recipe', () => {
-  it('should upload a recipe successfully', (done) => {
-    chai.request(app)
-      .post('/api/upload-recipe')
-      .set('content-type', 'multipart/form-data')
-      .field('title', 'Test Recipe')
-      .field('description', 'This is a test recipe')
-      .field('instructions', 'Step 1: Do this. Step 2: Do that.')
-      .field('ingredients', 'Ingredient 1, Ingredient 2')
-      .attach('image', Buffer.from('image-data'), 'test-image.jpg')
-      .end((err, res) => {
-        expect(res.status).to.equal(200);
-        expect(res.body).to.have.property('message').to.equal('Recipe uploaded successfully.');
-        done();
-      });
-  });
-});
+// describe('POST /upload-recipe', () => {
+//   it('should upload a recipe successfully', (done) => {
+//     chai.request(app)
+//       .post('/api/upload-recipe')
+//       .set('content-type', 'multipart/form-data')
+//       .field('title', 'Test Recipe')
+//       .field('description', 'This is a test recipe')
+//       .field('instructions', 'Step 1: Do this. Step 2: Do that.')
+//       .field('ingredients', 'Ingredient 1, Ingredient 2')
+//       .attach('image', Buffer.from('image-data'), 'test-image.jpg')
+//       .end((err, res) => {
+//         expect(res.status).to.equal(200);
+//         expect(res.body).to.have.property('message').to.equal('Recipe uploaded successfully.');
+//         done();
+//       });
+//   });
+// });
 
 // const chai = require('chai');
 // const chaiHttp = require('chai-http');
@@ -133,32 +133,32 @@ describe('POST /upload-recipe', () => {
 //   });
 // });
 
-// const chai = require('chai');
-// const chaiHttp = require('chai-http');
-// const app = require('../app'); //assuming the app is exported in app.js
-// const fs = require('fs');
-// const path = require('path');
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const app = require('../app'); //assuming the app is exported in app.js
+const fs = require('fs');
+const path = require('path');
 
-// const { expect } = chai;
+const { expect } = chai;
 
-// chai.use(chaiHttp);
+chai.use(chaiHttp);
 
-// describe('POST /upload-recipe', () => {
-//   it('should upload a recipe', (done) => {
-//     chai.request(app)
-//       .post('/upload-recipe')
-//       .set('content-type', 'multipart/form-data')
-//       .field('title', 'Test Recipe')
-//       .field('description', 'This is a test recipe')
-//       .field('instructions', 'Test instructions')
-//       .field('ingredients', 'Test ingredients')
-//       .attach('image', fs.readFileSync(path.join(__dirname, 'test-image.jpg')), 'test-image.jpg')
-//       .end((err, res) => {
-//         expect(err).to.be.null;
-//         expect(res).to.have.status(200);
-//         expect(res.body).to.have.property('message', 'Recipe uploaded successfully.');
-//         done();
-//       });
-//   });
-// });
+describe('POST /upload-recipe', () => {
+  it('should upload a recipe', (done) => {
+    chai.request(app)
+      .post('/upload-recipe')
+      .set('content-type', 'multipart/form-data')
+      .field('title', 'Test Recipe')
+      .field('description', 'This is a test recipe')
+      .field('instructions', 'Test instructions')
+      .field('ingredients', 'Test ingredients')
+      .attach('image', fs.readFileSync(path.join(__dirname, 'test-image.jpg')), 'test-image.jpg')
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(200);
+        expect(res.body).to.have.property('message', 'Recipe uploaded successfully.');
+        done();
+      });
+  });
+});
 
