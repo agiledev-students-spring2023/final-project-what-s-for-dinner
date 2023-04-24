@@ -1,3 +1,28 @@
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const app = require('../app');
+const expect = chai.expect;
+
+chai.use(chaiHttp);
+
+describe('POST /upload-recipe', () => {
+  it('should upload a recipe successfully', (done) => {
+    chai.request(app)
+      .post('/api/upload-recipe')
+      .set('content-type', 'multipart/form-data')
+      .field('title', 'Test Recipe')
+      .field('description', 'This is a test recipe')
+      .field('instructions', 'Step 1: Do this. Step 2: Do that.')
+      .field('ingredients', 'Ingredient 1, Ingredient 2')
+      .attach('image', Buffer.from('image-data'), 'test-image.jpg')
+      .end((err, res) => {
+        expect(res.status).to.equal(200);
+        expect(res.body).to.have.property('message').to.equal('Recipe uploaded successfully.');
+        done();
+      });
+  });
+});
+
 // const chai = require('chai');
 // const chaiHttp = require('chai-http');
 // const expect = chai.expect;
