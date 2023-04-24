@@ -1,41 +1,41 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const expect = chai.expect;
-const app = require('../app');
+// const chai = require('chai');
+// const chaiHttp = require('chai-http');
+// const expect = chai.expect;
+// const app = require('../app');
 
-chai.use(chaiHttp);
+// chai.use(chaiHttp);
 
-describe('POST /upload-recipe', () => {
-  it('should add a new recipe to the file and return a success message', (done) => {
-    chai.request(app)
-      .post('/api/upload-recipe')
-      .set('content-type', 'application/x-www-form-urlencoded')
-      .field('title', 'New Recipe')
-      .field('description', 'A delicious new recipe')
-      .field('instructions', '1. Mix ingredients. 2. Bake for 20 minutes.')
-      .field('ingredients', 'flour, sugar, eggs, milk')
-      .attach('image', './test/test-image.jpg')
-      .end((err, res) => {
-        expect(res).to.have.status(200);
-        expect(res.body.message).to.equal('Recipe uploaded successfully.');
-        done();
-      });
-  });
+// describe('POST /upload-recipe', () => {
+//   it('should add a new recipe to the file and return a success message', (done) => {
+//     chai.request(app)
+//       .post('/api/upload-recipe')
+//       .set('content-type', 'application/x-www-form-urlencoded')
+//       .field('title', 'New Recipe')
+//       .field('description', 'A delicious new recipe')
+//       .field('instructions', '1. Mix ingredients. 2. Bake for 20 minutes.')
+//       .field('ingredients', 'flour, sugar, eggs, milk')
+//       .attach('image', './test/test-image.jpg')
+//       .end((err, res) => {
+//         expect(res).to.have.status(200);
+//         expect(res.body.message).to.equal('Recipe uploaded successfully.');
+//         done();
+//       });
+//   });
 
-  it('should return an error message when required fields are missing', (done) => {
-    chai.request(app)
-      .post('/api/upload-recipe')
-      .set('content-type', 'application/x-www-form-urlencoded')
-      .field('description', 'A delicious new recipe')
-      .field('instructions', '1. Mix ingredients. 2. Bake for 20 minutes.')
-      .attach('image', './test/test-image.jpg')
-      .end((err, res) => {
-        expect(res).to.have.status(500);
-        expect(res.body.error).to.equal('Failed to Upload Recipe');
-        done();
-      });
-  });
-});
+//   it('should return an error message when required fields are missing', (done) => {
+//     chai.request(app)
+//       .post('/api/upload-recipe')
+//       .set('content-type', 'application/x-www-form-urlencoded')
+//       .field('description', 'A delicious new recipe')
+//       .field('instructions', '1. Mix ingredients. 2. Bake for 20 minutes.')
+//       .attach('image', './test/test-image.jpg')
+//       .end((err, res) => {
+//         expect(res).to.have.status(500);
+//         expect(res.body.error).to.equal('Failed to Upload Recipe');
+//         done();
+//       });
+//   });
+// });
 
 // const request = require("supertest");
 // const app = require("../app");

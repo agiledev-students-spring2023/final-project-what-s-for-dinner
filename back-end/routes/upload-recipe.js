@@ -54,22 +54,3 @@ router.post("/upload-recipe", async (req, res) => {
 
 module.exports = router;
 
-// const express = require('express');
-// const multer  = require('multer');
-// const fs = require('fs');
-
-// const app = express();
-// const upload = multer();
-
-//  Define endpoint for uploading recipe data
-// app.post('/upload-recipe', upload.single('image'), (req, res) => {
-//    Get recipe data from request body
-//   const recipe = req.body;
-
-//    Save recipe image to disk
-//   const image = req.file;
-//   if (image) {
-//     const filename = `${Date.now()}-${image.originalname}`;
-//     fs.writeFileSync(`./uploads/${filename}`, image.buffer);
-//     recipe.image = filename;
-//   }
