@@ -6,7 +6,6 @@ import "./Login.css"
 
 const Login = props => {
   let [urlSearchParams] = useSearchParams() // get access to the URL query string parameters
-
   // create state variables to hold username and password
   const [status, setStatus] = useState({}) // the API will return an object indicating the login status in a success field of the response object
   const [errorMessage, setErrorMessage] = useState(``) // will contain any error message that explains why the user was redirected to this page.
@@ -31,13 +30,13 @@ const Login = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-  
+    const baseUrl = 'http://localhost:3000';
     try {
       const requestData = {
         username: e.target.username.value,
         password: e.target.password.value,
       }
-      const response = await axios.post("/auth/login", requestData) // send the request to the backend server
+      const response = await axios.post(`${baseUrl}/auth/login`, requestData) // send the request to the backend server
   
       console.log(response.data)
       setStatus(response.data)

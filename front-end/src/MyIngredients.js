@@ -9,10 +9,11 @@ const MyIngredients = (props) => {
   const username = props.user.username;
 
   useEffect(() => {
-    // API call to fetch user's added ingredients
+    // API call to fetch user's added ingredients\
+    const baseUrl = 'http://localhost:3000';
     const fetchIngredients = async () => {
       try {
-        const response = await fetch(`/my-ingredients?username=${username}`); // pass user_id to the API endpoint
+        const response = await fetch(`${baseUrl}/my-ingredients?username=${username}`); // pass user_id to the API endpoint
         const data = await response.json();
         setIngredients(data);
       } catch (error) {
