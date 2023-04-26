@@ -23,10 +23,15 @@ class RecipeController {
     }
     static async getRecipesByIngredients(req, res) {
       try {
-        const recipes = await RecipeController.getIngredients(req, res);
+        const { ingredients } = req.query;
 
+        const ingredientsArray = ingredients ? ingredients.split(',') : [];
+        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } })
+        .limit(50)
+        .exec();
+    
         res.status(200).json({ recipes });
-
+    
       } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred while retrieving recipes');
@@ -34,15 +39,13 @@ class RecipeController {
     }
     static async getRecipesSorted(req, res) {
       try {
-        // Get recipes by ingredients
-        //const ingredients = ["broccolini"];
-        const recipes = await RecipeController.getIngredients(req, res);
-        //const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredients.join("|"), "i") } }).exec();
-        console.log(recipes)
-        // Create a new sorted array of recipes
+        const { ingredients } = req.query;
+        const ingredientsArray = ingredients ? ingredients.split(',') : [];
+        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } })
+        .limit(50)
+        .exec();;
         const sortedRecipes = [...recipes].sort((a, b) => a.Instructions.length - b.Instructions.length);
     
-        // Return the sorted list of recipes
         res.status(200).json({ recipes: sortedRecipes });
         return;
       } catch (error) {
@@ -54,26 +57,27 @@ class RecipeController {
 
     static async getRecipesSimilar(req, res) {
       try {
-        const ingredients = ["eggs", "rice"];
-    
-        const recipes = await RecipeController.getIngredients(req, res);
-        
+        const { ingredients } = req.query;
+        const ingredientsArray = ingredients ? ingredients.split(',') : [];
+        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } })
+        .limit(50)
+        .exec();;        
         const recipeSimilarities = recipes.map((recipe) => {
           const recipeIngredients = recipe.Cleaned_Ingredients;
-          const similarity = ingredients.reduce((total, ingredient) => {
+          const similarity = ingredientsArray.reduce((total, ingredient) => {
             return total + (recipeIngredients.includes(ingredient) ? 1 : 0);
           }, 0);
           return { recipe, similarity };
         });
-        
+    
         const sortedRecipes = recipeSimilarities.sort((a, b) => b.similarity - a.similarity).map((r) => r.recipe);
-        
+    
         res.status(200).json({ recipes: sortedRecipes });
       } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred while retrieving sorted recipes');
       }
-      }
+    }
 
       static async getRecipe(req, res) {
         const mealId = req.params.id;
