@@ -102,7 +102,8 @@ const MyIngredients = (props) => {
   const handleSearch = async (event) => {
     //setSearchTerm(event.target.value);
     try {
-      const response = await fetch(`/search-ingredient?query=${searchTerm}`);
+      const baseUrl = 'http://localhost:3000';
+      const response = await fetch(`${baseUrl}/search-ingredient?query=${searchTerm}`);
       const data = await response.json();
       setSearchResults(data);
       console.log(searchResults);

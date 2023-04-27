@@ -26,8 +26,8 @@ const Register = (props) => {
         password: e.target.password.value,
         passwordConfirm: e.target.confirmPassword.value,
       }
-
-      const response = await axios.post("/auth/register", requestData)
+      const baseUrl = 'http://localhost:3000';
+      const response = await axios.post(`${baseUrl}/auth/register`, requestData)
 
       console.log(response.data)
       setStatus(response.data)
@@ -38,42 +38,44 @@ const Register = (props) => {
     }
   }
 
+  const handlePopupClose = () => {
+    setShowPopup(false)
+  }
+
   return (
     <div className="Register">
       <h1>Create an account</h1>
       {errorMessage ? <p className="error">{errorMessage}</p> : ""}
-      {!status.success && (
-        <section className="main-content">
-          <form onSubmit={handleSubmit}>
-            <label>Your Email: </label>
-            <input type="text" name="email" placeholder="email@address.com" />
-            <label>Preferred Username: </label>
-            <input type="text" name="username" placeholder="username" />
-            <label>Your Password: </label>
-            <input type="password" name="password" placeholder="password" />
-            <label>Confirm Your Password: </label>
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="re-enter password"
-            />
-            <input type="submit" value="Create Account" />
-          </form>
-          <p>
-            <label>Already Have An Account? </label>
-            <br />
-            <Link to="/login">Log in</Link>
-          </p>
-        </section>
-      )}
+      <section className="main-content">
+        <form onSubmit={handleSubmit}>
+          <label>Your Email: </label>
+          <input type="text" name="email" placeholder="email@address.com" />
+          <label>Preferred Username: </label>
+          <input type="text" name="username" placeholder="username" />
+          <label>Your Password: </label>
+          <input type="password" name="password" placeholder="password" />
+          <label>Confirm Your Password: </label>
+          <input
+            type="password"
+            name="confirmPassword"
+            placeholder="re-enter password"
+          />
+          <input type="submit" value="Create Account" />
+        </form>
+        <p>
+          <label>Already Have An Account? </label>
+          <br />
+          <Link to="/login">Log in</Link>
+        </p>
+      </section>
       {/* Popup window */}
       {showPopup && (
         <div className="popup">
           <p>User created successfully.</p>
-          <button onClick={() => setShowPopup(false)}>Close</button>
+          <button onClick={handlePopupClose}>Close</button>
         </div>
       )}
-      {status.success && <Navigate to="/login" />}
+      {status.success && !showPopup && <Navigate to="/login" replace={true} />}
     </div>
   )
 }

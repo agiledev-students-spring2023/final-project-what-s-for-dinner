@@ -32,8 +32,9 @@ const ResetPassword = props => {
         email: e.target.email.value, // gets the value of the field in the submitted form with name='password',
       }
       // send the request to the server api to authenticate
+      const baseUrl = 'http://localhost:3000';
       const response = await axios.post(
-        "/reset-password",
+        `${baseUrl}/reset-password`,
         requestData
       )
 
@@ -49,44 +50,46 @@ const ResetPassword = props => {
     }
   }
 
-  // if the user's password is not restored, show the restore password form
-  if (!status.success)
-    return (
-      <div className="ResetPassword">
-        <h1>Reset Your Password</h1>
-        {errorMessage ? <p className="error">{errorMessage}</p> : ""}
-        <section className="main-content">
-          <form onSubmit={handleSubmit}>
-            {
-              //handle error condition
-            }
-            <label>Registered Username: </label>
-            <input type="text" name="username" placeholder="username" />
-            <label>Registered Email: </label>
-            <input type="text" name="email" placeholder="email" />
-            <input type="submit" value="Restore Password" />
-          </form>
-          <p>
-            <label>New user? </label>
-            <br />
-            <Link to="/register">Create an account</Link>
-            <br />
-            <br />
-            <label>Remember Your Password? </label>
-            <br />
-            <Link to="/login">Log in</Link>
-          </p>
-        </section>
-        {showPopup && (
-          <div className="popup">
-            <p>A new password has been sent to your registered email.</p>
-            <button onClick={() => setShowPopup(false)}>Close</button>
-          </div>
-        )}
-      </div>
-    )
-  // if the user's password has successfully restored, redirect them to the login page
-  else return <Navigate to="/login" />
+  const handlePopupClose = () => {
+    setShowPopup(false)
+    //props.navigate("/login")
+  }
+
+  return (
+    <div className="ResetPassword">
+      <h1>Reset Your Password</h1>
+      {errorMessage ? <p className="error">{errorMessage}</p> : ""}
+      <section className="main-content">
+        <form onSubmit={handleSubmit}>
+          {
+            //handle error condition
+          }
+          <label>Registered Username: </label>
+          <input type="text" name="username" placeholder="username" />
+          <label>Registered Email: </label>
+          <input type="text" name="email" placeholder="email" />
+          <input type="submit" value="Restore Password" />
+        </form>
+        <p>
+          <label>New user? </label>
+          <br />
+          <Link to="/register">Create an account</Link>
+          <br />
+          <br />
+          <label>Remember Your Password? </label>
+          <br />
+          <Link to="/login">Log in</Link>
+        </p>
+      </section>
+      {showPopup && (
+        <div className="popup">
+          <p>A new password has been sent to your registered email.</p>
+          <button onClick={handlePopupClose}>Close</button>
+        </div>
+      )}
+      {status.success && !showPopup && <Navigate to="/login" replace={true} />}
+    </div>
+  )
 }
 
 export default ResetPassword
