@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MyIngredients.css';
+import { Link } from 'react-router-dom';
 
 const MyIngredients = (props) => {
   const [ingredients, setIngredients] = useState([]);
@@ -125,6 +126,7 @@ const MyIngredients = (props) => {
           </li>
         ))}
       </ul>
+      <button><Link to="/recipes" className="button-link">Search recipes by your ingredients</Link></button>
       <h2>Search and Add Ingredients</h2>
       <div>
         <input

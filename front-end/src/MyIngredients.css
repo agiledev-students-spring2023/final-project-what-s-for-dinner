@@ -2,6 +2,12 @@
     margin: 0 auto;
     width: 80%;
   }
+
+  .button-link {
+    color: #ffffff;
+    text-align: center;
+    text-decoration: none;
+  }
   
   h1 {
     text-align: center;
