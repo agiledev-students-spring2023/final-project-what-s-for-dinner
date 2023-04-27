@@ -47,6 +47,24 @@ router.post('/my-ingredients', [
   }
 });
 
+// Delete an ingredient from the database
+router.delete('/my-ingredients/:name', async (req, res) => {
+  try {
+    const { name } = req.params;
+    console.log(name);
+    const username = req.query.username;
+    const ingredient = await IngredientModel.findOneAndDelete({ name: name.toLowerCase(), username }); // Modify to search by name and username
+    if (!ingredient) {
+      res.status(404).json({ error: `Ingredient with name ${name} not found` });
+    } else {
+      res.json({ message: `Successfully deleted ingredient with name ${name}` });
+    }
+  } catch (error) {
+    console.error('Error deleting ingredient:', error);
+    res.status(500).json({ error: 'Failed to delete ingredient' });
+  }
+});
+
 // Search for ingredients using the Spoonacular API
 router.get('/search-ingredient', async (req, res) => {
   const { query } = req.query;
