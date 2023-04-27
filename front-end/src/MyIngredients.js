@@ -26,7 +26,8 @@ const MyIngredients = (props) => {
   const handleAdd = async (ingredient) => {
     // API call to add ingredient to user's inventory
     try {
-      const response = await fetch('/my-ingredients', {
+      const baseUrl = 'http://localhost:3000';
+      const response = await fetch(`${baseUrl}/my-ingredients`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -56,6 +57,38 @@ const MyIngredients = (props) => {
       console.error('Error adding ingredient:', error);
     }
   };
+
+  const handleDelete = async (ingredient) => {
+    try {
+      const baseUrl = 'http://localhost:3000';
+      const response = await fetch(`${baseUrl}/my-ingredients/${ingredient.name}?username=${username}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: ingredient.name,
+          amount: ingredient.amount,
+          username: username,
+        }),
+      });
+      if (response.ok) {
+        const updatedIngredients = [...ingredients];
+        const existingIngredient = updatedIngredients.find((i) => i.name === ingredient.name);
+        if (existingIngredient) {
+          existingIngredient.amount -= ingredient.amount;
+          if (existingIngredient.amount <= 0) {
+            updatedIngredients.splice(updatedIngredients.indexOf(existingIngredient), 1);
+          }
+        }
+        setIngredients(updatedIngredients);
+      } else {
+        console.error('Error deleting ingredient:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error deleting ingredient:', error);
+    }
+  }; 
 
   const handleAmountChange = (event) => {
     const amount = parseInt(event.target.value);
@@ -87,6 +120,7 @@ const MyIngredients = (props) => {
           ingredients.map((ingredient) => (
           <li key={ingredient.id}>
             {ingredient.name} ({ingredient.amount})
+            <button onClick={() => handleDelete(ingredient)}>Delete</button>
           </li>
         ))}
       </ul>
