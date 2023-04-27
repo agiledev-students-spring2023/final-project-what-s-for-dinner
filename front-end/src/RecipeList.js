@@ -3,21 +3,23 @@ import axios from "axios";
 import Search from "./Search";
 import { Link } from "react-router-dom"
 import SortBy from "./SortBy";
+import SelectIng from "./SelectIng";
 import "./RecipeList.css";
 
 const RecipeList = (props) => {
   const baseUrl = 'http://localhost:3000';
   const images = '/api/images/';
   const [data, setData] = useState([]);
+  const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [sortOption, setSortOption] = useState("");
   const username = props.user.username;
-  const endpoint = `/recipes?username=${username}`;
+  const endpoint = `/recipes?username=${username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}`;
   useEffect(() => {
         let  url = `${baseUrl}${endpoint}`
         if (sortOption === "time") {
-          url = `${baseUrl}/recipes/sort-by-time?username=${username}`;
+          url = `${baseUrl}/recipes/sort-by-time?username=${username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}`;
         } else if (sortOption === "similar") {
-          url = `${baseUrl}/recipes/sort-by-similar?username=${username}`;
+          url = `${baseUrl}/recipes/sort-by-similar?username=${username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}}`;
         }
         axios.get(url)
         .then(response => {
@@ -27,16 +29,26 @@ const RecipeList = (props) => {
         .catch(error => {
           console.error(error);
         });
-      }, [sortOption, username]); // only run it once!
+      }, [sortOption, username, selectedIngredients]); // only run it once!
   const handleSortChange = (option) => {
     setSortOption(option);
   }
+  const handleIngredientSelect = (ingredientName) => {
+    const ingredientObject = { name: ingredientName };
+    if (selectedIngredients.some(ingredient => ingredient.name === ingredientName)) {
+      setSelectedIngredients(selectedIngredients.filter(ingredient => ingredient.name !== ingredientName));
+    } else {
+      setSelectedIngredients([...selectedIngredients, { name: ingredientName }]);
+    }
+  };
+  
   return (
     <div className="RecipeList">
     <h1>Recipes</h1>
     <Search />
     <div className="recipe-container">
     <SortBy handleSortChange={handleSortChange} />
+    <SelectIng handleIngredientSelect={handleIngredientSelect} user={props.user} />
     {data.map((recipe) => (
       <div key={recipe._id} className="recipe">
         <Link to={`/${recipe._id}`} className="recipe-link">
