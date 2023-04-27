@@ -7,6 +7,14 @@ const ingredientSchema = new mongoose.Schema({
   amount: { type: Number, required: true }
 });
 
+ingredientSchema.statics.findOneAndDelete = async function (query) {
+  const ingredient = await this.findOne(query);
+  if (ingredient) {
+    await ingredient.deleteOne();
+  }
+  return ingredient;
+};
+
 // Define the Ingredient model
 module.exports = mongoose.model('Ingredient', ingredientSchema);
 
