@@ -47,7 +47,7 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 
 ### Running
 1. if you are only running the front-end or back-end for testing purpose, you can simply run `npm start` in the corresponding front-end/back-end folder
-2. if you are running both front-end and back-end, please first run `npm start` in the back-end folder and then in the front-end folder
+2. if you are running both front-end and back-end, please first run `npm start` in the back-end folder and then in the front-end folder. When you encounter the question `Would you like to run the app on another port instead? › (Y/n)`, type "y" to run the front-end on port 3001.
 
 *Note: some of our pages won't work properly if you run back-end on port 3000 and front-end on port 3001*
 3. now you can open [http://localhost:3000](http://localhost:3000) in your browser to view our app.
