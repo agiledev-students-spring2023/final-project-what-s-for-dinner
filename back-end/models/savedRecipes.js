@@ -9,6 +9,5 @@ const savedRecipesSchema = new mongoose.Schema({
   Image_Name: {type: String},
 });
 
-// Define the Ingredient model
-module.exports = mongoose.model('Saved Recipe', savedRecipesSchema);
-
+const SavedRecipe = mongoose.model('SavedRecipe', savedRecipesSchema, 'SavedRecipe');
+module.exports = SavedRecipe;

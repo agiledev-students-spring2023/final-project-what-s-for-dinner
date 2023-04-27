@@ -76,6 +76,7 @@ const authenticationRouter = require('./routes/authentication');
 const cookieRouter = require('./routes/cookie');
 const protectedContentRouter = require('./routes/protected-content');
 const resetPasswordRouter = require('./routes/reset-password.js');
+const savedRecipesRouter = require('./routes/saved-recipes');
 
 // import some useful middleware
 const multer = require("multer"); // middleware to handle HTTP POST requests with file uploads
@@ -120,5 +121,6 @@ app.use("/auth", authenticationRouter()); // all requests for /auth/* will be ha
 app.use("/cookie", cookieRouter()); // all requests for /cookie/* will be handled by the cookieRoutes router
 app.use("/protected", protectedContentRouter()); // all requests for /protected/* will be handled by the protectedRoutes router
 app.use(resetPasswordRouter);
+app.use(savedRecipesRouter);
 
 module.exports = app;
