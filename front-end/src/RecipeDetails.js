@@ -19,11 +19,8 @@ const RecipeDetails = (props) => {
               console.log("just data", data);
               console.log("Before setItem(): ", data);
               setItem(data.recipe[0]);
-              const parseJSON = item.Cleaned_Ingredients.replace(/'/g, '"');
-              const cleanedIngredientsArray = JSON.parse(parseJSON);
-              console.log(item.Cleaned_Ingredients)
-              setCleanedIngredients(cleanedIngredientsArray);
               console.log("After setItem(): ", item);
+              
             } catch (error) {
               console.error(error);
             }
@@ -41,6 +38,27 @@ const RecipeDetails = (props) => {
     const handleCommentChange = e => {
         setComment(e.target.value);
     };
+
+
+    
+    useEffect(() => {
+      if (item) {
+        const ing = item.Cleaned_Ingredients;
+        console.log(ing)
+        const clean1 = ing.replace(/"/g, ' inches');
+        //const jsonString = JSON.stringify(clean1.map(item => item.replace(/"/g, '\\"')));
+        //return JSON.parse(jsonString.replace(/'/g, '"'));
+        //const cleanedIngredients =jsonString.replace(/'/g, '"');
+        console.log(clean1.replace(/'/g, "\""))
+        const ingredientsArr = JSON.parse(clean1.replace(/'/g, "\""))
+        const ingredientsList = ingredientsArr.map((ingredient) => {
+          return ingredient.replace(/"/g, "").replace(/\\\"/g, "\"");
+        });
+        
+        setCleanedIngredients(ingredientsList);
+      }
+    }, [item]);
+    
 
     const handleRatingChange = e => {
         setRating(parseInt(e.target.value));
@@ -87,11 +105,13 @@ const RecipeDetails = (props) => {
                 </div>
                 <div className="ingredients">
                   <h2>Ingredients</h2>
+                  {cleanedIngredients.length > 0 && (
                   <ul>
                     {cleanedIngredients.map((ingredient, index) => (
                       <li key={index}>{ingredient}</li>
                     ))}
                   </ul>
+                )}
                 </div>
                 <div className="instructions">
                     <h2>Instructions</h2>
