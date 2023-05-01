@@ -1,34 +1,30 @@
 const express = require("express");
 const router = express.Router();
-const Utensils = require("../models/utensils");
+const fs = require('fs');
+const path = require('path');
+
+const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt');
 
 // Route to get all utensils
-router.get("/utensils", async (req, res) => {
+router.get("/utensils", (req, res) => {
   try {
-    const utensils = await Utensil.find({});
+    const fileContent = fs.readFileSync(utensilsFilePath, 'utf-8');
+    const utensils = fileContent.split('\n').map(line => {
+      try {
+        const { utensil_title, image_url, description } = JSON.parse(line);
+        return { utensil_title, image_url, description };
+      } catch (error) {
+        console.error(`Error parsing utensil: ${line}`, error);
+        return null;
+      }
+    }).filter(utensil => utensil !== null);
+    
     res.json(utensils);
   } catch (error) {
-    console.error("Error fetching utensils:", error);
-    res.status(500).json({ error: "Failed to fetch utensils" });
+    console.error('Error fetching data from file:', error);
+    res.status(500).json({ error: 'Failed to fetch utensils' });
   }
 });
-
-// Route to add a new utensil
-router.post("/utensils", async (req, res) => {
-  try {
-    const newUtensil = new Utensil({
-      utensil_title: req.body.utensil_title,
-      image_url: req.body.image_url,
-      description: req.body.description,
-    });
-    await newUtensil.save();
-    res.status(200).json(newUtensil);
-  } catch (error) {
-    console.error("Error adding utensil:", error);
-    res.status(500).json({ error: "Failed to add utensil" });
-  }
-});
-
 
 // Route to add a new utensil
 router.post("/utensils", (req, res) => {
