@@ -4,7 +4,7 @@
 
 ### Product Vision Statement
 
-"What's for Dinner" is an app that helps users save time, reduce food waste, and enjoy the cooking process by providing optimal recipe suggestions based on the ingredients available.
+"What's for Dinner" is an app that helps users save time, reduce food waste, and enjoy the cooking process by providing optimal recipe suggestions based on the ingredients that users have available.
 
 ## Meet Our Team
 
