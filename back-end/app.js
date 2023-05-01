@@ -22,38 +22,7 @@ passport.use(jwtStrategy)
 app.use(passport.initialize())
 
 // mongoose models for MongoDB data manipulation
-const mongoose = require("mongoose")
 const User = require("./models/users.js")
-
-// connect to the database
-// console.log(`Conneting to MongoDB at ${process.env.MONGODB_URI}`)
-
-/*
-try {
-  //mongoose.connect(process.env.MONGODB_URI)
-  //changed so that it connects to test database where all collections will be
-  mongoose.connect('mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-  console.log(`Connected to MongoDB.`)
-} catch (err) {
-  console.log(
-    `Error connecting to MongoDB user account authentication will fail: ${err}`
-  )
- }
-*/
-async function connectToMongoDB() {
-  try {
-    await mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true });
-    //await mongoose.connect('mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
-    console.log(`Connected to MongoDB.`)
-  } catch (err) {
-    console.log(
-      err
-      //`Error connecting to MongoDB user account authentication will fail: ${err}`
-    )
-  }
-}
-
-connectToMongoDB();
 
 const corsOptions = {
     origin: 'http://localhost:3001',
@@ -90,9 +59,6 @@ app.use(morgan('dev'));
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
 app.use(cookieParser()) // useful middleware for dealing with cookies
-
-// the following cors setup is important when working with cookies on your local machine
-//app.use(cors({ origin: process.env.FRONT_END_DOMAIN, credentials: true })) // allow incoming requests only from a "trusted" host
 
 // make 'public' directory publicly readable with static content
 app.use("/static", express.static("public"));
