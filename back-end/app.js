@@ -74,7 +74,7 @@ const storage = multer.diskStorage({
 })
 const upload = multer({ storage: storage })
 app.use(recipeRouter);
-app.use(ingredientsRouter);
+app.use("/ingredients", ingredientsRouter);
 app.use(utensilsRouter);
 app.use(uploadrecipeRouter);
 app.use("/auth", authenticationRouter()); // all requests for /auth/* will be handled by the authenticationRoutes router

@@ -1,70 +1,107 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
-const fs = require('fs');
-const path = require('path');
-const app = require('../app');
+const app = require('../app.js');
+const connectToMongoDB = require("../db.js");
+const IngredientModel = require('../models/ingredients.js');
 const { expect } = chai;
 
 chai.use(chaiHttp);
 
-const ingredientsFilePath = path.join(__dirname, '../tmp_data/ingredients.txt');
+// call connectToMongoDB to connect to the database
+connectToMongoDB();
 
-describe('Ingredient routes', () => {
+describe('Ingredients API', () => {
   describe('GET /my-ingredients', () => {
-    it('should return an array of ingredients', (done) => {
-      chai.request(app)
-        .get('/my-ingredients')
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('array');
-          done();
-        });
-    });
+    it('should return all ingredients for a given username', async () => {
+      const username = 'ginettexu';
+      const res = await chai
+        .request(app)
+        .get(`/ingredients/my-ingredients?username=${username}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.be.an('array');
+    }).timeout(5000);
   });
 
   describe('POST /my-ingredients', () => {
-    it('should add a new ingredient to the file', (done) => {
-      chai.request(app)
-        .post('/my-ingredients')
-        .send({ name: 'testIngredient', amount: 1, id: 123 })
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body.message).to.equal('Successfully added 1 testIngredient(s)');
-          // Check if the ingredient was added to the file
-          const fileContent = fs.readFileSync(ingredientsFilePath, 'utf-8');
-          expect(fileContent).to.include('testIngredient');
-          done();
-        });
+    it('should add a new ingredient for a given username', async () => {
+      const username = 'ginettexu';
+      const newIngredient = {
+        name: 'apple',
+        amount: 5,
+        username,
+      };
+
+      const res = await chai
+        .request(app)
+        .post('/ingredients/my-ingredients')
+        .send(newIngredient);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.have.property('message').to.equal('Successfully added 5 apple(s)');
+
+      // verify that the ingredient was added to the database
+      const ingredient = await IngredientModel.findOne({ name: 'apple', username });
+      expect(ingredient).to.exist;
+      expect(ingredient.amount).to.equal(5);
+    }).timeout(5000);
+
+    it('should return an error if the request body is invalid', async () => {
+      const res = await chai
+        .request(app)
+        .post('/ingredients/my-ingredients')
+        .send({ name: '', amount: -1 });
+
+      expect(res).to.have.status(400);
+      expect(res.body).to.have.property('errors');
+      expect(res.body.errors.length).to.equal(2);
+    });
+  });
+
+  describe('DELETE /my-ingredients/:name', () => {
+    it('should delete an ingredient for a given username', async () => {
+      const username = 'testuser';
+      const ingredientName = 'test ingredient';
+
+      // add an ingredient to the database for the test user
+      const newIngredient = new IngredientModel({ username, name: ingredientName.toLowerCase(), amount: 5 });
+      await newIngredient.save();
+
+      const res = await chai
+        .request(app)
+        .delete(`/ingredients/my-ingredients/${ingredientName}?username=${username}`);
+
+      expect(res).to.have.status(200);
+      expect(res.body).to.have.property('message').to.equal(`Successfully deleted ingredient with name ${ingredientName}`);
+
+      // verify that the ingredient was deleted from the database
+      const ingredient = await IngredientModel.findOne({ name: ingredientName, username });
+      expect(ingredient).to.not.exist;
     });
 
-    it('should update an existing ingredient in the file', (done) => {
-      chai.request(app)
-        .post('/my-ingredients')
-        .send({ name: 'testIngredient', amount: 2, id: 123 })
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body.message).to.equal('Successfully added 2 testIngredient(s)');
-          // Check if the ingredient was updated in the file
-          const fileContent = fs.readFileSync(ingredientsFilePath, 'utf-8');
-          expect(fileContent).to.include('"amount": 3');
-          done();
-        });
+    it('should return an error if the ingredient does not exist', async () => {
+      const username = 'testuser';
+      const ingredientName = 'non-existent ingredient';
+
+      const res = await chai
+        .request(app)
+        .delete(`/ingredients/my-ingredients/${ingredientName}?username=${username}`);
+
+      expect(res).to.have.status(404);
+      expect(res.body).to.have.property('error').to.equal(`Ingredient with name ${ingredientName} not found`);
     });
   });
 
   describe('GET /search-ingredient', () => {
-    it('should return an array of matching ingredients from the API', (done) => {
-      chai.request(app)
-        .get('/search-ingredient')
-        .query({ query: 'potato' })
-        .end((err, res) => {
-          expect(res).to.have.status(200);
-          expect(res.body).to.be.an('array');
-          expect(res.body[0]).to.have.property('id');
-          expect(res.body[0]).to.have.property('name');
-          expect(res.body[0]).to.have.property('amount').to.equal(0);
-          done();
-        });
+    it('should search for ingredients using a given query string', async () => {
+      const query = 'apple';
+      const res = await chai
+      .request(app)
+      .get(`/ingredients/search-ingredient?query=${query}`);
+  
+    expect(res).to.have.status(200);
+    expect(res.body).to.be.an('array');
+    expect(res.body.length).to.be.greaterThan(0); // assuming at least one ingredient exists in the database matching the query
     });
   });
 });
