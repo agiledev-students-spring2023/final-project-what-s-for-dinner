@@ -23,27 +23,34 @@ class RecipeController {
     }
     static async getRecipesByIngredients(req, res) {
       try {
-        const { ingredients } = req.query;
-
+        const { ingredients, limit = 10, sentRecipeIds } = req.query;
+        
         const ingredientsArray = ingredients ? ingredients.split(',') : [];
-        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } })
-        .limit(50)
-        .exec();
-    
+        const filter = { Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } };
+        if (sentRecipeIds) {
+          // Exclude sent recipe IDs from the query
+          filter._id = { $nin: sentRecipeIds.split(',') };
+        }
+        
+        const recipes = await Recipe.find(filter)
+          .limit(parseInt(limit))
+          .exec();
+        
         res.status(200).json({ recipes });
-    
+        
       } catch (error) {
         console.error(error);
         res.status(500).send('An error occurred while retrieving recipes');
       }
     }
+    
     static async getRecipesSorted(req, res) {
       try {
-        const { ingredients } = req.query;
+        const { ingredients, limit, sentRecipeIds } = req.query;
         const ingredientsArray = ingredients ? ingredients.split(',') : [];
-        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } })
-        .limit(50)
-        .exec();;
+        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") }, _id: { $nin: sentRecipeIds.split(',') } })
+          .limit(limit)
+          .exec();;
         const sortedRecipes = [...recipes].sort((a, b) => a.Instructions.length - b.Instructions.length);
     
         res.status(200).json({ recipes: sortedRecipes });
@@ -54,13 +61,17 @@ class RecipeController {
         return;
       }
     }
+    
 
     static async getRecipesSimilar(req, res) {
       try {
-        const { ingredients } = req.query;
+        const { ingredients, limit, sentRecipeIds } = req.query;
         const ingredientsArray = ingredients ? ingredients.split(',') : [];
-        const recipes = await Recipe.find({ Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } })
-        .limit(50)
+        const recipes = await Recipe.find({ 
+          Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") },
+          _id: { $nin: sentRecipeIds.split(',') }
+        })
+        .limit(limit)
         .exec();;        
         const recipeSimilarities = recipes.map((recipe) => {
           const recipeIngredients = recipe.Cleaned_Ingredients;
@@ -78,6 +89,7 @@ class RecipeController {
         res.status(500).send('An error occurred while retrieving sorted recipes');
       }
     }
+    
 
       static async getRecipe(req, res) {
         const mealId = req.params.id;

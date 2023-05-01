@@ -12,27 +12,70 @@ const RecipeList = (props) => {
   const [data, setData] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);
   const [sortOption, setSortOption] = useState("");
-  const username = props.user.username;
-  const endpoint = `/recipes?username=${username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}`;
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+  const [sortUrl, setSortUrl] = useState(`/recipes?username=${props.user.username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}`);
+  const [sentRecipeIds, setSentRecipeIds] = useState([]);
+
+  const handleScroll = async () => {
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    if (scrollTop + clientHeight >= scrollHeight) {
+      setPage((page) => page + 1);
+    }
+  };
+  
   useEffect(() => {
-        let  url = `${baseUrl}${endpoint}`
-        if (sortOption === "time") {
-          url = `${baseUrl}/recipes/sort-by-time?username=${username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}`;
-        } else if (sortOption === "similar") {
-          url = `${baseUrl}/recipes/sort-by-similar?username=${username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}}`;
-        }
-        axios.get(url)
-        .then(response => {
-          setData(response.data.recipes);
-          console.log(response);
-        })
-        .catch(error => {
-          console.error(error);
-        });
-      }, [sortOption, username, selectedIngredients]); // only run it once!
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}${sortUrl}&limit=${perPage}&sentRecipeIds=${sentRecipeIds.join(',')}`);
+        const newRecipes = response.data.recipes.filter(
+          recipe => !sentRecipeIds.includes(recipe._id)
+        );
+        setData(data => [...data, ...newRecipes]);
+        setSentRecipeIds(ids => [...ids, ...newRecipes.map(recipe => recipe._id)]);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    
+  
+    fetchData();
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [sortUrl, selectedIngredients, page]);
+    
+
+  useEffect(() => {
+    setSentRecipeIds([]);
+    setSortUrl(`/recipes?username=${props.user.username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}`);
+  }, [selectedIngredients]);
+
   const handleSortChange = (option) => {
     setSortOption(option);
-  }
+    let sortUrl = "";
+    if (option === "time") {
+      sortUrl = `/recipes/sort-by-time?username=${props.user.username}&ingredients=${selectedIngredients
+        .map((selected) => selected && selected.name)
+        .join(",")}`;
+    } else if (option === "similar") {
+      sortUrl = `/recipes/sort-by-similar?username=${props.user.username}&ingredients=${selectedIngredients
+        .map((selected) => selected && selected.name)
+        .join(",")}`;
+    } else {
+      sortUrl = `/recipes?username=${props.user.username}&ingredients=${selectedIngredients
+        .map((selected) => selected && selected.name)
+        .join(",")}`;
+    }
+    setPerPage(10);
+    setData([]);
+    setSortUrl(sortUrl);
+    setPerPage(perPage => perPage + 10);
+
+  };
+  
+
   const handleIngredientSelect = (ingredientName) => {
     const ingredientObject = { name: ingredientName };
     if (selectedIngredients.some(ingredient => ingredient.name === ingredientName)) {
@@ -40,6 +83,8 @@ const RecipeList = (props) => {
     } else {
       setSelectedIngredients([...selectedIngredients, { name: ingredientName }]);
     }
+    //setPerPage(perPage => perPage + 10);
+    setData([]);
   };
   
   return (
