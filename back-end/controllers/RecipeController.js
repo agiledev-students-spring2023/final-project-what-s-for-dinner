@@ -150,10 +150,31 @@ class RecipeController {
           };
           recipe.Comments.push(newComment);
           await recipe.save();
-          res.status(200).json({ message: 'Comment added successfully' });
+          const averageRating = await RecipeController.getAverageRating(recipeId);
+          recipe.Rating = averageRating;
+          res.status(200).json({ message: 'Comment added successfully', averageRating});
         } catch (error) {
           console.error(error);
           res.status(500).send('Internal server error');
+        }
+      }
+
+      static async getAverageRating(recipeId) {
+        try {
+          const recipe = await Recipe.findById(recipeId);
+          if (!recipe) {
+            return null;
+          }
+          const numRatings = recipe.Comments.length;
+          if (numRatings === 0) {
+            return 0;
+          }
+          const totalRating = recipe.Comments.reduce((sum, comment) => sum + comment.rating, 0);
+          const averageRating = totalRating / numRatings;
+          return averageRating;
+        } catch (error) {
+          console.error(error);
+          return null;
         }
       }
 
