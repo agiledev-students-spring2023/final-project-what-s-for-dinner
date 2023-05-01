@@ -30,11 +30,7 @@ const corsOptions = {
     optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
-app.use(function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  next();
-});
+
 
 // import and use the recipe and ingredients routes
 const recipeRouter = require('./routes/recipes');
@@ -53,8 +49,6 @@ require("dotenv").config({ silent: true })
 const axios = require("axios"); // middleware for making requests to APIs
 require("dotenv").config({ silent: true }); // load environmental variables from a hidden file named .env
 
-const morgan = require("morgan"); // middleware for nice logging of incoming HTTP requests
-app.use(morgan('dev'));
 // use express's builtin body-parser middleware to parse any data included in a request
 app.use(express.json()); // decode JSON-formatted incoming POST data
 app.use(express.urlencoded({ extended: true })); // decode url-encoded incoming POST data
