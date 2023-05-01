@@ -14,7 +14,7 @@ const MyIngredients = (props) => {
     const baseUrl = 'http://localhost:3000';
     const fetchIngredients = async () => {
       try {
-        const response = await fetch(`${baseUrl}/my-ingredients?username=${username}`); // pass user_id to the API endpoint
+        const response = await fetch(`${baseUrl}/ingredients/my-ingredients?username=${username}`); // pass user_id to the API endpoint
         const data = await response.json();
         setIngredients(data);
       } catch (error) {
@@ -28,7 +28,7 @@ const MyIngredients = (props) => {
     // API call to add ingredient to user's inventory
     try {
       const baseUrl = 'http://localhost:3000';
-      const response = await fetch(`${baseUrl}/my-ingredients`, {
+      const response = await fetch(`${baseUrl}/ingredients/my-ingredients`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -62,7 +62,7 @@ const MyIngredients = (props) => {
   const handleDelete = async (ingredient) => {
     try {
       const baseUrl = 'http://localhost:3000';
-      const response = await fetch(`${baseUrl}/my-ingredients/${ingredient.name}?username=${username}`, {
+      const response = await fetch(`${baseUrl}/ingredients/my-ingredients/${ingredient.name}?username=${username}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ const MyIngredients = (props) => {
     //setSearchTerm(event.target.value);
     try {
       const baseUrl = 'http://localhost:3000';
-      const response = await fetch(`${baseUrl}/search-ingredient?query=${searchTerm}`);
+      const response = await fetch(`${baseUrl}/ingredients/search-ingredient?query=${searchTerm}`);
       const data = await response.json();
       setSearchResults(data);
       console.log(searchResults);
