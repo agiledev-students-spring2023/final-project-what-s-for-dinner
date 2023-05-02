@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 //model to store relationship between a user and a utensil
+=======
+>>>>>>> 70ced8f (utensils model)
 const mongoose = require("mongoose");
 
 const userUtensilSchema = new mongoose.Schema({
