@@ -9,6 +9,13 @@ const utensilSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+<<<<<<< HEAD
+=======
+  description: {
+    type: String,
+    required: true,
+  },
+>>>>>>> 8ccee45 (utensils changes back-end)
 });
 
 module.exports = mongoose.model("Utensil", utensilSchema);
