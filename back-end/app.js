@@ -71,7 +71,7 @@ app.use(function(req, res, next) {
 const recipeRouter = require('./routes/recipes');
 const ingredientsRouter = require('./routes/ingredients');
 const utensilsRouter = require('./routes/utensils');
-const uploadrecipeRouter = require('./routes/upload-recipe');
+const uploadrecipeRouter = require('./routes/share-recipes');
 const authenticationRouter = require('./routes/authentication');
 const cookieRouter = require('./routes/cookie');
 const protectedContentRouter = require('./routes/protected-content');
@@ -116,7 +116,7 @@ const upload = multer({ storage: storage })
 app.use(recipeRouter);
 app.use("/ingredients", ingredientsRouter);
 app.use(utensilsRouter);
-app.use(uploadrecipeRouter);
+app.use("/share-recipes",uploadrecipeRouter);
 app.use("/auth", authenticationRouter()); // all requests for /auth/* will be handled by the authenticationRoutes router
 app.use("/cookie", cookieRouter()); // all requests for /cookie/* will be handled by the cookieRoutes router
 app.use("/protected", protectedContentRouter()); // all requests for /protected/* will be handled by the protectedRoutes router

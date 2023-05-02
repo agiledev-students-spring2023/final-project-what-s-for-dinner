@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./ShareRecipe.css"
+// import axios from "axios"
 
 const ShareRecipe = () => {
   // Set up state variables to track form input
@@ -10,7 +11,7 @@ const ShareRecipe = () => {
   const [image, setImage] = useState(null);
 
   // Handle form submit
-  const handleSubmit = (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     // Create recipe object with form input
     const recipe = {
@@ -22,6 +23,18 @@ const ShareRecipe = () => {
     };
     // Send recipe data to API or database
     console.log(recipe);
+    const baseUrl = 'http://localhost:3001';
+    const response = await fetch(`${baseUrl}/share-recipes`, {
+      method: 'POST',
+      body: recipe,
+    });
+    if(response.ok){
+      console.log('Recipe submitted successfully!');
+    }else {
+      // handle error response
+      console.error('Error submitting recipe:', response.statusText);
+    }
+    
     // Reset form input
     setTitle("");
     setDescription("");

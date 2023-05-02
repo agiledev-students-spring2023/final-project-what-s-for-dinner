@@ -143,10 +143,10 @@ const { expect } = chai;
 
 chai.use(chaiHttp);
 
-describe('POST /upload-recipe', () => {
+describe('POST /share-recipes', () => {
   it('should upload a recipe', (done) => {
     chai.request(app)
-      .post('/upload-recipe')
+      .post('/share-recipes')
       .set('content-type', 'multipart/form-data')
       .field('title', 'Test Recipe')
       .field('description', 'This is a test recipe')
