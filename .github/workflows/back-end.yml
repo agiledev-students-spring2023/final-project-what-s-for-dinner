@@ -27,7 +27,7 @@ jobs:
       - name: Build and Push to DockerHub
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: ./back-end
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/back-end:latest
           platform: linux/amd64
@@ -41,6 +41,7 @@ jobs:
             with:
               app_name: lobster-app
               token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
 
 
 
