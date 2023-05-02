@@ -14,7 +14,7 @@ const SelectIng = ({ handleIngredientSelect, user }) => {
       .catch(error => {
         console.error(error);
       });
-  }, [user.username]);
+  }, [user.username, baseUrl]);
 
   return (
     <div>
