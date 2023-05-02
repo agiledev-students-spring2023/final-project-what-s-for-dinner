@@ -2,7 +2,7 @@ import React from "react"
 import { useNavigate } from "react-router"
 import "./Recipe.css";
 const Recipe = ({recipes}) =>{
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = process.env.REACT_APP_SERVER;
     const images = '/api/images/';
     console.log(recipes);
     let navigate = useNavigate();
