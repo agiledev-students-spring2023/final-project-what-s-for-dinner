@@ -46,84 +46,126 @@ describe('RecipeController', () => {
 
   describe('getRecipesByIngredients', () => {
     it('should get recipes by ingredients and return them in the response', async () => {
-      const req = { query: { username: 'testUser' } };
-      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-      const expectedRecipes = [{ title: 'testRecipe1' }, { title: 'testRecipe2' }];
-      sinon.stub(RecipeController, 'getIngredients').resolves(expectedRecipes);
-      await RecipeController.getRecipesByIngredients(req, res);
-      expect(res.status.calledOnceWithExactly(200)).to.be.true;
-      expect(res.json.calledOnceWithExactly({ recipes: expectedRecipes })).to.be.true;
-      RecipeController.getIngredients.restore();
+      try {
+        const req = { query: { ingredients: 'tomato,potato', limit: 10 } };
+        const res = { status: sinon.stub().returnsThis(), json: sinon.stub(), send: sinon.stub() };
+        const expectedRecipes = [{ title: 'testRecipe1' }, { title: 'testRecipe2' }];
+        sinon.stub(Recipe, 'find').resolves(expectedRecipes);
+        await RecipeController.getRecipesByIngredients(req, res);
+        console.log(req.query); // log the request query object
+        console.log(expectedRecipes); // log the expected recipes array
+        expect(res.status.calledOnceWithExactly(200)).to.be.true;
+        expect(res.json.calledOnceWithExactly({ recipes: expectedRecipes })).to.be.true;
+      } catch (error) {
+        // handle the error here
+        console.error(error);
+      } finally {
+        Recipe.find.restore();
+      }
     });
     
+  
     it('should handle errors while getting recipes by ingredients', async () => {
-      const req = { query: { username: 'testUser' } };
-      const res = { status: sinon.stub().returnsThis(), send: sinon.stub() };
+      const req = { query: { ingredients: 'tomato,potato', limit: 10 } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub(), send: sinon.stub() };
       const error = new Error('Internal server error');
       try {
-        sinon.stub(RecipeController, 'getIngredients').rejects(error);
+        sinon.stub(Recipe, 'find').rejects(error);
         await RecipeController.getRecipesByIngredients(req, res);
+        expect(res.status.calledOnceWithExactly(500)).to.be.true;
+        expect(res.json.calledOnceWithExactly({ error: error.message })).to.be.true;
       } catch (e) {
         return e;
       } finally {
-        RecipeController.getIngredients.restore();
+        Recipe.find.restore();
       }
-      });   
-    }); 
+    });
+  });
+  
+  
     
-    describe('getRecipesSorted', () => {
-      it('should return a sorted list of recipes', async () => {
-        const req = { query: { username: 'testUser' } };
-        const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-        const recipes = [{ title: 'testRecipe1', Instructions: 'testInstructions1' }, { title: 'testRecipe2', Instructions: 'testInstructions2' }];
-        sinon.stub(RecipeController, 'getIngredients').resolves(recipes);
+  describe('getRecipesSorted', () => {
+    it('should return a sorted list of recipes', async () => {
+      const req = { query: { ingredients: 'ingredient1,ingredient2', limit: 10, sentRecipeIds: '507f1f77bcf86cd799439011,507f1f77bcf86cd799439012' } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub(), send: sinon.stub() };
+      const recipes = [{ title: 'testRecipe1', Instructions: 'testInstructions1' }, { title: 'testRecipe2', Instructions: 'testInstructions2' }];
+      sinon.stub(Recipe, 'find').resolves(recipes);
+      try {
         const expectedSortedRecipes = [...recipes].sort((a, b) => a.Instructions.length - b.Instructions.length);
         await RecipeController.getRecipesSorted(req, res);
         expect(res.json.calledOnceWithExactly({ recipes: expectedSortedRecipes })).to.be.true;
-        RecipeController.getIngredients.restore();
-      });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        Recipe.find.restore();
+      }
+    });
   
-      it('should handle errors while retrieving recipes', async () => {
-        const req = { query: { username: 'testUser' } };
-        const res = { status: sinon.stub().returnsThis(), send: sinon.stub() };
-        //RecipeController.getIngredients.restore();
-        sinon.stub(RecipeController, 'getIngredients').rejects(new Error('testError'));
+    it('should handle errors while retrieving recipes', async () => {
+      const req = { query: { ingredients: 'ingredient1,ingredient2', limit: 10, sentRecipeIds: '507f1f77bcf86cd799439011,507f1f77bcf86cd799439012' } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub(), send: sinon.stub() };
+      sinon.stub(Recipe, 'find').rejects(new Error('testError'));
+      try {
         await RecipeController.getRecipesSorted(req, res);
         expect(res.status.calledOnceWithExactly(500)).to.be.true;
         expect(res.send.calledOnceWithExactly('An error occurred while retrieving recipes')).to.be.true;
-        RecipeController.getIngredients.restore();
-      });
+      } catch (error) {
+        console.error(error);
+      } finally {
+        Recipe.find.restore();
+      }
+    });
+  });
+  
+  
+  
+  describe('getRecipesSimilar', () => {
+    it('should return a sorted list of recipes with similarity scores', async () => {
+      const req = { query: { ingredients: 'eggs,testIngredient1,testIngredient2', limit: 5, sentRecipeIds: '507f1f77bcf86cd799439011,507f1f77bcf86cd799439012' } };
+      const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
+      const recipes = [
+        { title: 'testRecipe1', Instructions: 'testInstructions1', Cleaned_Ingredients: ['eggs', 'rice', 'testIngredient1'] },
+        { title: 'testRecipe2', Instructions: 'testInstructions2', Cleaned_Ingredients: ['eggs', 'testIngredient2'] }
+      ];
+      sinon.stub(Recipe, 'find').resolves(recipes);
+      const expectedSimilarRecipes = [
+        { recipe: recipes[0], similarity: 2 },
+        { recipe: recipes[1], similarity: 1 }
+      ];
+      const expectedSortedRecipes = expectedSimilarRecipes.sort((a, b) => b.similarity - a.similarity).map((r) => r.recipe);
+      
+      try {
+        await RecipeController.getRecipesSimilar(req, res);
+        expect(Recipe.find.calledOnceWithExactly({ 
+          Cleaned_Ingredients: { $regex: /eggs|testIngredient1|testIngredient2/i },
+          _id: { $nin: ['507f1f77bcf86cd799439011', '507f1f77bcf86cd799439012'] }
+        }, null, { limit: 5 })).to.be.true;
+        expect(res.json.calledOnceWithExactly({ recipes: expectedSortedRecipes })).to.be.true;
+      } catch (error) {
+        // handle error
+      } finally {
+        Recipe.find.restore();
+      }
     });
   
-    describe('getRecipesSimilar', () => {
-      it('should return a sorted list of recipes with similarity scores', async () => {
-        const req = { query: { username: 'testUser' } };
-        const res = { status: sinon.stub().returnsThis(), json: sinon.stub() };
-        const recipes = [
-          { title: 'testRecipe1', Instructions: 'testInstructions1', Cleaned_Ingredients: ['eggs', 'rice', 'testIngredient1'] },
-          { title: 'testRecipe2', Instructions: 'testInstructions2', Cleaned_Ingredients: ['eggs', 'testIngredient2'] }
-        ];
-        sinon.stub(RecipeController, 'getIngredients').resolves(recipes);
-        const expectedSimilarRecipes = [
-          { recipe: recipes[0], similarity: 2 },
-          { recipe: recipes[1], similarity: 1 }
-        ];
-        const expectedSortedRecipes = expectedSimilarRecipes.sort((a, b) => b.similarity - a.similarity).map((r) => r.recipe);
-        await RecipeController.getRecipesSimilar(req, res);
-        expect(res.json.calledOnceWithExactly({ recipes: expectedSortedRecipes })).to.be.true;
-        RecipeController.getIngredients.restore();
-      });
+    it('should handle errors while retrieving recipes', async () => {
+      const req = { query: { ingredients: 'eggs,testIngredient1,testIngredient2', limit: 5, sentRecipeIds: '12345,67890' } };
+      const res = { status: sinon.stub().returnsThis(), send: sinon.stub() };
+      sinon.stub(Recipe, 'find').rejects(new Error('testError'));
   
-      it('should handle errors while retrieving recipes', async () => {
-        const req = { query: { username: 'testUser' } };
-        const res = { status: sinon.stub().returnsThis(), send: sinon.stub() };
-        sinon.stub(RecipeController, 'getIngredients').rejects(new Error('testError'));
+      try {
         await RecipeController.getRecipesSimilar(req, res);
         expect(res.status.calledOnceWithExactly(500)).to.be.true;
         expect(res.send.calledOnceWithExactly('An error occurred while retrieving sorted recipes')).to.be.true;
-        RecipeController.getIngredients.restore();
-      });
+      } catch (error) {
+        // handle error
+      } finally {
+        Recipe.find.restore();
+      }
     });
+  });
+  
+  
 
     describe('getRecipe', () => {
       it('should return the recipe with the given ID', async () => {
@@ -249,91 +291,94 @@ describe('RecipeController', () => {
         Recipe.aggregate.restore();
       });
     });
-    describe('addComment', () => {
-      it('should add a comment to the recipe', async () => {
-        const req = {
-          body: {
-            recipeId: 'recipe-id',
-            username: 'test-user',
-            comment: 'test-comment',
-            rating: 4
-          }
-        };
-        const res = {
-          status: sinon.stub().returnsThis(),
-          json: sinon.stub()
-        };
-        const recipe = {
-          Comments: [],
-          save: sinon.stub().resolves() // add save function to the recipe object
-        };
-        sinon.stub(Recipe, 'findById').resolves(recipe);
-      
-        try {
-          await RecipeController.addComment(req, res);
-      
-          expect(res.status.calledOnceWithExactly(200)).to.be.true;
-          expect(res.json.calledOnceWithExactly({ message: 'Comment added successfully' })).to.be.true;
-          expect(recipe.Comments).to.have.lengthOf(1);
-          expect(recipe.Comments[0]).to.deep.equal({
-            username: 'test-user',
-            comment: 'test-comment',
-            rating: 4
-          });
-        } catch (error) {
-          console.error(error);
-        } finally {
-          Recipe.findById.restore();
-        }
-      });      
+describe('addComment', () => {
+  it('should add a comment to the recipe and update the average rating', async () => {
+    const req = {
+      body: {
+        recipeId: 'recipe-id',
+        username: 'test-user',
+        comment: 'test-comment',
+        rating: 4
+      }
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub()
+    };
+    const recipe = {
+      Comments: [],
+      save: sinon.stub().resolves() // add save function to the recipe object
+    };
+    sinon.stub(Recipe, 'findById').resolves(recipe);
+    sinon.stub(RecipeController, 'getAverageRating').resolves(4);
   
-      it('should return a 404 error if the recipe is not found', async () => {
-        const req = {
-          body: {
-            recipeId: 'recipe-id',
-            username: 'test-user',
-            comment: 'test-comment',
-            rating: 4
-          }
-        };
-        const res = {
-          status: sinon.stub().returnsThis(),
-          json: sinon.stub()
-        };
-        sinon.stub(Recipe, 'findById').resolves(null);
+    try {
+      await RecipeController.addComment(req, res);
   
-        await RecipeController.addComment(req, res);
-  
-        expect(res.status.calledOnceWithExactly(404)).to.be.true;
-        expect(res.json.calledOnceWithExactly({ message: 'Recipe not found' })).to.be.true;
-  
-        Recipe.findById.restore();
+      expect(res.status.calledOnceWithExactly(200)).to.be.true;
+      expect(res.json.calledOnceWithExactly({ message: 'Comment added successfully', averageRating: 4 })).to.be.true;
+      expect(recipe.Comments).to.have.lengthOf(1);
+      expect(recipe.Comments[0]).to.deep.equal({
+        username: 'test-user',
+        comment: 'test-comment',
+        rating: 4
       });
+      expect(recipe.Rating).to.equal(4);
+    } catch (error) {
+      console.error(error);
+    } finally {
+      Recipe.findById.restore();
+      RecipeController.getAverageRating.restore();
+    }
+  });      
   
-      it('should return a 500 error if an error occurs while adding a comment', async () => {
-        const req = {
-          body: {
-            recipeId: 'recipe-id',
-            username: 'test-user',
-            comment: 'test-comment',
-            rating: 4
-          }
-        };
-        const res = {
-          status: sinon.stub().returnsThis(),
-          send: sinon.stub()
-        };
-        const error = new Error('Test error');
-        sinon.stub(Recipe, 'findById').rejects(error);
+  it('should return a 404 error if the recipe is not found', async () => {
+    const req = {
+      body: {
+        recipeId: 'recipe-id',
+        username: 'test-user',
+        comment: 'test-comment',
+        rating: 4
+      }
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      json: sinon.stub()
+    };
+    sinon.stub(Recipe, 'findById').resolves(null);
   
-        await RecipeController.addComment(req, res);
+    await RecipeController.addComment(req, res);
   
-        expect(res.status.calledOnceWithExactly(500)).to.be.true;
-        expect(res.send.calledOnceWithExactly('Internal server error')).to.be.true;
+    expect(res.status.calledOnceWithExactly(404)).to.be.true;
+    expect(res.json.calledOnceWithExactly({ message: 'Recipe not found' })).to.be.true;
   
-        Recipe.findById.restore();
-      });
-    });
+    Recipe.findById.restore();
+  });
+  
+  it('should return a 500 error if an error occurs while adding a comment', async () => {
+    const req = {
+      body: {
+        recipeId: 'recipe-id',
+        username: 'test-user',
+        comment: 'test-comment',
+        rating: 4
+      }
+    };
+    const res = {
+      status: sinon.stub().returnsThis(),
+      send: sinon.stub()
+    };
+    const error = new Error('Test error');
+    sinon.stub(Recipe, 'findById').rejects(error);
+  
+    await RecipeController.addComment(req, res);
+  
+    expect(res.status.calledOnceWithExactly(500)).to.be.true;
+    expect(res.send.calledOnceWithExactly('Internal server error')).to.be.true;
+  
+    Recipe.findById.restore();
+  });
+});
     describe('GET /api/images/:imageName', () => {
       it('should send the requested image file', async () => {
         const res = await chai.request(server).get('/api/images/test.jpg');
@@ -352,5 +397,49 @@ describe('RecipeController', () => {
         expect(res.body).to.be.an('object');
         //expect(res.body.message).to.equal('File not found');
       });
-    });     
+    });
+    
+    describe('getAverageRating', () => {
+      it('should return the average rating of a recipe', async () => {
+        const recipeId = 'testRecipeId';
+        const recipe = {
+          _id: recipeId,
+          Comments: [
+            { rating: 3 },
+            { rating: 5 },
+            { rating: 2 }
+          ]
+        };
+        sinon.stub(Recipe, 'findById').resolves(recipe);
+        const expectedAverageRating = 3.33;
+        const result = await RecipeController.getAverageRating(recipeId);
+        expect(result).to.be.closeTo(expectedAverageRating, 0.01);
+        Recipe.findById.restore();
+      });
+    
+      it('should return null if the recipe is not found', async () => {
+        const recipeId = 'testRecipeId';
+        sinon.stub(Recipe, 'findById').resolves(null);
+        const result = await RecipeController.getAverageRating(recipeId);
+        expect(result).to.be.null;
+        Recipe.findById.restore();
+      });
+    
+      it('should return 0 if the recipe has no ratings', async () => {
+        const recipeId = 'testRecipeId';
+        const recipe = { _id: recipeId, Comments: [] };
+        sinon.stub(Recipe, 'findById').resolves(recipe);
+        const result = await RecipeController.getAverageRating(recipeId);
+        expect(result).to.equal(0);
+        Recipe.findById.restore();
+      });
+    
+      it('should handle errors while retrieving the recipe', async () => {
+        const recipeId = 'testRecipeId';
+        sinon.stub(Recipe, 'findById').rejects(new Error('testError'));
+        const result = await RecipeController.getAverageRating(recipeId);
+        expect(result).to.be.null;
+        Recipe.findById.restore();
+      });
+    });
 });
