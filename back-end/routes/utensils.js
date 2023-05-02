@@ -3,7 +3,7 @@ const router = express.Router();
 const fs = require('fs');
 const path = require('path');
 
-const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt');
+const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt'); // to get temp data, will be replaced with database
 
 // Route to get all utensils
 router.get("/utensils", (req, res) => {
@@ -25,6 +25,7 @@ router.get("/utensils", (req, res) => {
     res.status(500).json({ error: 'Failed to fetch utensils' });
   }
 });
+
 
 // Route to add a new utensil
 router.post("/utensils", (req, res) => {
