@@ -44,13 +44,13 @@ const RecipeList = (props) => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, [baseUrl, sortUrl, perPage, sentRecipeIds, selectedIngredients, page]);
+  }, [sortUrl, selectedIngredients, page]);
     
 
   useEffect(() => {
     setSentRecipeIds([]);
     setSortUrl(`/recipes?username=${props.user.username}&ingredients=${selectedIngredients.map(selected => selected && selected.name).join(",")}`);
-  }, [selectedIngredients, props.user.username]);
+  }, [selectedIngredients]);
 
   const handleSortChange = (option) => {
     setSortOption(option);

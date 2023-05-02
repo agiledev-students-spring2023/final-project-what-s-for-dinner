@@ -1,7 +1,8 @@
 const IngredientModel = require('../models/ingredients');
 const Recipe = require('../models/recipes');
+const mongoose = require("mongoose")
 const ObjectId = require('mongodb').ObjectId;
-
+const User = require ('../models/users');
 class RecipeController {
     static async getIngredients(req, res) {
       try {
@@ -95,7 +96,7 @@ class RecipeController {
         const mealId = req.params.id;
         let recipe;
         try {
-          recipe = await Recipe.find({ _id: new ObjectId(mealId)}).exec();;
+          recipe = await Recipe.find({ _id: new ObjectId(mealId)}).exec();
           console.log(recipe);
           if (!recipe) {
             res.status(404).send('Recipe not found');
@@ -177,6 +178,59 @@ class RecipeController {
           return null;
         }
       }
+      
+      // Save a recipe for a user
+      static async saveRecipe(req, res) {
+        try {
+          const { recipeId, username } = req.body;
+
+          console.log(recipeId);
+          // Find the user in the database
+          const user = await User.findOne({ username });
+      
+          // If the user's savedRecipes array is undefined or null, create an empty array
+          if (!user.savedRecipes) {
+            user.savedRecipes = [];
+            
+          }
+
+          let recipe = await Recipe.findOne({ _id: new ObjectId(recipeId)}).exec();
+          //console.log(recipe);      
+          // Add the recipe to the user's saved recipes array
+          console.log(recipe._id)
+          user.savedRecipes.push(recipe._id);
+      
+          // Save the user's updated document to the database
+          await user.save();
+      
+          // Send a success response
+          res.status(200).json({ message: 'Recipe saved successfully' });
+        } catch (error) {
+          console.error(error);
+          res.status(500).send('An error occurred while saving the recipe');
+        }
+      }
+      
+      
+
+    // View saved recipes for a user
+    static async viewSavedRecipes(req, res) {
+      try {
+        const { username } = req.query;
+        // Find the user in the database
+        const user = await User.findOne({ username });
+        //console.log(user);
+        // Get the saved recipes for the user from the database
+        const savedRecipes = await Recipe.find({ _id: { $in: user.savedRecipes } });
+        // Send the saved recipes in the response
+        console.log(savedRecipes);
+        res.status(200).json({ savedRecipes });
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('An error occurred while retrieving saved recipes');
+      }
+    }
+
 
     
   }

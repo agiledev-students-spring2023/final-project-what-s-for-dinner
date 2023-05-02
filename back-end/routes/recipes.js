@@ -16,6 +16,8 @@ router.get('/recipes/:id', RecipeController.getRecipe);
 router.get('/search', RecipeController.getSearchRecipes);
 router.get('/random-recipe', RecipeController.getReccomended);
 router.post('/reviews', RecipeController.addComment);
+router.post('/save-recipe/:id', RecipeController.saveRecipe);
+router.get('/saved-recipes', RecipeController.viewSavedRecipes);
 router.get('/api/images/:imageName', (req, res) => {
   const imageName = req.params.imageName;
   const imagePath = path.join(__dirname, '../public/foodimages', imageName);
