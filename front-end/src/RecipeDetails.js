@@ -85,7 +85,24 @@ const RecipeDetails = (props) => {
           console.error(error);
         }
       };
-    
+      const handleSaveRecipe = async () => {
+        try {
+          const response = await fetch(`${baseUrl}/save-recipe/${recipeId}?username=${username}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              recipeId: item._id,
+              username: username,
+            }),
+          });
+          const data = await response.json();
+          console.log(data.message); // log the response from the server
+        } catch (error) {
+          console.error(error);
+        }
+      }; 
     const handleSubmit = e => {
         e.preventDefault();
         sendComment();
@@ -156,7 +173,7 @@ const RecipeDetails = (props) => {
                 </div>
 
                 <div className="add-saved-recipes">
-                    <button type="add">Add to saved recipes</button>
+                <button onClick={handleSaveRecipe}>Save Recipe</button>
 
                 </div>
 
