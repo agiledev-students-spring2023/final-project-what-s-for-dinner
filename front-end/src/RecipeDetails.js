@@ -7,7 +7,7 @@ const RecipeDetails = (props) => {
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
     const {recipeId} = useParams();
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = process.env.REACT_APP_SERVER;
     const username = props.user.username;
     const images = '/api/images/';
     const [cleanedIngredients, setCleanedIngredients] = useState([]);

@@ -30,7 +30,7 @@ const Login = props => {
 
   const handleSubmit = async e => {
     e.preventDefault()
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = process.env.REACT_APP_SERVER;
     try {
       const requestData = {
         username: e.target.username.value,

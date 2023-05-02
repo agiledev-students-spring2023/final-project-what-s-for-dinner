@@ -7,7 +7,7 @@ import SelectIng from "./SelectIng";
 import "./RecipeList.css";
 
 const RecipeList = (props) => {
-  const baseUrl = 'http://localhost:3000';
+  const baseUrl = process.env.REACT_APP_SERVER;
   const images = '/api/images/';
   const [data, setData] = useState([]);
   const [selectedIngredients, setSelectedIngredients] = useState([]);

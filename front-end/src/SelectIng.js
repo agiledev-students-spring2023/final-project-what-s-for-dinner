@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const SelectIng = ({ handleIngredientSelect, user }) => {
-  const baseUrl = 'http://localhost:3000';
+  const baseUrl = process.env.REACT_APP_SERVER;
   const [ingredients, setIngredients] = useState([]);
   useEffect(() => {
     const username = user.username;

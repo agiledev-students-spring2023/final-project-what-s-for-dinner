@@ -7,7 +7,7 @@ const Search = prop => {
     const [keyword, setKeyword] = useState('null');
     const [recipes, setRecipes] = useState([]);
     const [show, setShow] = useState(false);
-    const url = 'http://localhost:3000/search';
+    const url = `${process.env.REACT_APP_SERVER}/search`;
     const getSearch = e =>{
         e.preventDefault()
         setKeyword(search)

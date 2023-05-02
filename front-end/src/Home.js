@@ -6,7 +6,7 @@ import './Home.css';
 const Home = (props) => {
 
   const [recommendedRecipes, setRecommendedRecipes] = useState([]);
-  const baseUrl = 'http://localhost:3000';
+  const baseUrl = process.env.REACT_APP_SERVER;
   const endpoint = '/random-recipe';
   const images = '/api/images/';
   useEffect(() => {

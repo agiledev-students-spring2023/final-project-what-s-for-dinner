@@ -9,7 +9,7 @@ const Utensils = (props) => {
 
   useEffect(() => {
     // Fetch utensils data from the new backend API
-    axios("http://localhost:3000/utensils")
+    axios(`${process.env.REACT_APP_SERVER}/utensils`)
       .then((response) => {
         setData(response.data);
       })
@@ -22,7 +22,7 @@ const Utensils = (props) => {
   // Fetch and save the utensils data from the Spoonacular API
   const fetchAndSaveUtensils = async (recipeId) => {
     try {
-      await axios.get(`http://localhost:3000/utensils/fetch-from-api?recipeId=${recipeId}`);
+      await axios.get(`${process.env.REACT_APP_SERVER}/utensils/fetch-from-api?recipeId=${recipeId}`);
       console.log('Utensils data fetched and saved successfully');
     } catch (error) {
       console.error('Error fetching and saving utensils data:', error);

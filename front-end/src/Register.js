@@ -26,7 +26,7 @@ const Register = (props) => {
         password: e.target.password.value,
         passwordConfirm: e.target.confirmPassword.value,
       }
-      const baseUrl = 'http://localhost:3000';
+      const baseUrl = process.env.REACT_APP_SERVER;
       const response = await axios.post(`${baseUrl}/auth/register`, requestData)
 
       console.log(response.data)
