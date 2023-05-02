@@ -38,7 +38,7 @@ const Search = prop => {
 
     useEffect(() =>{
         getRecipes();
-    }, [keyword]);
+    }, [keyword, getRecipes]);
 
     return(
         <div>

@@ -19,7 +19,7 @@ const ResetPassword = props => {
       setErrorMessage(
         "Please log in to view your home page."
       )
-  }, [])
+  }, [urlSearchParams])
 
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
