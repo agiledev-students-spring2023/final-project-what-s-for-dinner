@@ -30,14 +30,14 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/front-end:latest
-          platform: linux/amd64
-      
-    deploy:
-      runs-on: ubuntu-latest
-      needs: dockerhub-push
-      steps:
-        - name: DigitalOcean App Platform deployment
-          uses: digitalocean/app_action@main
-          with:
-            app_name: plankton-app
-            token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+          platform: linux/amd64    
+      deploy:
+        runs-on: ubuntu-latest
+        needs: dockerhub-push
+        steps:
+          - name: DigitalOcean App Platform deployment
+            uses: digitalocean/app_action@main
+            with:
+              app_name: monkfish-app
+              token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
