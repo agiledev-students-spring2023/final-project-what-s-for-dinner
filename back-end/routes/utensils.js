@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
-const UserUtensil = require("../models/userUtensil");
-const Utensil = require("../models/utensil");
+const fs = require('fs');
+const path = require('path');
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 router.get("/utensils", (req, res) => {
   try {
@@ -23,13 +24,31 @@ router.get("/utensils", async (req, res) => {
   try {
     const utensils = await Utensil.find({});
 >>>>>>> 8ccee45 (utensils changes back-end)
+=======
+const utensilsFilePath = path.join(__dirname, '../tmp_data/utensils.txt');
+
+router.get("/utensils", (req, res) => {
+  try {
+    const fileContent = fs.readFileSync(utensilsFilePath, 'utf-8');
+    const utensils = fileContent.split('\n').map(line => {
+      try {
+        const { id, utensil_title, image_url } = JSON.parse(line);
+        return { id, utensil_title, image_url };
+      } catch (error) {
+        console.error(`Error parsing utensil: ${line}`, error);
+        return null;
+      }
+    }).filter(utensil => utensil !== null);
+
+>>>>>>> c020431 (completed utensil functionality - works)
     res.json(utensils);
   } catch (error) {
-    console.error('Error fetching utensils:', error);
+    console.error('Error fetching data from file:', error);
     res.status(500).json({ error: 'Failed to fetch utensils' });
   }
 });
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 =======
@@ -64,4 +83,6 @@ router.post("/user-utensils", async (req, res) => {
 // Other routes remain unchanged
 
 >>>>>>> 70ced8f (utensils model)
+=======
+>>>>>>> c020431 (completed utensil functionality - works)
 module.exports = router;
