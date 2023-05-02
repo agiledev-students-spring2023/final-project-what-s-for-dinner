@@ -1,3 +1,4 @@
+//model to store relationship between a user and a utensil
 const mongoose = require("mongoose");
 
 const userUtensilSchema = new mongoose.Schema({
