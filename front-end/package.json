@@ -19,7 +19,8 @@
     "start": "PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "build:digitalocean": "npm install --legacy-peer-deps && npm run build"
   },
   "proxy": "http://localhost:3001",
   "eslintConfig": {
