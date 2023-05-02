@@ -19,26 +19,25 @@ const Search = prop => {
         console.log(search)
     }
 
-    const getRecipes = async () => {
-        axios.get(url, {
-            params: {
-              keyword: `${keyword}` // need to replace this with ingredients selected by user
-            }
-          })
-          .then(response => {
-            console.log(response)
-            setRecipes(response.data.recipes);
-            setShow(true);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-    }
-
 
     useEffect(() =>{
+        const getRecipes = async () => {
+            axios.get(url, {
+                params: {
+                  keyword: `${keyword}` // need to replace this with ingredients selected by user
+                }
+              })
+              .then(response => {
+                console.log(response)
+                setRecipes(response.data.recipes);
+                setShow(true);
+              })
+              .catch(error => {
+                console.error(error);
+              });
+        }
         getRecipes();
-    }, [keyword, getRecipes]);
+    }, [keyword, url]);
 
     return(
         <div>
