@@ -17,7 +17,7 @@ const Home = (props) => {
       .catch((error) => {
         console.error(error);
       });
-  }, []);
+  }, [baseUrl]);
 
   // if the user is not logged in, redirect them to the login route
   if (!props.user || !props.user.success) {

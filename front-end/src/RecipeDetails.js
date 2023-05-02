@@ -29,7 +29,7 @@ const RecipeDetails = (props) => {
           if (recipeId !== " ") {
             fetchRecipe();
           }
-    }, [recipeId]);
+    }, [recipeId, baseUrl, item]);
 
     useEffect(() => {
         console.log("item after update: ", item);
@@ -52,7 +52,7 @@ const RecipeDetails = (props) => {
         console.log(clean1.replace(/'/g, "\""))
         const ingredientsArr = JSON.parse(clean1.replace(/'/g, "\""))
         const ingredientsList = ingredientsArr.map((ingredient) => {
-          return ingredient.replace(/"/g, "").replace(/\\\"/g, "\"");
+          return ingredient.replace(/"/g, "").replace(/"/g, "\"");
         });
         
         setCleanedIngredients(ingredientsList);

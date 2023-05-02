@@ -17,7 +17,7 @@ const Login = props => {
       setErrorMessage(
         "Please log in to view your home page."
       )
-  }, [])
+  }, [urlSearchParams])
 
   // if the user's logged-in status changes, call the setuser function that was passed to this component from the PrimaryNav component.
   useEffect(() => {
@@ -26,7 +26,7 @@ const Login = props => {
       console.log(`User successfully logged in: ${status.username}`)
       props.setuser(status)
     }
-  }, [status])
+  }, [status, props])
 
   const handleSubmit = async e => {
     e.preventDefault()
