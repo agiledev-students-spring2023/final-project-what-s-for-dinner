@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import "./UtensilThumb.css";
 import { makeStyles } from "@material-ui/core/styles";
 import { Card } from "@material-ui/core";
 import { CardContent } from "@material-ui/core";
-import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,12 +14,15 @@ const useStyles = makeStyles((theme) => ({
   cardContainer: {
     display: "flex",
     flexWrap: "wrap",
-    justifyContent: "flex-start",
+    justifyContent: "center",
+    alignItems: "center",
     width: "100%",
   },
   card: {
-    flexBasis: "calc(50% - 2%)",
-    marginBottom: "20px",
+    width: 200,
+    margin: theme.spacing(2),
+    position: "relative",
+    border: "2px solid transparent",
   },
   cardTitle: {
     fontSize: 20,
@@ -35,23 +37,35 @@ const useStyles = makeStyles((theme) => ({
 
 const UtensilThumb = (props) => {
   const classes = useStyles();
+  const [selected, setSelected] = useState(false);
+
+  const handleUtensilClick = () => {
+    if (selected) {
+      props.handleDeleteUtensil(props.details.id);
+    } else {
+      props.handleAddUtensil(props.details.id);
+    }
+    setSelected(!selected);
+  };
 
   return (
-    <article className="UtensilThumb">
+    <article
+      className={`UtensilThumb${selected ? " selected" : ""}`}
+      onClick={handleUtensilClick}
+    >
       <div className={classes.root}>
         <div className={classes.cardContainer}>
-          <Card className={classes.card}>
+          <Card className={classes.card} style={{borderColor: selected ? '#4CAF50' : 'transparent'}}>
             <CardContent>
-              <div className={classes.cardTitle}>{props.details.utensil_title}</div>
-              <img src={props.details.image_url} alt={props.details.utensil_title} />
-              <div className={classes.cardContent}>{props.details.description}</div>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={props.addUserUtensil}
-              >
-                Add to My Utensils
-              </Button>
+              <div className={classes.cardTitle}>
+                {props.details.utensil_title}
+              </div>
+              <div className="imageWrapper">
+                <img
+                  src={props.details.image_url}
+                  alt={props.details.utensil_title}
+                />
+              </div>
             </CardContent>
           </Card>
         </div>
