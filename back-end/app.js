@@ -56,9 +56,9 @@ async function connectToMongoDB() {
 connectToMongoDB();
 
 const corsOptions = {
-    origin: 'http://localhost:3001',
-    credentials: true,
-    optionsSuccessStatus: 200
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
+  optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 app.use(function(req, res, next) {
