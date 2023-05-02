@@ -6,9 +6,10 @@ import "./Utensils.css";
 
 const Utensils = (props) => {
   const [data, setData] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    // Fetch utensils data from the new backend API
+    // Fetch utensils data from the backend API
     axios(`${process.env.REACT_APP_SERVER}/utensils`)
       .then((response) => {
         setData(response.data);
@@ -19,17 +20,22 @@ const Utensils = (props) => {
       });
   }, []);
 
-  // Fetch and save the utensils data from the Spoonacular API
-  const fetchAndSaveUtensils = async (recipeId) => {
+  // Associate a utensil with the user
+  const addUserUtensil = async (utensilId) => {
     try {
-      await axios.get(`${process.env.REACT_APP_SERVER}/utensils/fetch-from-api?recipeId=${recipeId}`);
-      console.log('Utensils data fetched and saved successfully');
+      const userId = props.user.id;
+      await axios.post(`${process.env.REACT_APP_SERVER}/user-utensils`, { userId, utensilId });
+      alert('Utensil added to your account successfully');
     } catch (error) {
-      console.error('Error fetching and saving utensils data:', error);
+      console.error('Error adding utensil to user:', error);
+      alert('Failed to add utensil to your account');
     }
   };
 
-  // if the user is not logged in, redirect them to the login route
+  // Filter utensils based on the search term
+  const filteredUtensils = data.filter(utensil => utensil.utensil_title.toLowerCase().includes(searchTerm.toLowerCase()));
+
+  // If the user is not logged in, redirect them to the login route
   if (!props.user || !props.user.success) {
     return <Navigate to="/login?error=protected" />;
   }
@@ -37,11 +43,16 @@ const Utensils = (props) => {
   return (
     <div className="Utensils">
       <h1>My Utensils</h1>
-      <button onClick={() => fetchAndSaveUtensils(715538)}>Fetch and Save Utensils Data</button>
+      <input
+        type="text"
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        placeholder="Search for utensils"
+      />
       <section className="utensils">
-        {/* show a thumbnail for each utensil item */}
-        {data.map((item) => (
-          <UtensilThumb key={item.id} details={item} />
+        {/* Show a thumbnail for each utensil item */}
+        {filteredUtensils.map((item) => (
+          <UtensilThumb key={item._id} details={item} addUserUtensil={() => addUserUtensil(item._id)} />
         ))}
       </section>
     </div>
