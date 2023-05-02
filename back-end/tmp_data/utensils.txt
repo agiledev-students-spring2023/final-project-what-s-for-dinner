@@ -1,9 +1,11 @@
-{"id": 1, "utensil_title": "Whisk", "image_url": "../images/img2.jpeg", "description": "A kitchen utensil used to blend ingredients together smoothly and incorporate air into the mixture."}
-{"id": 2, "utensil_title": "Spatula", "image_url": "../images/img7.jpeg", "description": "A flat, flexible utensil used for flipping food, spreading condiments, or scraping the sides of bowls or jars."}
-{"id": 3, "utensil_title": "Knife", "image_url": "../images/img1.jpeg", "description": "A sharp tool used for cutting, slicing, or chopping food."}
-{"id":4,"utensil_title":"Test Utensil"}
-{"id":5,"utensil_title":"Test Utensil"}
-{"id":6,"utensil_title":"Test Utensil"}
-{"id":7,"utensil_title":"Test Utensil"}
-{"id":8,"utensil_title":"Test Utensil"}
-{"id":9,"utensil_title":"Test Utensil"}
+{"id": 1, "utensil_title": "Whisk", "image_url": "/images/whisk.jpeg"}
+{"id": 2, "utensil_title": "Spatula", "image_url": "../images/spatula.jpeg"}
+{"id": 3, "utensil_title": "Knife", "image_url": "../images/knife.jpeg"}
+{"id": 4, "utensil_title": "Big Pot", "image_url": "../images/big_pot.jpeg"}
+{"id": 5, "utensil_title": "Bowl", "image_url": "../images/bowl.jpeg"}
+{"id": 6, "utensil_title": "Cooking Tray", "image_url": "../images/cooking_tray.jpeg"}
+{"id": 7, "utensil_title": "Grater", "image_url": "../images/grater.jpeg"}
+{"id": 8, "utensil_title": "Measuring Cup", "image_url": "../images/measuring_cup.jpeg"}
+{"id": 9, "utensil_title": "Pan", "image_url": "../images/pan.jpeg"}
+{"id": 10, "utensil_title": "Salad Spoon", "image_url": "../images/salad_spoon.jpeg"}
+{"id": 11, "utensil_title": "Squeezer", "image_url": "../images/squeezer.jpeg"}
