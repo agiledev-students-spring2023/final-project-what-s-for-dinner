@@ -1,14 +1,10 @@
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const app = require('../app.js');
-const connectToMongoDB = require("../db.js");
 const IngredientModel = require('../models/ingredients.js');
 const { expect } = chai;
 
 chai.use(chaiHttp);
-
-// call connectToMongoDB to connect to the database
-connectToMongoDB();
 
 describe('Ingredients API', () => {
   describe('GET /my-ingredients', () => {
@@ -44,6 +40,8 @@ describe('Ingredients API', () => {
       const ingredient = await IngredientModel.findOne({ name: 'apple', username });
       expect(ingredient).to.exist;
       expect(ingredient.amount).to.equal(5);
+
+      await IngredientModel.findOneAndDelete({ name: ingredient.name, username });
     }).timeout(5000);
 
     it('should return an error if the request body is invalid', async () => {
@@ -60,8 +58,8 @@ describe('Ingredients API', () => {
 
   describe('DELETE /my-ingredients/:name', () => {
     it('should delete an ingredient for a given username', async () => {
-      const username = 'testuser';
-      const ingredientName = 'test ingredient';
+      const username = 'ginettexu';
+      const ingredientName = 'apple';
 
       // add an ingredient to the database for the test user
       const newIngredient = new IngredientModel({ username, name: ingredientName.toLowerCase(), amount: 5 });
@@ -80,7 +78,7 @@ describe('Ingredients API', () => {
     });
 
     it('should return an error if the ingredient does not exist', async () => {
-      const username = 'testuser';
+      const username = 'ginettexu';
       const ingredientName = 'non-existent ingredient';
 
       const res = await chai
