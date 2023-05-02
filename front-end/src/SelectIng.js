@@ -6,7 +6,7 @@ const SelectIng = ({ handleIngredientSelect, user }) => {
   const [ingredients, setIngredients] = useState([]);
   useEffect(() => {
     const username = user.username;
-    axios.get(`${baseUrl}/my-ingredients?username=${username}`)
+    axios.get(`${baseUrl}/ingredients/my-ingredients?username=${username}`)
       .then(response => {
         const names = response.data.map(obj => obj.name); // extract name values and create new array
         setIngredients(names);
