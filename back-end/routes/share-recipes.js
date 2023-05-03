@@ -1,25 +1,17 @@
 const express = require("express");
 const router = express.Router();
-const Recipe = require('../models/recipes');
-const bodyParser = require('body-parser');
+const Recipe = require('../models/recipes.js');
 
-const fs = require('fs');
-const path = require('path');
-const multer = require("multer");
-
-const uploadrecipeFilePath = path.join(__dirname, '../tmp_data/upload-recipe.txt');
-
-router.use(bodyParser.json());
-
-router.post("/", async (req,res) => {
+router.post('/', async (req,res) => {
     try{
         const recipe = new Recipe({
             Title: req.body.title,
             Instructions: req.body.instructions,
             Ingredients: req.body.ingredients,
         })
+        res.json(recipe);
 
-        const savedRecipe = await post.save();
+        await recipe.save();
         res.status(200).json({ message: `Recipe successfully uploaded` });
     }
     catch (error) {
@@ -28,7 +20,16 @@ router.post("/", async (req,res) => {
     }
 
 })
+
+module.exports = router;
   
+//const bodyParser = require('body-parser');
+//const fs = require('fs');
+//const path = require('path');
+//const uploadrecipeFilePath = path.join(__dirname, '../tmp_data/upload-recipe.txt');
+//router.use(bodyParser.json());
+
+
 // Route to upload a recipe
 // router.post("/", async (req, res) => {
 //     try {
@@ -69,5 +70,5 @@ router.post("/", async (req,res) => {
 // });
   
 
-module.exports = router;
+
 
