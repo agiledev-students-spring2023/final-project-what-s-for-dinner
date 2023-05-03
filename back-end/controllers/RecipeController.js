@@ -158,9 +158,11 @@ class RecipeController {
             rating
           };
           recipe.Comments.push(newComment);
-          await recipe.save();
           const averageRating = await RecipeController.getAverageRating(recipeId);
           recipe.Rating = averageRating;
+          console.log(recipe.Rating)
+          await recipe.save();
+          console.log(recipe.Rating)
           res.status(200).json({ message: 'Comment added successfully', averageRating});
         } catch (error) {
           console.error(error);

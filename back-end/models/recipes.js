@@ -9,7 +9,7 @@ let recipeSchema = new Schema(
         Instructions: {type: String},
         Image_Name: {type: String},
         Cleaned_Ingredients: {type: String},
-        Rating: {type: Number},
+        Rating: {type: Number, default: 0},
         Comments: {type: Array}
     }
 )
