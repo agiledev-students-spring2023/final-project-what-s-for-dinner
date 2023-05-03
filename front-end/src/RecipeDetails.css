@@ -52,4 +52,44 @@ img{
 .content .add-saved-recipes {
     padding: 0 20px 20px 20px
 }
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .content > div {
+    margin: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .content .Reviews, .content .comments {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .content .Reviews h2, .content .comments h2 {
+    text-align: center;
+  }
+  
+  .content .Reviews p {
+    margin-bottom: 10px;
+  }
+  
+  .content .Reviews div, .content .comments div {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .content .Reviews div:last-child, .content .comments div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  
 

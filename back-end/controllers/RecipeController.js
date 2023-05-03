@@ -32,7 +32,6 @@ class RecipeController {
     
         const ingredientsArray = ingredients.split(',');
         const filter = { Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } };
-        
         if (sentRecipeIds) {
           // Exclude sent recipe IDs from the query
           filter._id = { $nin: sentRecipeIds.split(',') };
