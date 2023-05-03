@@ -1,6 +1,6 @@
-![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/.github/workflows/back-end.yml/badge.svg?event=push)
+![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/workflows/back-end/.github/workflows/back-end.yml/badge.svg?event=push)
 
-![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/.github/workflows/front-end.yml/badge.svg?event=push)
+![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/workflows/front-end.yml/badge.svg?event=push)
 ## Project Description
 
 "What's for Dinner" is an open-source web application that suggests recipes based on the ingredients and cooking utensils you have on hand. With our platform, you can search for recipes using specific ingredients, add or remove ingredients to see different recipe suggestions, and save your favorite recipes for future use. Our app also includes advanced search filters such as dietary restrictions, meal type, and cooking time/difficulty to help find the perfect recipe for users at all levels.
@@ -32,7 +32,10 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 ### Building
 **Front-end**
 1. run `cd front-end` to navigate to front-end folder
-2. first run `npm install --legacy-peer-deps` (please ignore the error for now)
+2. first run `npm install` 
+3. create a `.env` file in the back-end directory with the following information:
+    > PORT=3001
+    > REACT_APP_SERVER=http://localhost:3000
 
 **Back-end**
 1. run `cd back-end` to navigate to back-end folder
