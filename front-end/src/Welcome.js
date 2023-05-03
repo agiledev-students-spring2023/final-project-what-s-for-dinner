@@ -8,20 +8,16 @@ const Welcome = (props) => {
       <h1>Welcome!</h1>
       <section className="main-content">
         <p>
-          "What's for Dinner" is an open-source web application that suggests
-          recipes based on the ingredients and cooking utensils you have on
-          hand. With our platform, you can search for recipes using specific
-          ingredients, add or remove ingredients to see different recipe
-          suggestions, and save your favorite recipes for future use. Our app
-          also includes advanced search filters such as dietary restrictions,
-          meal type, and cooking time/difficulty to help find the perfect recipe
-          for users at all levels.
+        Welcome to "What's for Dinner", the ultimate solution for your meal planning needs. <br></br>
+        Our open-source web application provides personalized recipe suggestions based on the ingredients you have on hand. 
+        With our user-friendly platform, you can easily search for recipes, add or remove ingredients to find new and exciting dishes, and save your favorite recipes for future reference. 
+        Our advanced search filters make it easy to find recipes that fit your dietary restrictions, meal type, and cooking time/difficulty, making meal planning a breeze for users of all skill levels.
         </p>
-        <br />
-        <br />
-        <Link to="/recipes">Check out our recipes!</Link>
+        <h2>
+        <Link to="/search">Check out our recipes!</Link>
+        </h2>
         <h1>
-          <Link to="/home">Click Here to Start</Link>
+        <Link to="/home">Login for Customized Recipes</Link>
         </h1>
       </section>
     </div>

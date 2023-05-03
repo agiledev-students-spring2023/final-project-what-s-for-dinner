@@ -16,14 +16,14 @@
     "web-vitals": "^3.3.1"
   },
   "scripts": {
-    "start": "PORT=3001 HOST=0.0.0.0 react-scripts start",
+    "start": "PORT=3001 react-scripts start",
     "start-pc": "set PORT=3001 && react-scripts start",
 
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://lobster-app-4dv57.ondigitalocean.app/",
+  "proxy": "https://lobster-app-4dv57.ondigitalocean.app",
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -41,11 +41,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devServer": {
-    "allowedHosts": [
-      "0.0.0.0",
-      "monkfish-app-fjlpj.ondigitalocean.app"
-    ]
-  }  
+  }
 }
