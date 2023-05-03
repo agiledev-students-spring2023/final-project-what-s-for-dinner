@@ -1,6 +1,7 @@
 ![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/.github/workflows/back-end.yml/badge.svg?event=push)
 
 ![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/.github/workflows/front-end.yml/badge.svg?event=push)
+
 ## Project Description
 
 "What's for Dinner" is an open-source web application that suggests recipes based on the ingredients and cooking utensils you have on hand. With our platform, you can search for recipes using specific ingredients, add or remove ingredients to see different recipe suggestions, and save your favorite recipes for future use. Our app also includes advanced search filters such as dietary restrictions, meal type, and cooking time/difficulty to help find the perfect recipe for users at all levels.
@@ -30,11 +31,14 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 ## Instructions to Building and Testing the Project
 
 ### Building
+
 **Front-end**
+
 1. run `cd front-end` to navigate to front-end folder
 2. first run `npm install --legacy-peer-deps` (please ignore the error for now)
 
 **Back-end**
+
 1. run `cd back-end` to navigate to back-end folder
 2. run `npm install`
 3. create a `.env` file in the back-end directory with the following information:
@@ -45,22 +49,24 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
     > MONGODB_URI=mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority
     > EMAIL_USERNAME=whatsfordinneragile@gmail.com
     > EMAIL_PASSWORD=nuzvkswprpbdvozh
-    
+
     *Note: You should go to "https://www.themealdb.com/" to create your own account and replace the value with your own api key. But for demonstrantion simplicity we provide you with the api key for now.*
 
 ### Running
+
 1. if you are only running the front-end or back-end for testing purpose, you can simply run `npm start` in the corresponding front-end/back-end folder
 2. if you are running both front-end and back-end, please first run `npm start` in the back-end folder and then in the front-end folder. When you encounter the question `Would you like to run the app on another port instead? › (Y/n)`, type "y" to run the front-end on port 3001.
 3. if you are working on a Windows PC, please use `npm run start-pc` instead for front-end.
-
 
 *Note: some of our pages won't work properly if you run back-end on port 3000 and front-end on port 3001*
 4. now you can open [http://localhost:3000](http://localhost:3000) in your browser to view our app.
 
 ## Additional Resources
+
 [README.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/README.md) - an overview of this project<br>
 [LICENSE.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/LICENSE.md) - the license under which this project is released<br>
 [UX-DESIGN.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/UX-DESIGN.md) - the wireframe diagrams and prototype for this project
 
-### Important Note:
+### Important Note
+
 This project is still in development, and we appreciate your patience and feedback as we work to improve the platform. If you have any questions or suggestions, please don't hesitate to reach out to us via the project's GitHub page.
