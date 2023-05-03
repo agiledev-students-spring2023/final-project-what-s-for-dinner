@@ -25,19 +25,18 @@ const RecipeList = (props) => {
   };
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}${sortUrl}&limit=${perPage}&sentRecipeIds=${sentRecipeIds.join(',')}`);
-        const newRecipes = response.data.recipes.filter(
-          recipe => !sentRecipeIds.includes(recipe._id)
-        );
-        setData(data => [...data, ...newRecipes]);
-        setSentRecipeIds(ids => [...ids, ...newRecipes.map(recipe => recipe._id)]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    
+    const fetchData = () => {
+      axios
+        .get(`${baseUrl}${sortUrl}&limit=${perPage}&sentRecipeIds=${sentRecipeIds.join(',')}`)
+        .then((response) => {
+          const newRecipes = response.data.recipes.filter((recipe) => !sentRecipeIds.includes(recipe._id));
+          setData((data) => [...data, ...newRecipes]);
+          setSentRecipeIds((ids) => [...ids, ...newRecipes.map((recipe) => recipe._id)]);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }; 
   
     fetchData();
     window.addEventListener("scroll", handleScroll);
@@ -91,18 +90,22 @@ const RecipeList = (props) => {
     <div className="RecipeList">
     <h1>Recipes</h1>
     <div className="recipe-container">
-    <SortBy handleSortChange={handleSortChange} />
-    <SelectIng handleIngredientSelect={handleIngredientSelect} user={props.user} />
-    {data.map((recipe) => (
-      <div key={recipe._id} className="recipe">
-        <Link to={`/${recipe._id}`} className="recipe-link">
-          <img src={`${baseUrl}${images}${recipe.Image_Name}.jpg`} alt={recipe.Title} className="recipe-image" />
-          <h3>{recipe.Title}</h3>
-        </Link>
-      </div>
-    ))}
-      </div>
+      <SortBy handleSortChange={handleSortChange} />
+      <SelectIng handleIngredientSelect={handleIngredientSelect} user={props.user} />
+      {selectedIngredients.length > 0 ? (
+        data.map((recipe) => (
+          <div key={recipe._id} className="recipe">
+            <Link to={`/${recipe._id}`} className="recipe-link">
+              <img src={`${baseUrl}${images}${recipe.Image_Name}.jpg`} alt={recipe.Title} className="recipe-image" />
+              <h3>{recipe.Title}</h3>
+            </Link>
+          </div>
+        ))
+      ) : (
+        <p>Please select ingredients to view recipes.</p>
+      )}
     </div>
+  </div>
   );
 };
 

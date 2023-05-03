@@ -38,18 +38,24 @@ const RecipeThumb = (props) => {
 
   useEffect(() => {
     const getRecipe = async () => {
-      const response1 = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${52996 + props.details.id}`
-      );
-      const data1 = await response1.json();
-      setItem1(data1.meals[0]);
-
-      const response2 = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${52770 + props.details.id}`
-      );
-      const data2 = await response2.json();
-      setItem2(data2.meals[0]);
-    };
+      const url1 = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${52996 + props.details.id}`;
+      const url2 = `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${52770 + props.details.id}`;
+    
+      const response1 = fetch(url1);
+      const response2 = fetch(url2);
+    
+      Promise.all([response1, response2])
+        .then(([res1, res2]) => {
+          return Promise.all([res1.json(), res2.json()]);
+        })
+        .then(([data1, data2]) => {
+          setItem1(data1.meals[0]);
+          setItem2(data2.meals[0]);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
+    }; 
     getRecipe();
   }, []);
   const classes = useStyles();

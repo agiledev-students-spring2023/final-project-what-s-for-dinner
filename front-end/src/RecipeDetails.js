@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import "./RecipeDetails.css"
+import axios from "axios";
 
 const RecipeDetails = (props) => {
     const [item, setItem] = useState();
@@ -11,25 +12,32 @@ const RecipeDetails = (props) => {
     const username = props.user.username;
     const images = '/api/images/';
     const [cleanedIngredients, setCleanedIngredients] = useState([]);
+    const [averageRating, setAverageRating] = useState(0);
     useEffect(() => {
-        const fetchRecipe = async () => {
-            try {
-              const response = await fetch(`${baseUrl}/recipes/${recipeId}`);
-              const data = await response.json();
+      const fetchRecipe = async () => {
+        try {
+          axios.get(`${baseUrl}/recipes/${recipeId}`)
+            .then(response => {
+              const data = response.data;
               console.log("just data", data);
               console.log("Before setItem(): ", data);
               setItem(data.recipe[0]);
               console.log("After setItem(): ", item);
-              
-            } catch (error) {
+              setAverageRating(data.recipe[0].Rating);
+              console.log("After setItem(): ", data.recipe[0].Rating);
+            })
+            .catch(error => {
               console.error(error);
-            }
-          };
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      };
       
           if (recipeId !== " ") {
             fetchRecipe();
           }
-    }, [recipeId, baseUrl, item]);
+    }, [recipeId, baseUrl]);
 
     useEffect(() => {
         console.log("item after update: ", item);
@@ -113,7 +121,6 @@ const RecipeDetails = (props) => {
 
     return(
         <>
-
         {
             (!item) ? "" : <div className="content">
                 <img src={`${baseUrl}${images}${item.Image_Name}.jpg`} alt={item._id} />
@@ -136,6 +143,7 @@ const RecipeDetails = (props) => {
                 </div>
                 <div className="Reviews">
                     <h2>Reviews</h2>
+                    <p>Average Rating: {averageRating}</p>
                     {item.Comments.map((comment, index) => (
                         <div key={index}>
                         <h3>{comment.username}</h3>

@@ -1,12 +1,15 @@
 .container {
     margin: 0 auto;
     width: 80%;
+    align-items: center;
   }
 
   .button-link {
     color: #ffffff;
     text-align: center;
     text-decoration: none;
+    font-size: medium;
+    max-width: 200px;
   }
   
   h1 {
@@ -55,6 +58,7 @@
     border: none;
     background-color: transparent;
     cursor: pointer;
+    font-size: small;
   }
   
   .table td button:hover {

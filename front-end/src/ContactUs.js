@@ -4,7 +4,7 @@ import axios from 'axios';
 const ContactUs = () => {
   const [formStatus, setFormStatus] = useState('Send');
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
   
     setFormStatus('Submitting...');
@@ -17,15 +17,18 @@ const ContactUs = () => {
       message: message.value,
     };
   
-    try {
-      const baseUrl = process.env.REACT_APP_SERVER;
-      await axios.post(`${baseUrl}/contact-us`, requestData);
-      setFormStatus('Sent');
-    } catch (error) {
-      console.error(error);
-      setFormStatus('Error sending');
-    }
+    const baseUrl = process.env.REACT_APP_SERVER;
+  
+    axios.post(`${baseUrl}/contact-us`, requestData)
+      .then(() => {
+        setFormStatus('Sent');
+      })
+      .catch((error) => {
+        console.error(error);
+        setFormStatus('Error sending');
+      });
   };
+
   return (
     <div className="container mt-5">
       <h2 className="mb-3">Contact Form</h2>
