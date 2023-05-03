@@ -25,19 +25,18 @@ const RecipeList = (props) => {
   };
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}${sortUrl}&limit=${perPage}&sentRecipeIds=${sentRecipeIds.join(',')}`);
-        const newRecipes = response.data.recipes.filter(
-          recipe => !sentRecipeIds.includes(recipe._id)
-        );
-        setData(data => [...data, ...newRecipes]);
-        setSentRecipeIds(ids => [...ids, ...newRecipes.map(recipe => recipe._id)]);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    
+    const fetchData = () => {
+      axios
+        .get(`${baseUrl}${sortUrl}&limit=${perPage}&sentRecipeIds=${sentRecipeIds.join(',')}`)
+        .then((response) => {
+          const newRecipes = response.data.recipes.filter((recipe) => !sentRecipeIds.includes(recipe._id));
+          setData((data) => [...data, ...newRecipes]);
+          setSentRecipeIds((ids) => [...ids, ...newRecipes.map((recipe) => recipe._id)]);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }; 
   
     fetchData();
     window.addEventListener("scroll", handleScroll);

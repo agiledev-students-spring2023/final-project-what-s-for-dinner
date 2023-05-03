@@ -18,16 +18,18 @@ const SavedRecipes = (props) => {
   };
   
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(`${baseUrl}/${endPoint}`);
-        const newRecipes = response.data.savedRecipes;
-        console.log(response.data);
-        setData(newRecipes);
-        //setSentRecipeIds(ids => [...ids, ...newRecipes.map(recipe => recipe._id)]);
-      } catch (error) {
-        console.error(error);
-      }
+    const fetchData = () => {
+      axios
+        .get(`${baseUrl}/${endPoint}`)
+        .then(response => {
+          const newRecipes = response.data.savedRecipes;
+          console.log(response.data);
+          setData(newRecipes);
+          //setSentRecipeIds(ids => [...ids, ...newRecipes.map(recipe => recipe._id)]);
+        })
+        .catch(error => {
+          console.error(error);
+        });
     };
     
   

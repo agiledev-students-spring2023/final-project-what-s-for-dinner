@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import { useParams } from "react-router"
 import "./RecipeDetails.css"
+import axios from "axios";
 
 const RecipeDetails = (props) => {
     const [item, setItem] = useState();
@@ -13,20 +14,25 @@ const RecipeDetails = (props) => {
     const [cleanedIngredients, setCleanedIngredients] = useState([]);
     const [averageRating, setAverageRating] = useState(0);
     useEffect(() => {
-        const fetchRecipe = async () => {
-            try {
-              const response = await fetch(`${baseUrl}/recipes/${recipeId}`);
-              const data = await response.json();
+      const fetchRecipe = async () => {
+        try {
+          axios.get(`${baseUrl}/recipes/${recipeId}`)
+            .then(response => {
+              const data = response.data;
               console.log("just data", data);
               console.log("Before setItem(): ", data);
               setItem(data.recipe[0]);
               console.log("After setItem(): ", item);
               setAverageRating(data.recipe[0].Rating);
               console.log("After setItem(): ", data.recipe[0].Rating);
-            } catch (error) {
+            })
+            .catch(error => {
               console.error(error);
-            }
-          };
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      };
       
           if (recipeId !== " ") {
             fetchRecipe();

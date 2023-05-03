@@ -28,23 +28,23 @@ const Login = props => {
     }
   }, [status, props])
 
-  const handleSubmit = async e => {
-    e.preventDefault()
+  const handleSubmit = e => {
+    e.preventDefault();
     const baseUrl = process.env.REACT_APP_SERVER;
-    try {
-      const requestData = {
-        username: e.target.username.value,
-        password: e.target.password.value,
-      }
-      const response = await axios.post(`${baseUrl}/auth/login`, requestData) // send the request to the backend server
-  
-      console.log(response.data)
-      setStatus(response.data)
-    } catch (err) {
-      console.error(err)
-      setErrorMessage(err.response.data.message)
-    }
-  }
+    const requestData = {
+      username: e.target.username.value,
+      password: e.target.password.value,
+    };
+    axios.post(`${baseUrl}/auth/login`, requestData)
+      .then(response => {
+        console.log(response.data);
+        setStatus(response.data);
+      })
+      .catch(err => {
+        console.error(err);
+        setErrorMessage(err.response.data.message);
+      });
+  } 
   
 
   // if the user is not logged in, show the login form
