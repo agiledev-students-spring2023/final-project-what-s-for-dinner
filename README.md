@@ -31,31 +31,34 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 
 ### Building
 **Front-end**
-1. run `cd front-end` to navigate to front-end folder
-2. first run `npm install --legacy-peer-deps` (please ignore the error for now)
+1. first run `cd front-end` to navigate to front-end folder
+2. then run `npm install` to install the front-end dependencies
+3. create a `.env` file in the front-end directory with the following content:
+```
+PORT=3001
+REACT_APP_SERVER=http://localhost:3000
+```
 
 **Back-end**
-1. run `cd back-end` to navigate to back-end folder
-2. run `npm install`
-3. create a `.env` file in the back-end directory with the following information:
-    > MEAL_DB_API_KEY=9973533
-    > SPOONACULAR_API_KEY=86b8ac3348974b5ab495921e201be0de
-    > JWT_SECRET=whats.for.dinner
-    > JWT_EXP_DAYS=60
-    > MONGODB_URI=mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority
-    > EMAIL_USERNAME=whatsfordinneragile@gmail.com
-    > EMAIL_PASSWORD=nuzvkswprpbdvozh
-    
-    *Note: You should go to "https://www.themealdb.com/" to create your own account and replace the value with your own api key. But for demonstrantion simplicity we provide you with the api key for now.*
+1. first run `cd back-end` to navigate to back-end folder
+2. then run `npm install` to install the back-end dependencies
+3. create a `.env` file in the back-end directory with the following content:
+```
+MEAL_DB_API_KEY=9973533
+JWT_SECRET=whats.for.dinner
+JWT_EXP_DAYS=60
+MONGODB_URI=mongodb+srv://dinner:4s7K0Z2cQJS0LrL0@cluster0.ufkozym.mongodb.net/test?retryWrites=true&w=majority
+SPOONACULAR_API_KEY=86b8ac3348974b5ab495921e201be0de
+EMAIL_USERNAME=whatsfordinneragile@gmail.com
+EMAIL_PASSWORD=nuzvkswprpbdvozh
+CORS_ORIGIN=http://localhost:3001
+```
+    *Note: For this project, we have provided the following credentials. However, for real projects, please visit "https://www.themealdb.com/" to create an account and replace <MEAL_DB_API_KEY> with your own API key. Similarly, replace <MONGODB_URI> and <SPOONACULAR_API_KEY> with your respective API keys.*
 
 ### Running
-1. if you are only running the front-end or back-end for testing purpose, you can simply run `npm start` in the corresponding front-end/back-end folder
-2. if you are running both front-end and back-end, please first run `npm start` in the back-end folder and then in the front-end folder. When you encounter the question `Would you like to run the app on another port instead? › (Y/n)`, type "y" to run the front-end on port 3001.
-3. if you are working on a Windows PC, please use `npm run start-pc` instead for front-end.
-
-
-*Note: some of our pages won't work properly if you run back-end on port 3000 and front-end on port 3001*
-4. now you can open [http://localhost:3000](http://localhost:3000) in your browser to view our app.
+1. If you are testing either the front-end or back-end, you can run npm start in the corresponding folder.
+2. If you are running both the front-end and back-end together, run npm start separately in each folder and view the app on http://localhost:3001.
+3. If you are using a Windows PC, please run npm run start-pc instead of npm start for the front-end.
 
 ## Additional Resources
 [README.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/README.md) - an overview of this project<br>
