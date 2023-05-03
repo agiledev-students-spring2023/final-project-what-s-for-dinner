@@ -6,7 +6,7 @@ footer {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background-color: rgba(255, 255, 255, 0.8); /* Match the background-color from app.css */
+  background-color: transparent; /* Remove the background color */
 }
 
 .footer-links {

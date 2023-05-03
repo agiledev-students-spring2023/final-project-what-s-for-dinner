@@ -1,28 +1,38 @@
-Welcome {
-  text-align: center;
-}
-
 .Welcome {
-  border: 1px solid black;
-  border-width: 1px 0px 1px 0px; 
-  font-family: georgia;
-  padding: 20px;
-  margin: 90%px 0; /* no margin on left or right */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.Welcome h1 {
+  width: 100%;
   text-align: center;
+  margin: 10px 0;
 }
 
-.Welcome b {
-  font-size: large;
-  font-weight: bold;
+.main-content {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
 }
 
-.Welcome a {
-  text-decoration: none;
-  color: black;
-  margin: 20px;
+.main-content p {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0;
 }
 
-.Welcome a:hover {
-  text-decoration: underline;
-  background-color: yellow;
+.main-content a {
+  width: 100%;
+  text-align: center;
+  display: block;
+  margin: 10px 0;
 }
