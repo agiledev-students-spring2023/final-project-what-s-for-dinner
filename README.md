@@ -60,6 +60,9 @@ CORS_ORIGIN=http://localhost:3001
 2. If you are running both the front-end and back-end together, run npm start separately in each folder and view the app on http://localhost:3001.
 3. If you are using a Windows PC, please run npm run start-pc instead of npm start for the front-end.
 
+## Deployed front-end
+To view our front-end code live on the web, go to https://monkfish-app-fjlpj.ondigitalocean.app/
+
 ## Additional Resources
 [README.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/README.md) - an overview of this project<br>
 [LICENSE.md](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/LICENSE.md) - the license under which this project is released<br>
