@@ -2,15 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./Footer.css";
 
-//links to the footer pages which are terms of service, contanct us, and all rights reserved
 const Footer = props => {
-    return (
-        <footer>
+  return (
+    <footer>
+      <div className="footer-links">
         <Link to="/termsofservice">Terms of Service</Link>
+        <span>|</span>
         <Link to="/contactus">Contact Us</Link>
-        <br />
+      </div>
+      <div className="reserved">
         <Link to="/allrightsreserved">©All Rights Reserved 2023</Link>
-        </footer>
-    );
-    }
+      </div>
+    </footer>
+  );
+};
 export default Footer;
