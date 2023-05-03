@@ -4,7 +4,7 @@
   "description": "The back-end of your project will live in this directory.",
   "main": "index.js",
   "scripts": {
-    "test": "nyc mocha test/**/*.js",
+    "test": "nyc mocha test/**/*.js --exit",
     "start": "node server.js"
   },
   "keywords": [],
