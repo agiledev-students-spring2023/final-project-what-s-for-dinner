@@ -9,7 +9,7 @@ const Welcome = (props) => {
       <section className="main-content">
         <p>
           "What's for Dinner" is an open-source web application that suggests
-          recipes based on the ingredients and cooking utensils you have on
+          recipes based on the ingredients you have on
           hand. With our platform, you can search for recipes using specific
           ingredients, add or remove ingredients to see different recipe
           suggestions, and save your favorite recipes for future use. Our app
