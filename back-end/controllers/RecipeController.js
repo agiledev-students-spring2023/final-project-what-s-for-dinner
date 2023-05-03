@@ -26,8 +26,13 @@ class RecipeController {
       try {
         const { ingredients, limit = 10, sentRecipeIds } = req.query;
         
-        const ingredientsArray = ingredients ? ingredients.split(',') : [];
+        if (!ingredients) {
+          return res.status(400).json({ error: 'Ingredients are required' });
+        }
+    
+        const ingredientsArray = ingredients.split(',');
         const filter = { Cleaned_Ingredients: { $regex: new RegExp(ingredientsArray.join("|"), "i") } };
+        
         if (sentRecipeIds) {
           // Exclude sent recipe IDs from the query
           filter._id = { $nin: sentRecipeIds.split(',') };
@@ -44,6 +49,7 @@ class RecipeController {
         res.status(500).send('An error occurred while retrieving recipes');
       }
     }
+    
     
     static async getRecipesSorted(req, res) {
       try {
