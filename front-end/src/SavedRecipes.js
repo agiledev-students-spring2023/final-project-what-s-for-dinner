@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, Navigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 import "./SavedRecipes.css";
 
 const SavedRecipes = (props) => {
@@ -18,18 +18,16 @@ const SavedRecipes = (props) => {
   };
   
   useEffect(() => {
-    const fetchData = () => {
-      axios
-        .get(`${baseUrl}/${endPoint}`)
-        .then(response => {
-          const newRecipes = response.data.savedRecipes;
-          console.log(response.data);
-          setData(newRecipes);
-          //setSentRecipeIds(ids => [...ids, ...newRecipes.map(recipe => recipe._id)]);
-        })
-        .catch(error => {
-          console.error(error);
-        });
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(`${baseUrl}/${endPoint}`);
+        const newRecipes = response.data.savedRecipes;
+        console.log(response.data);
+        setData(newRecipes);
+        //setSentRecipeIds(ids => [...ids, ...newRecipes.map(recipe => recipe._id)]);
+      } catch (error) {
+        console.error(error);
+      }
     };
     
   
@@ -39,10 +37,6 @@ const SavedRecipes = (props) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [page, baseUrl, endPoint]);
-
-  if (!props.user || !props.user.success) {
-    return <Navigate to="/login?error=protected" />;
-  }
   
   return (
     <div className="RecipeList">
