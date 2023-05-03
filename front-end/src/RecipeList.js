@@ -90,7 +90,6 @@ const RecipeList = (props) => {
   return (
     <div className="RecipeList">
     <h1>Recipes</h1>
-    <Search />
     <div className="recipe-container">
     <SortBy handleSortChange={handleSortChange} />
     <SelectIng handleIngredientSelect={handleIngredientSelect} user={props.user} />

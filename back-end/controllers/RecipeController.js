@@ -116,7 +116,9 @@ class RecipeController {
         try {
           if (keyword) {
             const regex = new RegExp(keyword, 'i');
-            response = await Recipe.find({ Title: regex }).exec();
+            response = await Recipe.find({ Title: regex })
+            .limit(60)
+            .exec();
           } else {
             response = await Recipe.find().exec();
           }
