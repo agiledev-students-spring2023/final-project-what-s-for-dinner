@@ -11,6 +11,7 @@ const RecipeDetails = (props) => {
     const username = props.user.username;
     const images = '/api/images/';
     const [cleanedIngredients, setCleanedIngredients] = useState([]);
+    const [averageRating, setAverageRating] = useState(0);
     useEffect(() => {
         const fetchRecipe = async () => {
             try {
@@ -20,7 +21,8 @@ const RecipeDetails = (props) => {
               console.log("Before setItem(): ", data);
               setItem(data.recipe[0]);
               console.log("After setItem(): ", item);
-              
+              setAverageRating(data.recipe[0].Rating);
+              console.log("After setItem(): ", data.recipe[0].Rating);
             } catch (error) {
               console.error(error);
             }
@@ -29,7 +31,7 @@ const RecipeDetails = (props) => {
           if (recipeId !== " ") {
             fetchRecipe();
           }
-    }, [recipeId, baseUrl, item]);
+    }, [recipeId, baseUrl]);
 
     useEffect(() => {
         console.log("item after update: ", item);
@@ -113,7 +115,6 @@ const RecipeDetails = (props) => {
 
     return(
         <>
-
         {
             (!item) ? "" : <div className="content">
                 <img src={`${baseUrl}${images}${item.Image_Name}.jpg`} alt={item._id} />
@@ -136,6 +137,7 @@ const RecipeDetails = (props) => {
                 </div>
                 <div className="Reviews">
                     <h2>Reviews</h2>
+                    <p>Average Rating: {averageRating}</p>
                     {item.Comments.map((comment, index) => (
                         <div key={index}>
                         <h3>{comment.username}</h3>
