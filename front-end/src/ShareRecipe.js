@@ -4,7 +4,7 @@ import "./ShareRecipe.css"
 const ShareRecipe = () => {
   // Set up state variables to track form input
   const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+  // const [description, setDescription] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [instructions, setInstructions] = useState("");
   const [image, setImage] = useState(null);
@@ -15,32 +15,24 @@ const ShareRecipe = () => {
     // Create recipe object with form input
     const recipe = {
       title: title,
-      description: description,
       ingredients: ingredients,
       instructions: instructions,
       image: image,
     };
     // Send recipe data
+
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('instructions', instructions);
+    formData.append('ingredients', JSON.stringify(ingredients));
+    formData.append('image', image);
+
     console.log(recipe);
-    const response = await fetch(`http://localhost:3000/share-recipes`, {
-      method: 'POST',
-      body: recipe,
+    const response = await fetch('http://localhost:3000/share-recipes', {
+        method: 'POST',
+        body: formData
     });
-
-    // const formData = new FormData();
-    // formData.append('title', title);
-    // formData.append('description', description);
-    // formData.append('instructions', instructions);
-    // formData.append('image', image);
-
-    // ingredients.forEach((ingredient, index) => {
-    // formData.append(`ingredients[${index}]`, ingredient);
-    // });
-
-    // const response = await fetch(`http://localhost:3000/share-recipes`, {
-    //   method: 'POST',
-    //   body: formData,
-    // });
 
     if(response.ok){
       console.log('Recipe submitted successfully!');
@@ -51,7 +43,7 @@ const ShareRecipe = () => {
 
     // Reset form input
     setTitle("");
-    setDescription("");
+    // setDescription("");
     setIngredients([]);
     setInstructions("");
     setImage(null);
@@ -86,13 +78,13 @@ const ShareRecipe = () => {
         required
       />
 
-      <label htmlFor="description">Description:</label>
+      {/* <label htmlFor="description">Description:</label>
       <textarea
         id="description"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         required
-      ></textarea>
+      ></textarea> */}
 
       <label htmlFor="ingredients">Ingredients:</label>
       {ingredients.map((ingredient, index) => (
@@ -122,6 +114,7 @@ const ShareRecipe = () => {
         id="image"
         accept=".jpg,.jpeg,.png"
         onChange={handleImageUpload}
+        required
       />
 
       <button type="submit">Share Recipe</button>

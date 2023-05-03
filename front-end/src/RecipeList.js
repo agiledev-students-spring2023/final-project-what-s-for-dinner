@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Search from "./Search";
+// import Search from "./Search";
 import { Link } from "react-router-dom"
 import SortBy from "./SortBy";
 import SelectIng from "./SelectIng";
