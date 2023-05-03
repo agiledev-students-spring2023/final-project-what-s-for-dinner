@@ -19,6 +19,7 @@ const PrimaryNav = props => {
     <nav>
       <Link to="/home">Home</Link>
       <Link to="/recipes">Recipes</Link>
+      <Link to="/search">Search</Link>
       {logInOutComponent}
     </nav>
   )
