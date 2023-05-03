@@ -1,5 +1,10 @@
-.Login {
+.Login .main-content form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
 }
+
 .Login .error {
   margin-left: 20px;
   color: red;

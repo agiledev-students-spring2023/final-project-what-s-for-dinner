@@ -20,9 +20,9 @@ const PrimaryNav = (props) => {
           </li>
           <li>
             {isLoggedIn ? (
-              <Link to="/logout">Log Out</Link>
+              <Link to="/logout">Logout</Link>
             ) : (
-              <Link to="/login">Log In</Link>
+              <Link to="/login">Login</Link>
             )}
           </li>
         </ul>

@@ -1,11 +1,11 @@
 .Welcome {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
+width: 100%;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+padding: 0;
+margin: 0;
 }
 
 .Welcome h1 {
@@ -14,7 +14,13 @@
   margin: 10px 0;
 }
 
-.main-content {
+.Welcome h2 {
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+}
+
+.Welcome .main-content {
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -24,15 +30,38 @@
   margin: 0;
 }
 
-.main-content p {
-  width: 100%;
-  text-align: center;
+.Welcome .main-content p {
+  width: 90%;
+  text-align: justify;
   margin: 20px 0;
 }
 
-.main-content a {
+.Welcome .main-content h2 a {
+  font-size: 18px;
   width: 100%;
+  max-width: 250px;
   text-align: center;
   display: block;
   margin: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  background-color: #0074d9;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+}
+
+.Welcome .main-content h1 a {
+  font-size: 18px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  display: block;
+  margin: 10px 0;
+  color: #fff;
+  text-decoration: none;
+  background-color: #6158e0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
 }
