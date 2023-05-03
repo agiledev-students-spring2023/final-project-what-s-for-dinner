@@ -22,7 +22,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-  "proxy": "https://lobster-app-4dv57.ondigitalocean.app/",
+  "proxy": "https://lobster-app-4dv57.ondigitalocean.app",
   "eslintConfig": {
     "extends": [
       "react-app",
