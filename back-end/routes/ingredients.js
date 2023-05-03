@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const IngredientModel = require('../models/ingredients.js');
 const { body, validationResult } = require('express-validator');
-const fetch = require('node-fetch');
+const fetch = require('node-fetch').default;
 
 // Get all ingredients from the database
 router.get('/my-ingredients', async (req, res) => {
