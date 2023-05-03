@@ -7,7 +7,7 @@ const Logout = props => {
   // we assume that a setuser function has been passed as a prop to this component
   useEffect(() => {
     props.setuser({}) // set the user data to a blank object
-  }, [])
+  }, [props])
 
   // redirect the user to the home screen
   return <Navigate to="/" />

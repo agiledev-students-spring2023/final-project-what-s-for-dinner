@@ -21,6 +21,10 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  savedRecipes: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Recipe',
+  }],
 })
 
 // hash the password before the user is saved

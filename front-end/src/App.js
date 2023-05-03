@@ -6,7 +6,6 @@ import Home from "./Home"
 import MenuOverlay from "./MenuOverlay"
 import RecipeList from "./RecipeList"
 import Utensils from "./Utensils"
-import IngredientDetails from "./IngredientDetails"
 import RecipeDetails from "./RecipeDetails"
 import Search from "./Search" 
 import Login from "./Login"
@@ -83,12 +82,7 @@ const App = props => {
           <Route
             path="/share-recipes" element={<ShareRecipe user={user} />}
           />
-          {/* a route to ingredient description */}
-          <Route 
-            path="/ingredientdetails/:id" element={<IngredientDetails/>} 
-          />
-
-          {/* a route to ingredient description */}
+          {/* a route to utensils page */}
           <Route 
             path="/utensils" element={<Utensils user={user} setuser={setUser} />}
           />

@@ -74,9 +74,10 @@ input[type="submit"]:active {
 
 .menu-button {
   position: fixed;
-  top: 55px;
+  top: 47px;
   left: 0px; /* Change the left position to 0px to always align it to the left corner */
-  padding: 0.5rem 1rem;
+  padding: 
+  0.5rem 1rem;
   font-size: 1.1rem;
   background-color: #3498db;
   color: #fff;

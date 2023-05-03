@@ -7,7 +7,7 @@ const Search = prop => {
     const [keyword, setKeyword] = useState('null');
     const [recipes, setRecipes] = useState([]);
     const [show, setShow] = useState(false);
-    const url = 'http://localhost:3000/search';
+    const url = `${process.env.REACT_APP_SERVER}/search`;
     const getSearch = e =>{
         e.preventDefault()
         setKeyword(search)
@@ -19,26 +19,25 @@ const Search = prop => {
         console.log(search)
     }
 
-    const getRecipes = async () => {
-        axios.get(url, {
-            params: {
-              keyword: `${keyword}` // need to replace this with ingredients selected by user
-            }
-          })
-          .then(response => {
-            console.log(response)
-            setRecipes(response.data.recipes);
-            setShow(true);
-          })
-          .catch(error => {
-            console.error(error);
-          });
-    }
-
 
     useEffect(() =>{
+        const getRecipes = async () => {
+            axios.get(url, {
+                params: {
+                  keyword: `${keyword}` // need to replace this with ingredients selected by user
+                }
+              })
+              .then(response => {
+                console.log(response)
+                setRecipes(response.data.recipes);
+                setShow(true);
+              })
+              .catch(error => {
+                console.error(error);
+              });
+        }
         getRecipes();
-    }, [keyword]);
+    }, [keyword, url]);
 
     return(
         <div>

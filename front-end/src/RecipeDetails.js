@@ -7,7 +7,7 @@ const RecipeDetails = (props) => {
     const [comment, setComment] = useState("");
     const [rating, setRating] = useState(0);
     const {recipeId} = useParams();
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = process.env.REACT_APP_SERVER;
     const username = props.user.username;
     const images = '/api/images/';
     const [cleanedIngredients, setCleanedIngredients] = useState([]);
@@ -29,7 +29,7 @@ const RecipeDetails = (props) => {
           if (recipeId !== " ") {
             fetchRecipe();
           }
-    }, [recipeId]);
+    }, [recipeId, baseUrl, item]);
 
     useEffect(() => {
         console.log("item after update: ", item);
@@ -52,7 +52,7 @@ const RecipeDetails = (props) => {
         console.log(clean1.replace(/'/g, "\""))
         const ingredientsArr = JSON.parse(clean1.replace(/'/g, "\""))
         const ingredientsList = ingredientsArr.map((ingredient) => {
-          return ingredient.replace(/"/g, "").replace(/\\"/g, "\"");
+          return ingredient.replace(/"/g, "").replace(/"/g, "\"");
         });
         
         setCleanedIngredients(ingredientsList);
@@ -85,7 +85,24 @@ const RecipeDetails = (props) => {
           console.error(error);
         }
       };
-    
+      const handleSaveRecipe = async () => {
+        try {
+          const response = await fetch(`${baseUrl}/save-recipe/${recipeId}?username=${username}`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              recipeId: item._id,
+              username: username,
+            }),
+          });
+          const data = await response.json();
+          console.log(data.message); // log the response from the server
+        } catch (error) {
+          console.error(error);
+        }
+      }; 
     const handleSubmit = e => {
         e.preventDefault();
         sendComment();
@@ -156,7 +173,7 @@ const RecipeDetails = (props) => {
                 </div>
 
                 <div className="add-saved-recipes">
-                    <button type="add">Add to saved recipes</button>
+                <button onClick={handleSaveRecipe}>Save Recipe</button>
 
                 </div>
 

@@ -11,7 +11,7 @@ const MyIngredients = (props) => {
 
   useEffect(() => {
     // API call to fetch user's added ingredients\
-    const baseUrl = 'http://localhost:3000';
+    const baseUrl = process.env.REACT_APP_SERVER;
     const fetchIngredients = async () => {
       try {
         const response = await fetch(`${baseUrl}/ingredients/my-ingredients?username=${username}`); // pass user_id to the API endpoint
@@ -27,7 +27,7 @@ const MyIngredients = (props) => {
   const handleAdd = async (ingredient) => {
     // API call to add ingredient to user's inventory
     try {
-      const baseUrl = 'http://localhost:3000';
+      const baseUrl = process.env.REACT_APP_SERVER;
       const response = await fetch(`${baseUrl}/ingredients/my-ingredients`, {
         method: 'POST',
         headers: {
@@ -61,7 +61,7 @@ const MyIngredients = (props) => {
 
   const handleDelete = async (ingredient) => {
     try {
-      const baseUrl = 'http://localhost:3000';
+      const baseUrl = process.env.REACT_APP_SERVER;
       const response = await fetch(`${baseUrl}/ingredients/my-ingredients/${ingredient.name}?username=${username}`, {
         method: 'DELETE',
         headers: {
@@ -103,7 +103,7 @@ const MyIngredients = (props) => {
   const handleSearch = async (event) => {
     //setSearchTerm(event.target.value);
     try {
-      const baseUrl = 'http://localhost:3000';
+      const baseUrl = process.env.REACT_APP_SERVER;
       const response = await fetch(`${baseUrl}/ingredients/search-ingredient?query=${searchTerm}`);
       const data = await response.json();
       setSearchResults(data);

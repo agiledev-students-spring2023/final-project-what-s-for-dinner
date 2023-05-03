@@ -13,6 +13,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 const _ = require("lodash") // the lodash module has some convenience functions for arrays that we use to sift through our mock user data... you don't need this if using a real database with user info
 const jwt = require("jsonwebtoken")
 const passport = require("passport")
+const contactUsRouter = require('./routes/contactUs');
 
 // use this JWT strategy within passport for authentication handling
 const jwtStrategy = require("./config/jwt-config.js") // import setup options for using JWT in passport
@@ -56,9 +57,9 @@ async function connectToMongoDB() {
 connectToMongoDB();
 
 const corsOptions = {
-    origin: 'http://localhost:3001',
-    credentials: true,
-    optionsSuccessStatus: 200
+  origin: process.env.CORS_ORIGIN,
+  credentials: true,
+  optionsSuccessStatus: 200
 };
 app.use(cors(corsOptions));
 app.use(function(req, res, next) {
@@ -122,5 +123,6 @@ app.use("/cookie", cookieRouter()); // all requests for /cookie/* will be handle
 app.use("/protected", protectedContentRouter()); // all requests for /protected/* will be handled by the protectedRoutes router
 app.use(resetPasswordRouter);
 app.use(savedRecipesRouter);
+app.use(contactUsRouter);
 
 module.exports = app;

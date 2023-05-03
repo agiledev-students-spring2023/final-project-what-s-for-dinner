@@ -1,3 +1,6 @@
+![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/.github/workflows/back-end.yml/badge.svg?event=push)
+
+![Workflow Status](https://github.com/agiledev-students-spring-2023/final-project-what-s-for-dinner/blob/master/.github/workflows/front-end.yml/badge.svg?event=push)
 ## Project Description
 
 "What's for Dinner" is an open-source web application that suggests recipes based on the ingredients and cooking utensils you have on hand. With our platform, you can search for recipes using specific ingredients, add or remove ingredients to see different recipe suggestions, and save your favorite recipes for future use. Our app also includes advanced search filters such as dietary restrictions, meal type, and cooking time/difficulty to help find the perfect recipe for users at all levels.
@@ -48,7 +51,8 @@ Please refer to the [CONTRIBUTING.md](https://github.com/agiledev-students-sprin
 ### Running
 1. if you are only running the front-end or back-end for testing purpose, you can simply run `npm start` in the corresponding front-end/back-end folder
 2. if you are running both front-end and back-end, please first run `npm start` in the back-end folder and then in the front-end folder. When you encounter the question `Would you like to run the app on another port instead? › (Y/n)`, type "y" to run the front-end on port 3001.
-3. if you are working on a Windows PC, run `npm run start-pc` for front-end.
+3. if you are working on a Windows PC, please use `npm run start-pc` instead for front-end.
+
 
 *Note: some of our pages won't work properly if you run back-end on port 3000 and front-end on port 3001*
 4. now you can open [http://localhost:3000](http://localhost:3000) in your browser to view our app.

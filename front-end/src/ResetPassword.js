@@ -19,7 +19,7 @@ const ResetPassword = props => {
       setErrorMessage(
         "Please log in to view your home page."
       )
-  }, [])
+  }, [urlSearchParams])
 
   const handleSubmit = async e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
@@ -32,7 +32,7 @@ const ResetPassword = props => {
         email: e.target.email.value, // gets the value of the field in the submitted form with name='password',
       }
       // send the request to the server api to authenticate
-      const baseUrl = 'http://localhost:3000';
+      const baseUrl = process.env.REACT_APP_SERVER;
       const response = await axios.post(
         `${baseUrl}/reset-password`,
         requestData

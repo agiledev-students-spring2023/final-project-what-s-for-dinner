@@ -1,35 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Navigate } from 'react-router-dom';
+import { Navigate } from "react-router-dom";
 import axios from "axios";
 import UtensilThumb from "./UtensilThumb";
 import "./Utensils.css";
 
 const Utensils = (props) => {
-  const [data, setData] = useState([]);
+  const [utensils, setUtensils] = useState([]);
+  const [selectedUtensils, setSelectedUtensils] = useState([]);
 
   useEffect(() => {
-    // Fetch utensils data from the new backend API
-    axios("http://localhost:3000/utensils")
+    axios(`${process.env.REACT_APP_SERVER}/utensils`)
       .then((response) => {
-        setData(response.data);
+        setUtensils(response.data);
       })
       .catch((err) => {
         console.log(`Error fetching utensils data: ${err}`);
-        setData([]);
+        setUtensils([]);
       });
   }, []);
 
-  // Fetch and save the utensils data from the Spoonacular API
-  const fetchAndSaveUtensils = async (recipeId) => {
-    try {
-      await axios.get(`http://localhost:3000/utensils/fetch-from-api?recipeId=${recipeId}`);
-      console.log('Utensils data fetched and saved successfully');
-    } catch (error) {
-      console.error('Error fetching and saving utensils data:', error);
-    }
+  const handleAddUtensil = (utensilId) => {
+    setSelectedUtensils([...selectedUtensils, utensilId]);
   };
 
-  // if the user is not logged in, redirect them to the login route
+  const handleDeleteUtensil = (utensilId) => {
+    setSelectedUtensils(selectedUtensils.filter((id) => id !== utensilId));
+  };
+
   if (!props.user || !props.user.success) {
     return <Navigate to="/login?error=protected" />;
   }
@@ -37,11 +34,16 @@ const Utensils = (props) => {
   return (
     <div className="Utensils">
       <h1>My Utensils</h1>
-      <button onClick={() => fetchAndSaveUtensils(715538)}>Fetch and Save Utensils Data</button>
+      <p>Select Utensils That You Have Available</p>
       <section className="utensils">
-        {/* show a thumbnail for each utensil item */}
-        {data.map((item) => (
-          <UtensilThumb key={item.id} details={item} />
+        {utensils.map((item) => (
+          <UtensilThumb
+            key={item._id}
+            details={item}
+            isSelected={selectedUtensils.includes(item._id)}
+            handleAddUtensil={handleAddUtensil}
+            handleDeleteUtensil={handleDeleteUtensil}
+          />
         ))}
       </section>
     </div>

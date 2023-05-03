@@ -2,11 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 const SelectIng = ({ handleIngredientSelect, user }) => {
-  const baseUrl = 'http://localhost:3000';
+  const baseUrl = process.env.REACT_APP_SERVER;
   const [ingredients, setIngredients] = useState([]);
   useEffect(() => {
     const username = user.username;
-    axios.get(`${baseUrl}/my-ingredients?username=${username}`)
+    axios.get(`${baseUrl}/ingredients/my-ingredients?username=${username}`)
       .then(response => {
         const names = response.data.map(obj => obj.name); // extract name values and create new array
         setIngredients(names);
@@ -14,7 +14,7 @@ const SelectIng = ({ handleIngredientSelect, user }) => {
       .catch(error => {
         console.error(error);
       });
-  }, [user.username]);
+  }, [user.username, baseUrl]);
 
   return (
     <div>
