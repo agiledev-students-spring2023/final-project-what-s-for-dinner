@@ -32,7 +32,7 @@ const Home = (props) => {
           <li><Link to="/my-ingredients">My Ingredients</Link></li>
           <li><Link to="/utensils">My Utensils</Link></li>
           <li><Link to="/saved-recipes">My Saved Recipes</Link></li>
-          <li><Link to="/recipes">Search Recipes</Link></li>
+          <li><Link to="/search">Search Recipes</Link></li>
         </ul>
       </nav>
       <div className="RecipeList">
