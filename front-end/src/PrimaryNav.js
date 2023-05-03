@@ -10,7 +10,7 @@ const PrimaryNav = (props) => {
       <nav>
         <ul className="nav-links">
           <li>
-            <Link to="/home">Home</Link>
+            <Link to="/">Home</Link>
           </li>
           <li>
             <Link to="/recipes">Recipes</Link>
@@ -20,9 +20,9 @@ const PrimaryNav = (props) => {
           </li>
           <li>
             {isLoggedIn ? (
-              <Link to="/logout">Logout</Link>
+              <Link to="/logout">Log Out</Link>
             ) : (
-              <Link to="/login">Login</Link>
+              <Link to="/login">Log In</Link>
             )}
           </li>
         </ul>

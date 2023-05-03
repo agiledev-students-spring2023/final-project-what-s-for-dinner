@@ -28,23 +28,23 @@ const Login = props => {
     }
   }, [status, props])
 
-  const handleSubmit = e => {
-    e.preventDefault();
+  const handleSubmit = async e => {
+    e.preventDefault()
     const baseUrl = process.env.REACT_APP_SERVER;
-    const requestData = {
-      username: e.target.username.value,
-      password: e.target.password.value,
-    };
-    axios.post(`${baseUrl}/auth/login`, requestData)
-      .then(response => {
-        console.log(response.data);
-        setStatus(response.data);
-      })
-      .catch(err => {
-        console.error(err);
-        setErrorMessage(err.response.data.message);
-      });
-  } 
+    try {
+      const requestData = {
+        username: e.target.username.value,
+        password: e.target.password.value,
+      }
+      const response = await axios.post(`${baseUrl}/auth/login`, requestData) // send the request to the backend server
+  
+      console.log(response.data)
+      setStatus(response.data)
+    } catch (err) {
+      console.error(err)
+      setErrorMessage(err.response.data.message)
+    }
+  }
   
 
   // if the user is not logged in, show the login form
@@ -80,7 +80,7 @@ const Login = props => {
   // otherwise, if the user has successfully logged-in, redirect them to a different page
   // in this example, we simply redirect to the home page, but a real app would redirect 
   //to a page that shows content only available to logged-in users
-  else return <Navigate to="/home" />
+  else return <Navigate to="/" />
 }
 
 export default Login

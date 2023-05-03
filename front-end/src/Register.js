@@ -16,27 +16,26 @@ const Register = (props) => {
     }
   }, [urlSearchParams])
 
-  const handleSubmit = e => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-  
-    const baseUrl = process.env.REACT_APP_SERVER;
-    const requestData = {
-      email: e.target.email.value,
-      username: e.target.username.value,
-      password: e.target.password.value,
-      passwordConfirm: e.target.confirmPassword.value,
+
+    try {
+      const requestData = {
+        email: e.target.email.value,
+        username: e.target.username.value,
+        password: e.target.password.value,
+        passwordConfirm: e.target.confirmPassword.value,
+      }
+      const baseUrl = process.env.REACT_APP_SERVER;
+      const response = await axios.post(`${baseUrl}/auth/register`, requestData)
+
+      console.log(response.data)
+      setStatus(response.data)
+      setShowPopup(true)
+    } catch (err) {
+      console.error(err)
+      setErrorMessage(err.response.data.message)
     }
-  
-    axios.post(`${baseUrl}/auth/register`, requestData)
-      .then(response => {
-        console.log(response.data)
-        setStatus(response.data)
-        setShowPopup(true)
-      })
-      .catch(err => {
-        console.error(err)
-        setErrorMessage(err.response.data.message)
-      })
   }
 
   const handlePopupClose = () => {
