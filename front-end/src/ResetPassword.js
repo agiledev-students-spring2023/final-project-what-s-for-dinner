@@ -21,34 +21,31 @@ const ResetPassword = props => {
       )
   }, [urlSearchParams])
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     // prevent the HTML form from actually submitting... we use React's javascript code instead
     e.preventDefault()
-
-    try {
-      // create an object with the data we want to send to the server
-      const requestData = {
-        username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
-        email: e.target.email.value, // gets the value of the field in the submitted form with name='password',
-      }
-      // send the request to the server api to authenticate
-      const baseUrl = process.env.REACT_APP_SERVER;
-      const response = await axios.post(
-        `${baseUrl}/reset-password`,
-        requestData
-      )
-
-      // store the response data into the data state variable
-      console.log(response.data)
-      setShowPopup(true)
-      setStatus(response.data)
-      //setShowPopup(true)
-    } catch (err) {
-      // throw an error
-      console.error(err)
-      setErrorMessage(err.response.data.message)
+  
+    // create an object with the data we want to send to the server
+    const requestData = {
+      username: e.target.username.value, // gets the value of the field in the submitted form with name='username'
+      email: e.target.email.value, // gets the value of the field in the submitted form with name='password',
     }
-  }
+  
+    // send the request to the server api to authenticate
+    const baseUrl = process.env.REACT_APP_SERVER;
+    axios.post(`${baseUrl}/reset-password`, requestData)
+      .then(response => {
+        // store the response data into the data state variable
+        console.log(response.data)
+        setShowPopup(true)
+        setStatus(response.data)
+      })
+      .catch(err => {
+        // throw an error
+        console.error(err)
+        setErrorMessage(err.response.data.message)
+      })
+  } 
 
   const handlePopupClose = () => {
     setShowPopup(false)
