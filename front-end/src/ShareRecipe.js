@@ -20,7 +20,7 @@ const ShareRecipe = () => {
       image: image,
     };
     // Send recipe data
-    console.log(recipe);
+
 
     const formData = new FormData();
     formData.append('title', title);
@@ -28,21 +28,11 @@ const ShareRecipe = () => {
     formData.append('ingredients', JSON.stringify(ingredients));
     formData.append('image', image);
 
+    console.log(recipe);
     const response = await fetch('http://localhost:3000/share-recipes', {
         method: 'POST',
         body: formData
     });
-
-    // const formData = new FormData();
-    // formData.append('title', title);
-    // formData.append('description', description);
-    // formData.append('instructions', instructions);
-    // formData.append('image', image);
-
-    // ingredients.forEach((ingredient, index) => {
-    // formData.append(`ingredients[${index}]`, ingredient);
-    // });
-
 
     if(response.ok){
       console.log('Recipe submitted successfully!');
@@ -124,6 +114,7 @@ const ShareRecipe = () => {
         id="image"
         accept=".jpg,.jpeg,.png"
         onChange={handleImageUpload}
+        required
       />
 
       <button type="submit">Share Recipe</button>
