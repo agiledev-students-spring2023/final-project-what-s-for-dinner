@@ -1,29 +1,34 @@
-import React from "react"
-import "./PrimaryNav.css"
-import { Link } from "react-router-dom"
+import React from "react";
+import { Link } from "react-router-dom";
+import "./PrimaryNav.css";
 
-const PrimaryNav = props => {
-  // we assume a function named setuser is passed as a prop to this component
-
-  // show a login link if the user is not yet logged in
-  let logInOutComponent = <Link to="/login">Login</Link>
-  // show a logout link if the user is already logged in
-  if (props.user.success)
-    logInOutComponent = (
-      <>
-        <Link to="/logout">Logout</Link>
-      </>
-    )
+const PrimaryNav = (props) => {
+  const isLoggedIn = props.user && props.user.success;
 
   return (
-    <nav>
-      <Link to="/home">Home</Link>
-      <Link to="/recipes">Recipes</Link>
-      <Link to="/search">Search</Link>
-      {logInOutComponent}
-    </nav>
-  )
-  
-}
+    <header>
+      <nav>
+        <ul className="nav-links">
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/recipes">Recipes</Link>
+          </li>
+          <li>
+            <Link to="/search">Search</Link>
+          </li>
+          <li>
+            {isLoggedIn ? (
+              <Link to="/logout">Log Out</Link>
+            ) : (
+              <Link to="/login">Log In</Link>
+            )}
+          </li>
+        </ul>
+      </nav>
+    </header>
+  );
+};
 
-export default PrimaryNav
+export default PrimaryNav;
