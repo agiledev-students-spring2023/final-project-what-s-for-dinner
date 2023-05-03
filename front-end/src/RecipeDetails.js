@@ -109,6 +109,7 @@ const RecipeDetails = (props) => {
         e.preventDefault();
         sendComment();
         // TODO: submit the comment and rating to the server
+        console.log("User:", username);
         console.log("Comment:", comment);
         console.log("Rating:", rating);
     };

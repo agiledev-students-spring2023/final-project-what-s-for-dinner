@@ -8,6 +8,7 @@ const RecipeController = require('../controllers/RecipeController');
 const IngredientModel = require('../models/ingredients');
 const ObjectId = require('mongodb').ObjectId;
 const Recipe = require('../models/recipes');
+const User = require('../models/users')
 
 
 chai.use(chaiHttp);
@@ -442,4 +443,31 @@ describe('addComment', () => {
         Recipe.findById.restore();
       });
     });
+    describe('RecipeController.saveRecipe', () => {
+      
+      it('should return a 500 error if an error occurs', async () => {
+        const req = {
+          body: {
+            recipeId: new ObjectId().toHexString(),
+            username: 'testuser'
+          }
+        };
+        const res = {
+          status: sinon.stub().returnsThis(),
+          send: sinon.stub()
+        };
+        sinon.stub(User, 'findOne').rejects(new Error('Database error'));
+        
+        try {
+          await RecipeController.saveRecipe(req, res);
+          expect(res.status.calledOnceWith(500)).to.be.true;
+          expect(res.send.calledOnceWith('An error occurred while saving the recipe')).to.be.true;
+        } catch (error) {
+          throw error;
+        } finally {
+          User.findOne.restore();
+        }
+      });
+    });
+    
 });
