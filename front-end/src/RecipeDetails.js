@@ -88,6 +88,10 @@ const RecipeDetails = (props) => {
         }
       };
       const handleSaveRecipe = async () => {
+        if (!props.username) {
+          alert("Please sign in to save a recipe.");
+          return;
+        }
         try {
           const response = await fetch(`${baseUrl}/save-recipe/${recipeId}?username=${username}`, {
             method: "POST",
@@ -106,6 +110,10 @@ const RecipeDetails = (props) => {
         }
       }; 
     const handleSubmit = e => {
+      if (!props.username) {
+        alert("Please sign in to leave a comment.");
+        return;
+      }
         e.preventDefault();
         sendComment();
         // TODO: submit the comment and rating to the server
@@ -149,6 +157,7 @@ const RecipeDetails = (props) => {
                 </div>
                 <div className="comments">
                     <h2>Comments</h2>
+                    
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
                             <label htmlFor="comment">Comment:</label>
