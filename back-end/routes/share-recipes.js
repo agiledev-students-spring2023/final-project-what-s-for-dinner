@@ -9,7 +9,6 @@ router.post('/', async (req,res) => {
             Instructions: req.body.instructions,
             Ingredients: req.body.ingredients,
         })
-        res.json(recipe);
 
         await recipe.save();
         res.status(200).json({ message: `Recipe successfully uploaded` });
