@@ -34,6 +34,7 @@ const Utensils = (props) => {
   return (
     <div className="Utensils">
       <h1>My Utensils</h1>
+      <p>Select Utensils That You Have Available</p>
       <section className="utensils">
         {utensils.map((item) => (
           <UtensilThumb
