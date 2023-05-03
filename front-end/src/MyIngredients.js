@@ -113,6 +113,10 @@ const MyIngredients = (props) => {
     }
   };
 
+  if (!props.user || !props.user.success) {
+    return <Navigate to="/login?error=protected" />;
+  }
+
   return (
     <div>
       <h1>My Ingredients Page</h1>

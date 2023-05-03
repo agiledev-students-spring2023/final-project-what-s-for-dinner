@@ -37,6 +37,10 @@ const SavedRecipes = (props) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [page, baseUrl, endPoint]);
+
+  if (!props.user || !props.user.success) {
+    return <Navigate to="/login?error=protected" />;
+  }
   
   return (
     <div className="RecipeList">
