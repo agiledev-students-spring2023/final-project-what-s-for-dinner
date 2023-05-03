@@ -2,12 +2,25 @@ const express = require("express");
 const router = express.Router();
 const Recipe = require('../models/recipes.js');
 
+const multer = require('multer');
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + file.originalname);
+    }
+});
+const upload = multer({ storage: storage });
+
+
 router.post('/', async (req,res) => {
     try{
         const recipe = new Recipe({
             Title: req.body.title,
             Instructions: req.body.instructions,
             Ingredients: req.body.ingredients,
+            Image: req.file.path
         })
 
         await recipe.save();

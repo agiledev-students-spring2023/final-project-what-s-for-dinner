@@ -15,17 +15,34 @@ const ShareRecipe = () => {
     // Create recipe object with form input
     const recipe = {
       title: title,
-      // description: description,
       ingredients: ingredients,
       instructions: instructions,
       image: image,
     };
     // Send recipe data
     console.log(recipe);
-    const response = await fetch(`http://localhost:3000/share-recipes`, {
-      method: 'POST',
-      body: recipe,
+
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('instructions', instructions);
+    formData.append('ingredients', JSON.stringify(ingredients));
+    formData.append('image', image);
+
+    const response = await fetch('http://localhost:3000/share-recipes', {
+        method: 'POST',
+        body: formData
     });
+
+    // const formData = new FormData();
+    // formData.append('title', title);
+    // formData.append('description', description);
+    // formData.append('instructions', instructions);
+    // formData.append('image', image);
+
+    // ingredients.forEach((ingredient, index) => {
+    // formData.append(`ingredients[${index}]`, ingredient);
+    // });
+
 
     if(response.ok){
       console.log('Recipe submitted successfully!');
