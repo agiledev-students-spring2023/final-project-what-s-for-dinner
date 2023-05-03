@@ -33,7 +33,7 @@ describe("Login", () => {
   })
 
   describe("POST /auth/login with correct username/password", () => {
-    const formData = { username: "ginettexu", password: "jxcz12rv" } // mock form data with correct credentials
+    const formData = { username: "chenyi", password: "123456" } // mock form data with correct credentials
     it("it should return a 200 HTTP response code", done => {
       chai
         .request(server)
