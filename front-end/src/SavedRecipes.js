@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom"
+import { Link, Navigate } from "react-router-dom"
 import "./SavedRecipes.css";
 
 const SavedRecipes = (props) => {
@@ -39,6 +39,10 @@ const SavedRecipes = (props) => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, [page, baseUrl, endPoint]);
+
+  if (!props.user || !props.user.success) {
+    return <Navigate to="/login?error=protected" />;
+  }
   
   return (
     <div className="RecipeList">

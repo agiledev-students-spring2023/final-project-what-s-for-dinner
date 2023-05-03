@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import './MyIngredients.css';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 const MyIngredients = (props) => {
   const [ingredients, setIngredients] = useState([]);
@@ -115,7 +115,11 @@ const MyIngredients = (props) => {
       .catch(error => {
         console.error('Error fetching data from API:', error);
       });
-  }; 
+  };
+  
+  if (!props.user || !props.user.success) {
+    return <Navigate to="/login?error=protected" />;
+  }
 
   return (
     <div>

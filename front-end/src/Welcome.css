@@ -31,15 +31,27 @@ margin: 0;
 }
 
 .Welcome .main-content p {
-  width: 90%;
-  text-align: justify;
+  width: 85%;
+  text-align: center;
   margin: 20px 0;
+  font-family:Verdana, Geneva, Tahoma, sans-serif
+}
+
+.Welcome .main-content p u {
+  text-decoration-style: dotted;
+  text-decoration-color: rgb(245, 152, 59);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
+}
+
+.Welcome .main-content p mark {
+  background-color: rgb(245, 152, 59);
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif
 }
 
 .Welcome .main-content h2 a {
   font-size: 18px;
   width: 100%;
-  max-width: 250px;
+  max-width: 200px;
   text-align: center;
   display: block;
   margin: 10px 0;
@@ -54,7 +66,7 @@ margin: 0;
 .Welcome .main-content h1 a {
   font-size: 18px;
   width: 100%;
-  max-width: 300px;
+  max-width: 250px;
   text-align: center;
   display: block;
   margin: 10px 0;
