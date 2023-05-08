@@ -88,7 +88,7 @@ const RecipeDetails = (props) => {
         }
       };
       const handleSaveRecipe = async () => {
-        if (!props.username) {
+        if (!props.user) {
           alert("Please sign in to save a recipe.");
           return;
         }
@@ -110,7 +110,7 @@ const RecipeDetails = (props) => {
         }
       }; 
     const handleSubmit = e => {
-      if (!props.username) {
+      if (!props.user) {
         alert("Please sign in to leave a comment.");
         return;
       }
