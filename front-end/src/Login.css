@@ -1,0 +1,25 @@
+.Login {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.Login .main-content form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
+}
+
+.Login .error {
+  margin-left: 20px;
+  color: red;
+}
+.Login .feedback {
+  font-size: 0.75em;
+  margin: 0 20px;
+}

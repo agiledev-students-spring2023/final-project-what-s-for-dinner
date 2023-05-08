@@ -1,0 +1,31 @@
+header {
+  border: 1px solid black;
+  border-width: 1px 0px 1px 0px; /* no border on left or right */
+  font-family: georgia;
+  padding: 5px;
+  margin: 0; /* no margin on left or right */
+  text-align: center;
+}
+
+nav {
+  display: flex; /* add this line to display the nav items in a horizontal line */
+  justify-content: center; /* add this line to center the nav items */
+}
+
+nav ul.nav-links {
+  list-style-type: none;
+  padding: 0;
+  display: flex; /* add this line to display the nav items in a horizontal line */
+  flex-direction: row; /* add this line to make sure the nav items are in a single row */
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+  margin: 0 10px; /* adjust this line to decrease the space between the links */
+}
+
+nav a:hover {
+  text-decoration: underline;
+  background-color: yellow;
+}

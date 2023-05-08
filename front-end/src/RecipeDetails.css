@@ -1,0 +1,95 @@
+h1 {color:black;}
+
+@import url('https://fonts.googleapis.com/css2?family=Bona+Nova&display=swap');
+*{
+    font-family: 'Bona Nova', serif;
+}
+
+img{
+    border-radius: 8px;
+    width: 200px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.content .title{
+   text-align: center;
+   color: black;
+   top: 45%;
+   left: 50%;
+}
+
+.content .cuisine{
+    text-align: center;
+    color: black;
+ }
+
+ .content .category{
+    padding: 0 20px 20px 20px;
+    margin: 0 auto
+ }
+
+.content .ingredients h2{
+    left: 50%;
+    padding: 0 20px 20px 20px
+}
+
+.content .ingredients h4{
+    text-align: center;
+    
+}
+
+.content .instructions h2{
+    padding: 0 20px 20px 20px
+}
+
+
+.content .instructions h4{
+    padding: 0 20px 20px 20px
+}
+
+.content .add-saved-recipes {
+    padding: 0 20px 20px 20px
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .content > div {
+    margin: 40px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 500px;
+  }
+  
+  .content .Reviews, .content .comments {
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .content .Reviews h2, .content .comments h2 {
+    text-align: center;
+  }
+  
+  .content .Reviews p {
+    margin-bottom: 10px;
+  }
+  
+  .content .Reviews div, .content .comments div {
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+  }
+  
+  .content .Reviews div:last-child, .content .comments div:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+  
+

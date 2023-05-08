@@ -1,1 +1,1 @@
-The exported files of the completed prototype should reside in this directory.
+https://www.figma.com/proto/BbUOPStZKVZfCxUn3nl3fY/What-s-for-Dinner?node-id=0%3A1&scaling=scale-down&starting-point-node-id=4%3A24&show-proto-sidebar=1

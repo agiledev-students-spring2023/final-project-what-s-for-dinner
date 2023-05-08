@@ -1,0 +1,99 @@
+/* styles shared by all screens within the app */
+
+body {
+  background-image: url('https://thefridgeagency.com/wp-content/uploads/sites/3/2020/04/Fridge_Zoom_Background_inside.jpg');
+  background-size: auto;
+  background-position: relative;
+}
+
+.container {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 0px solid black;
+  max-width: 375px; /* adjust the max-width for iPhone 14 screen */
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* each screen has a main content area with an image, and a paragraph */
+.main-content {
+  margin: 20px;
+  display: flex;
+   /* use css flexbox for elements inside of this element */
+}
+
+.main-content p,
+.main-content img {
+  flex: auto;
+  align-items: center;
+}
+
+.main-content p {
+  margin-left: 0px;
+}
+
+.main-content img {
+  object-fit: contain;
+}
+.main-content form {
+  flex: auto;
+  margin-left: 0px;
+}
+h1 {
+  font-family: georgia;
+  margin-left: 0px;
+}
+p {
+  font-family: helvetica;
+}
+/* styles for form text fields */
+input[type="text"],
+input[type="password"],
+input[type="number"] {
+  padding: 10px;
+  margin: 10px 0;
+  width: 200px; /* Changed the width to fit in the smaller screen */
+  max-width: 90%; /* Added a max-width to prevent overflowing on smaller screens */
+}
+
+/* styles for the form submit button */
+input[type="submit"] {
+  margin-top: 20px;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  padding: 20px;
+  font-size: 20px;
+}
+
+/* changes to the submit button when it is being clicked */
+input[type="submit"]:active {
+  color: black;
+  background-color: white;
+  border-color: black;
+}
+
+.menu-button {
+  position: fixed;
+  top: 47px;
+  left: 0px; /* Change the left position to 0px to always align it to the left corner */
+  padding: 
+  0.5rem 1rem;
+  font-size: 1.1rem;
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  z-index: 1001; /* Place the button above the menu overlay */
+}
+
+.menu-button:hover {
+  background-color: #2980b9;
+}
+
+/* media query to override the menu button style for larger screens */
+@media only screen and (min-width: 768px) {
+  .menu-button {
+    left: 650px; /* Align the button with the menu overlay on larger screens */
+  }
+}

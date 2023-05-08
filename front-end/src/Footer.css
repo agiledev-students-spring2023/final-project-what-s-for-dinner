@@ -1,0 +1,34 @@
+footer {
+  font-family: georgia;
+  padding: 5px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: transparent; /* Remove the background color */
+}
+
+.footer-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+footer a {
+  text-decoration: none;
+  color: black;
+  margin: 0 10px;
+}
+
+footer span {
+  margin: 0 5px;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+.reserved {
+  margin-top: 5px;
+}

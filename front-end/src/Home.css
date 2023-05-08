@@ -1,0 +1,21 @@
+nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  padding: 0;
+}
+
+nav li {
+  margin: 10px 0;
+}
+
+nav a {
+  text-decoration: none;
+  color: black;
+}
+
+h2 {
+  text-align: center;
+  font-size: larger;
+}

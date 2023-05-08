@@ -1,0 +1,30 @@
+.AboutUs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: top;
+    height: 100vh;
+  }
+
+  li.ContactLink
+  {
+    color: grey;
+  }
+
+  li.ContactLink:hover
+  {
+    color: teal;
+  }
+
+  li.ContactLink:active
+  {
+    color: teal;
+  }
+
+  li.ContactLink:visited
+  {
+    color: green;
+  }
+  
+  
+  
